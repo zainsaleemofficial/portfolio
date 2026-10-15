@@ -1,0 +1,3 @@
+[mcp_servers.motionsites]
+command = "npx"
+args = ["-y", "mcp-remote", "https://xgdzyqfalbibzelpdpvr.supabase.co/functions/v1/mcp"]
