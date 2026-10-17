@@ -309,13 +309,15 @@ ul {
 .hero-portrait img {
   position: relative;
   display: block;
-  object-fit: contain;
-  object-position: center bottom;
-  width: 100%;
+  width: 96%;
   height: 510px;
   max-width: none;
+  object-fit: cover;
+  object-position: center 39%;
+  border: 1px solid color-mix(in srgb, var(--color-brand-primary) 55%, white 10%);
+  border-radius: 28px;
+  box-shadow: 0 25px 64px rgb(0 0 0 / 20%);
   z-index: 1;
-  filter: drop-shadow(0 18px 22px rgb(0 0 0 / 9%));
 }
 .portrait-orbit {
   display: none;
@@ -1176,6 +1178,7 @@ ul {
   }
   .hero-portrait img {
     height: 396px;
+    object-position: center 38%;
   }
   .hero h1 {
     font-size: clamp(3.1rem, 6.3vw, 5rem);
@@ -1296,6 +1299,8 @@ ul {
   }
   .hero-portrait img {
     height: 376px;
+    object-position: center 38%;
+    border-radius: 22px;
   }
   .hero-portrait::before {
     border-radius: 22px;

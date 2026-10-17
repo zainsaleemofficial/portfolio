@@ -5,9 +5,9 @@ export const site = {
   email: 'me@zainsaleem.co',
   bookingUrl: 'https://calendly.com/zainsaleemofficial/30min',
   portrait: {
-    src: '/images/zain-portrait.webp',
-    width: 620,
-    height: 775,
+    src: '/images/zain-hero-studio-2026.webp',
+    width: 1122,
+    height: 1402,
     alt: 'Zain Saleem in a navy blazer, looking thoughtfully to the left',
   },
   socials: [
