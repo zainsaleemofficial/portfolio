@@ -233,9 +233,7 @@ ul {
   flex-wrap: wrap;
 }
 .hero {
-  background:
-    radial-gradient(ellipse 44% 52% at 78% 62%, color-mix(in srgb, var(--color-portrait-glow) 22%, transparent), transparent 77%),
-    linear-gradient(112deg, var(--color-bg-hero) 6%, var(--color-bg-teal) 60%, var(--color-bg-forest) 100%);
+  background: var(--color-bg-hero);
   color: var(--color-text-inverse);
   padding-top: var(--space-8);
   overflow: hidden;

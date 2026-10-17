@@ -1,6 +1,6 @@
 :root {
   --color-bg-page: #f6f9f7;
-  --color-bg-hero: #1a2b29;
+  --color-bg-hero: #102622;
   --color-bg-forest: #245246;
   --color-bg-teal: #173a33;
   --color-bg-surface: #ffffff;
@@ -11,9 +11,9 @@
   --color-header-muted: var(--color-text-muted);
   --color-portrait-border: #79a995;
   --color-text-primary: #1a2b29;
-  --color-text-muted: #50655c;
-  --color-text-inverse: #f6f9f7;
-  --color-text-inverse-muted: #d0e0d8;
+  --color-text-muted: #556d66;
+  --color-text-inverse: #f4faf5;
+  --color-text-inverse-muted: #c1d0c9;
   --color-brand-primary: #167a60;
   --color-brand-primary-hover: #11694f;
   --color-brand-dark: #167a60;
