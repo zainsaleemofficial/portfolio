@@ -1,10 +1,10 @@
 # Dual Contrast — Zain Saleem
 
-The approved direction is a deep-forest / dark-teal cinematic introduction followed by spacious, light editorial sections. Software development leads; search is the complementary perspective. The visual signature is large, restrained typography, dark-to-light rhythm, and an interactive engineering/search split in the middle of the page.
+The approved direction is a charcoal-green / muted-forest cinematic introduction paired with a clean white navigation header followed by spacious, light editorial sections. Software development leads; search is the complementary perspective. The visual signature is large, restrained typography, dark-to-light rhythm, and an interactive engineering/search split in the middle of the page.
 
 ## Tokens
 
-`src/styles/tokens.css` is the global source for semantic colors, type, space, radius, borders, elevation, and timing. The refined owner-approved palette uses deep evergreen `#071e19`, forest `#124b39`, emerald `#10b981`, mint `#dcece8`, and near-white `#f8fafc`; navy is no longer the dominant hero color. Dark emerald is refined to `#076b50` for contrast on mint. Avoid raw color values inside components.
+`src/styles/tokens.css` is the global source for semantic colors, type, space, radius, borders, elevation, and timing. The current owner-approved palette is near-white `#f6f9f7`, white `#ffffff`, charcoal green `#1a2b29`, muted teal `#167a60`, and soft mint `#b8e9cc`. The navigation header is light, while the hero remains dark charcoal/forest green with a restrained portrait halo and softer photo borders. The CTA is white on teal, with measured contrast above 4.5:1. Secondary forest and teal gradient stops are semantic tokens, rather than extra brand accents. Avoid raw color values inside components.
 
 `themes.css` defines the optional `ink-and-sage` palette. Set the layout HTML's `data-theme` to `ink-and-sage` to preview it. The default is `dual-contrast`. Both must pass contrast checks.
 
@@ -22,7 +22,7 @@ Buttons use a consistent 4px radius, clear hover/active/focus states, and at lea
 
 ## Portrait and content
 
-The current hero uses the optional professional portrait supplied in the conversation, optimized to a 760 × 1143 WebP at `public/images/zain-portrait.webp`. The actual subject is displayed using `object-fit: contain`; a gentle radial alpha mask blends the photo background with forest-green CSS lighting. Compare against the supplied original photograph before final personal-brand approval; preserve authentic features. Verify full head and shoulder framing at all widths.
+The hero currently uses the supplied teal-green studio photograph at `public/images/zain-hero-studio-2026.webp`. It is displayed in a dedicated cover-fitted photographic frame with a subtle green border, inward photo lighting, and a soft glow extending below the image. Do not mask, regenerate, or change facial details during ordinary palette adjustments. Compare against the supplied original photograph before final personal-brand approval; preserve authentic features. Verify full head and shoulder framing at all widths.
 
 Work visuals are original CSS illustrations with explicit labels. Unapproved content produces no detail pages. Do not introduce fictitious metrics or testimonials to fill space.
 

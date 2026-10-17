@@ -132,8 +132,8 @@ ul {
   color: var(--color-brand-dark);
 }
 .site-header {
-  background: var(--color-bg-hero);
-  color: var(--color-text-inverse);
+  background: var(--color-header-bg);
+  color: var(--color-header-text);
   position: relative;
   z-index: 10;
 }
@@ -142,7 +142,7 @@ ul {
   align-items: center;
   gap: var(--space-7);
   min-height: 100px;
-  border-bottom: 1px solid var(--color-border-inverse);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 .brand {
   display: flex;
@@ -156,12 +156,12 @@ ul {
   font-family: var(--font-editorial);
   font-style: italic;
   font-size: 2.6rem;
-  color: var(--color-brand-primary);
+  color: var(--color-brand-dark);
 }
 .brand-sub {
   display: block;
   font-weight: 400;
-  color: var(--color-text-inverse-muted);
+  color: var(--color-header-muted);
   font-size: 0.6875rem;
   letter-spacing: 0.07em;
   margin-top: 0.3rem;
@@ -175,27 +175,40 @@ ul {
 .desktop-nav a {
   padding-block: 12px;
 }
-.desktop-nav a:hover,
-.header-cta:hover {
-  color: var(--color-brand-primary);
+.desktop-nav a:hover {
+  color: var(--color-brand-dark);
 }
 .header-cta {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  border-bottom: 1px solid var(--color-border-inverse);
-  padding-block: 12px;
+  justify-content: center;
+  gap: 0.7rem;
+  background: var(--color-brand-primary);
+  color: var(--color-button-text);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.8rem 1.25rem;
+  min-height: 46px;
   font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  transition: background var(--motion-duration-fast), transform var(--motion-duration-fast);
 }
-.site-header :focus-visible,
+.header-cta:hover {
+  background: var(--color-brand-primary-hover);
+  color: var(--color-button-text);
+  transform: translateY(-1px);
+}
+.site-header :focus-visible {
+  outline-color: var(--color-focus-ring);
+}
 .hero :focus-visible,
 .consultation :focus-visible {
-  outline-color: var(--color-brand-primary);
+  outline-color: var(--color-bg-mint);
 }
 .menu-toggle {
   display: none;
   background: none;
-  border: 1px solid var(--color-border-inverse);
+  border: 1px solid var(--color-border-subtle);
   width: 48px;
   height: 48px;
   border-radius: var(--radius-button);
@@ -221,8 +234,8 @@ ul {
 }
 .hero {
   background:
-    radial-gradient(ellipse at 79% 47%, color-mix(in srgb, var(--color-portrait-glow) 74%, transparent), transparent 55%),
-    linear-gradient(112deg, var(--color-bg-hero) 4%, var(--color-bg-teal) 53%, var(--color-bg-forest) 100%);
+    radial-gradient(ellipse 44% 52% at 78% 62%, color-mix(in srgb, var(--color-portrait-glow) 22%, transparent), transparent 77%),
+    linear-gradient(112deg, var(--color-bg-hero) 6%, var(--color-bg-teal) 60%, var(--color-bg-forest) 100%);
   color: var(--color-text-inverse);
   padding-top: var(--space-8);
   overflow: hidden;
@@ -281,7 +294,7 @@ ul {
   flex-wrap: wrap;
 }
 .hero .text-link:hover {
-  color: var(--color-brand-primary);
+  color: var(--color-bg-mint);
 }
 .hero-portrait {
   position: relative;
@@ -293,17 +306,31 @@ ul {
   padding: 0 0 44px;
   background: none;
 }
+/* Subtle halo extends beneath the portrait to visually anchor it in the hero. */
+.hero-portrait::after {
+  content: '';
+  position: absolute;
+  left: 13%;
+  right: 13%;
+  bottom: 22px;
+  height: 72px;
+  background: color-mix(in srgb, var(--color-portrait-glow) 44%, transparent);
+  filter: blur(34px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
 /* A deliberate photographic frame, not a floating cut-out or oversized poster. */
 .hero-portrait::before {
   content: '';
   position: absolute;
   inset: 0 2% 44px;
-  border: 1px solid color-mix(in srgb, var(--color-brand-primary) 64%, white 10%);
+  border: 1px solid color-mix(in srgb, var(--color-portrait-border) 45%, transparent);
   border-radius: 28px;
   background:
-    radial-gradient(ellipse at 55% 48%, color-mix(in srgb, var(--color-portrait-glow) 80%, transparent), transparent 69%),
+    radial-gradient(ellipse at 55% 61%, color-mix(in srgb, var(--color-portrait-glow) 28%, transparent), transparent 72%),
     linear-gradient(155deg, var(--color-bg-forest), var(--color-bg-hero));
-  box-shadow: 0 28px 65px rgb(0 0 0 / 13%), inset 0 1px rgb(255 255 255 / 9%);
+  box-shadow: 0 26px 58px rgb(0 0 0 / 11%), inset 0 1px rgb(255 255 255 / 10%);
   z-index: 0;
 }
 .hero-portrait img {
@@ -314,9 +341,9 @@ ul {
   max-width: none;
   object-fit: cover;
   object-position: center 39%;
-  border: 1px solid color-mix(in srgb, var(--color-brand-primary) 55%, white 10%);
+  border: 1px solid color-mix(in srgb, var(--color-portrait-border) 54%, transparent);
   border-radius: 28px;
-  box-shadow: 0 25px 64px rgb(0 0 0 / 20%);
+  box-shadow: 0 22px 52px rgb(0 0 0 / 16%);
   z-index: 1;
 }
 .portrait-orbit {
