@@ -1,0 +1,23 @@
+---
+interface Props {
+  items: { title: string; summary: string; slug: string; approved: boolean }[]
+  base: string
+  label: string
+}
+const { items, base, label } = Astro.props
+const published = items.filter((i) => i.approved)
+---
+
+{published.length > 0 && (
+  <div class="published-content">
+    <p class="eyebrow">{label}</p>
+    {published.map((item) => (
+      <article>
+        <h3>
+          <a href={`${base}/${item.slug}/`}>{item.title} ↗</a>
+        </h3>
+        <p>{item.summary}</p>
+      </article>
+    ))}
+  </div>
+)}

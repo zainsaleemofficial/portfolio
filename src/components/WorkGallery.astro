@@ -1,0 +1,118 @@
+---
+import { workAreas } from '../data/site'
+import Arrow from './Arrow.astro'
+---
+
+<div class="work-gallery">
+  <div class="work-toolbar">
+    <div class="work-filters" aria-label="Filter work areas" hidden>
+      {['All', 'Software', 'SEO'].map((filter, i) => (
+        <button data-filter={filter} aria-pressed={i === 0}>
+          {filter}
+        </button>
+      ))}
+    </div>
+    <p class="work-count small" role="status">
+      3 areas of expertise
+    </p>
+  </div>
+  <div class="work-grid">
+    {workAreas.map((work, i) => (
+      <article class="work-card" data-category={work.category}>
+        <div class={`work-art art-${work.art}`}>
+          <div class="art-label">
+            {String(i + 1).padStart(2, '0')} / {work.category}
+          </div>
+          {work.art === 'product' ? (
+            <div class="product-window" aria-hidden="true">
+              <div class="window-bar">
+                <i></i>
+                <i></i>
+                <i></i>
+                <span>Workspace</span>
+              </div>
+              <div class="window-content">
+                <div class="window-sidebar">
+                  <b>Overview</b>
+                  <span>Projects</span>
+                  <span>Activity</span>
+                  <span>Settings</span>
+                </div>
+                <div class="window-main">
+                  <p>Your next good idea.</p>
+                  <div class="window-blocks">
+                    <i></i>
+                    <i></i>
+                  </div>
+                  <div class="window-lines">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : work.art === 'flow' ? (
+            <div class="flow-art" aria-hidden="true">
+              <div>
+                01 <b>Capture</b>
+              </div>
+              <span>↓</span>
+              <div>
+                02 <b>Connect</b>
+              </div>
+              <span>↓</span>
+              <div>
+                03 <b>Create</b>
+              </div>
+            </div>
+          ) : (
+            <div class="search-art" aria-hidden="true">
+              <div class="orbit orbit-one"></div>
+              <div class="orbit orbit-two"></div>
+              <div class="search-center">Found.</div>
+              <span class="orbit-point"></span>
+            </div>
+          )}
+          <p class="art-caption">Illustration · not a client project</p>
+          <a
+            class="work-art-link"
+            href={`/services/${work.service}/`}
+            aria-label={`Explore ${work.category}: ${work.title}`}
+          >
+            <Arrow diagonal />
+          </a>
+        </div>
+        <div class="work-meta">
+          <p class="eyebrow">{work.category}</p>
+          <h3>
+            <a href={`/services/${work.service}/`}>{work.title}</a>
+          </h3>
+          <p>{work.description}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.work-gallery').forEach((gallery) => {
+    const filters = gallery.querySelector<HTMLElement>('.work-filters')!
+    filters.hidden = false
+    filters.querySelectorAll<HTMLButtonElement>('button').forEach((button) =>
+      button.addEventListener('click', () => {
+        filters
+          .querySelectorAll('button')
+          .forEach((b) => b.setAttribute('aria-pressed', String(b === button)))
+        let count = 0
+        gallery.querySelectorAll<HTMLElement>('.work-card').forEach((card) => {
+          card.hidden =
+            button.dataset.filter !== 'All' &&
+            card.dataset.category !== button.dataset.filter
+          if (!card.hidden) count++
+        })
+        gallery.querySelector('.work-count')!.textContent =
+          `${count} ${count === 1 ? 'area' : 'areas'} of expertise`
+      }),
+    )
+  })
+</script>

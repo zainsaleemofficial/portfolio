@@ -1,0 +1,35 @@
+---
+import { site } from '../data/site'
+import Arrow from './Arrow.astro'
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="footer-name" href="/">
+        Zain Saleem<span class="accent">.</span>
+      </a>
+      <p>
+        Building software.
+        <br />
+        Understanding growth.
+      </p>
+    </div>
+    <div class="footer-bottom">
+      <p>© {new Date().getFullYear()} Zain Saleem</p>
+      <nav aria-label="Social links">
+        {site.socials.map((s) => (
+          <a href={s.url} target="_blank" rel="noopener noreferrer">
+            {s.label}
+            <Arrow diagonal />
+          </a>
+        ))}
+        <a href={`mailto:${site.email}`}>
+          Email
+          <Arrow diagonal />
+        </a>
+      </nav>
+      <a href="/privacy/">Privacy</a>
+    </div>
+  </div>
+</footer>

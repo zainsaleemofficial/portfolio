@@ -1,35 +1,49 @@
 {
-  "name": "portfolio",
+  "name": "zain-saleem-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "typecheck": "tsc -b --noEmit",
-    "preview": "vite preview"
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build && node scripts/verify-build.mjs",
+    "preview": "astro preview --host 0.0.0.0",
+    "typecheck": "astro check",
+    "lint": "eslint src tests playwright.config.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "playwright test",
+    "cf:preview": "wrangler dev --ip 127.0.0.1 --port 8787",
+    "deploy:preview": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/react": "^7.1.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "astro": "^7.4.0",
     "framer-motion": "^14.3.0",
     "lucide-react": "^1.57.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
     "eslint": "^10.12.0",
+    "eslint-plugin-astro": "^3.2.1",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.13.0",
+    "lighthouse": "^13.5.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.1",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.71.2",
-    "vite": "^8.3.0"
+    "wrangler": "^4.151.1"
   }
 }

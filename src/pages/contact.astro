@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro'
+import BriefForm from '../components/BriefForm'
+import Arrow from '../components/Arrow.astro'
+import { site } from '../data/site'
+---
+
+<Layout title="Start a conversation — Zain Saleem" noindex>
+  <section class="section page-intro">
+    <div class="container">
+      <p class="eyebrow">A conversation before a commitment</p>
+      <h1>
+        What are you
+        <br />
+        <span class="serif">working on?</span>
+      </h1>
+      <p class="large-copy">
+        Tell me about the problem, the people it affects, and what you’d like to
+        change.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container contact-grid">
+      <div>
+        <h2>
+          Let’s find a<br />
+          <span class="serif">useful starting point.</span>
+        </h2>
+        <p>
+          SaaS products, custom software, or your website’s search visibility.
+          We can start with the challenge in front of you.
+        </p>
+        <a
+          class="button"
+          href={site.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Choose a call time <Arrow diagonal />
+        </a>
+        <a class="text-link contact-email" href={`mailto:${site.email}`}>
+          {site.email} <Arrow diagonal />
+        </a>
+      </div>
+      <div>
+        <BriefForm email={site.email} client:visible />
+        <noscript>
+          <p>
+            JavaScript is needed to prepare a brief. Email{' '}
+            <a href={`mailto:${site.email}`}>{site.email}</a> directly or use
+            the booking link above.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+</Layout>

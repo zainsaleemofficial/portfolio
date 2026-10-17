@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro'
+import WorkGallery from '../components/WorkGallery.astro'
+import PublishedContent from '../components/PublishedContent.astro'
+import Consultation from '../components/Consultation.astro'
+import { projects, caseStudies } from '../data/content'
+---
+
+<Layout title="Software & search experience — Zain Saleem">
+  <section class="section page-intro">
+    <div class="container">
+      <p class="eyebrow">Work / A developing collection</p>
+      <h1>
+        Useful work.
+        <br />
+        <span class="serif">Thoughtful decisions.</span>
+      </h1>
+      <p class="large-copy">
+        My experience includes building 50+ SaaS tools while working with a
+        UK-based agency, alongside SEO work for clients.
+      </p>
+      <p>
+        Individual projects and evidence are being prepared for publication.
+        These visual studies illustrate my areas of work; they are not product
+        screenshots or client case studies.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <WorkGallery />
+      <PublishedContent
+        items={projects}
+        base="/projects"
+        label="Approved projects"
+      />
+      <PublishedContent
+        items={caseStudies}
+        base="/case-studies"
+        label="Case studies"
+      />
+    </div>
+  </section>
+  <Consultation />
+</Layout>

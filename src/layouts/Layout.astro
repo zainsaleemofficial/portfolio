@@ -1,0 +1,97 @@
+---
+import '@fontsource-variable/manrope'
+import '@fontsource/instrument-serif/latin-400-italic.css'
+import '../styles/globals.css'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { site, publicationApproved } from '../data/site'
+import { motionTokens } from '../data/motion'
+interface Props {
+  title?: string
+  description?: string
+  noindex?: boolean
+}
+const {
+  title = 'Zain Saleem — SaaS & Software Developer × SEO Strategist',
+  description = 'I build software products with growth in mind. SaaS development, custom software, technical SEO, local SEO, and search strategy.',
+  noindex = false,
+} = Astro.props
+const canonical = new URL(Astro.url.pathname, site.url)
+const indexable =
+  publicationApproved &&
+  import.meta.env.PUBLIC_DEPLOYMENT_ENV === 'production' &&
+  !noindex
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  jobTitle: site.title,
+  sameAs: site.socials.map((s) => s.url),
+}
+---
+
+<!doctype html>
+<html
+  lang="en"
+  data-theme="dual-contrast"
+  style={`--motion-duration-fast:${motionTokens.fast}s;--motion-duration-normal:${motionTokens.normal}s;--motion-duration-slow:${motionTokens.slow}s;--motion-entrance:${motionTokens.entrance}px;--motion-ease-standard:cubic-bezier(${motionTokens.ease.join(',')})`}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta
+      name="robots"
+      content={indexable ? 'index, follow' : 'noindex, nofollow'}
+    />
+    <meta name="theme-color" content="#0b1f3b" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${site.url}/social-preview.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Zain Saleem — Software with growth in mind"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(schema).replace(/</g, '\u003c')}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)')
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement
+          if (!reduced.matches) el.classList.add('in-view')
+          observer.unobserve(el)
+        }
+      }
+    },
+    { threshold: 0.12 },
+  )
+  document
+    .querySelectorAll('[data-reveal]')
+    .forEach((el) => observer.observe(el))
+</script>

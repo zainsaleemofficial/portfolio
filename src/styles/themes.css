@@ -1,0 +1,15 @@
+html[data-theme='ink-and-sage'] {
+  --color-bg-page: #faf9f5;
+  --color-bg-hero: #162925;
+  --color-bg-forest: #233d35;
+  --color-bg-alternate: #eeeee4;
+  --color-bg-mint: #e4ebdd;
+  --color-brand-primary: #b7d5a2;
+  --color-brand-primary-hover: #cde8ba;
+  --color-brand-dark: #365f36;
+  --color-button-text: #162b18;
+  --color-text-primary: #22382c;
+  --color-text-muted: #536252;
+  --color-focus-ring: #365f36;
+  --color-portrait-glow: #557349;
+}

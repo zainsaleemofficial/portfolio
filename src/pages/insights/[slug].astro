@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import ContentSections from '../../components/ContentSections.astro'
+import { articles } from '../../data/content'
+export function getStaticPaths() {
+  return articles
+    .filter((a) => a.approved)
+    .map((article) => ({ params: { slug: article.slug }, props: { article } }))
+}
+const { article } = Astro.props
+---
+
+<Layout title={`${article.title} — Zain Saleem`} description={article.summary}>
+  <section class="section page-intro">
+    <div class="container reading-width">
+      <a class="text-link" href="/insights/">
+        ← Insights
+      </a>
+      <p class="eyebrow">
+        {article.category} /{' '}
+        <time datetime={article.published}>{article.published}</time>
+      </p>
+      <h1>{article.title}</h1>
+      <p class="large-copy">{article.summary}</p>
+      <p>By Zain Saleem</p>
+    </div>
+  </section>
+  <article class="section container reading-width prose">
+    <ContentSections sections={article.sections} />
+  </article>
+</Layout>

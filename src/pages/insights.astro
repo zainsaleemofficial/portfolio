@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Consultation from '../components/Consultation.astro'
+import PublishedContent from '../components/PublishedContent.astro'
+import { articles } from '../data/content'
+import { insightTopics } from '../data/site'
+---
+
+<Layout title="Insights — Zain Saleem">
+  <section class="section page-intro">
+    <div class="container">
+      <p class="eyebrow">The writing desk</p>
+      <h1>
+        Notes from
+        <br />
+        <span class="serif">the intersection.</span>
+      </h1>
+      <p class="large-copy">
+        On building software, understanding search, and learning from the work.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container reading-width">
+      {articles.some((a) => a.approved) ? (
+        <PublishedContent items={articles} base="/insights" label="Articles" />
+      ) : (
+        <>
+          <p class="eyebrow">First articles forthcoming</p>
+          <h2>
+            Good writing
+            <br />
+            <span class="serif">starts with something to say.</span>
+          </h2>
+          <p>
+            This space is being prepared for practical articles and thoughtful
+            technical notes. No articles have been published yet.
+          </p>
+          <ul class="topic-list">
+            {insightTopics.map((topic) => (
+              <li>
+                {topic}
+                <span aria-hidden="true">↗</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  </section>
+  <Consultation />
+</Layout>

@@ -1,23 +1,27 @@
 import js from '@eslint/js'
-import { defineConfig, globalIgnores } from 'eslint/config'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import globals from 'globals'
 import tseslint from 'typescript-eslint'
-
+import astro from 'eslint-plugin-astro'
+import reactHooks from 'eslint-plugin-react-hooks'
+import globals from 'globals'
+import { defineConfig } from 'eslint/config'
 export default defineConfig([
-  globalIgnores(['dist']),
+  {
+    ignores: [
+      'dist/**',
+      '.astro/**',
+      'node_modules/**',
+      '.agents/**',
+      'artifacts/**',
+    ],
+  },
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
     ],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      globals: globals.browser,
-    },
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
   },
+  ...astro.configs.recommended,
 ])
