@@ -6,8 +6,8 @@ export const site = {
   bookingUrl: 'https://calendly.com/zainsaleemofficial/30min',
   portrait: {
     src: '/images/zain-portrait.webp',
-    width: 760,
-    height: 1143,
+    width: 620,
+    height: 775,
     alt: 'Zain Saleem in a navy blazer, looking thoughtfully to the left',
   },
   socials: [

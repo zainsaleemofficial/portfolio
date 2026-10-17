@@ -304,9 +304,6 @@ ul {
   width: 100%;
   height: 500px;
   z-index: 1;
-  /* Keep the full portrait while feathering the baked-in background into the hero. */
-  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 59%, #000 54%, transparent 97%);
-  mask-image: radial-gradient(ellipse 70% 55% at 50% 59%, #000 54%, transparent 97%);
 }
 .portrait-orbit {
   position: absolute;
