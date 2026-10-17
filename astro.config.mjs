@@ -6,5 +6,5 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   integrations: [react()],
-  vite: { plugins: [tailwindcss()] },
+  vite: { plugins: [tailwindcss()], build: { assetsInlineLimit: 0 } },
 })

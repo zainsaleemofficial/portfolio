@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
-import { Code2, ScanSearch } from 'lucide-react'
+import { Code2, ScanSearch, ArrowUpRight } from 'lucide-react'
 import { motionTokens } from '../data/motion'
+import { useHydrated } from './useHydrated'
 export default function DualExpertise() {
+  const hydrated = useHydrated()
   const [value, setValue] = useState(50)
   const reduced = useReducedMotion()
   const focus =
@@ -38,7 +40,7 @@ export default function DualExpertise() {
               complicated process feel simple.
             </p>
             <a className="text-link" href="/services/saas-development/">
-              Explore development <span aria-hidden="true">↗</span>
+              Explore development <ArrowUpRight aria-hidden="true" size={18} />
             </a>
           </div>
           <div className={`dual-panel ${value >= 40 ? 'is-active' : ''}`}>
@@ -54,7 +56,7 @@ export default function DualExpertise() {
               websites actually work.
             </p>
             <a className="text-link" href="/services/technical-seo/">
-              Explore SEO <span aria-hidden="true">↗</span>
+              Explore SEO <ArrowUpRight aria-hidden="true" size={18} />
             </a>
           </div>
         </div>
@@ -63,6 +65,7 @@ export default function DualExpertise() {
           <input
             id="expertise-range"
             type="range"
+            disabled={!hydrated}
             min="20"
             max="80"
             step="5"
@@ -79,6 +82,7 @@ export default function DualExpertise() {
             ].map(([label, num]) => (
               <button
                 key={label}
+                disabled={!hydrated}
                 onClick={() => setValue(Number(num))}
                 aria-pressed={value === num}
               >

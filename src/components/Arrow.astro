@@ -1,8 +1,10 @@
 ---
 interface Props {
   diagonal?: boolean
+  direction?: 'right' | 'down' | 'left'
 }
-const { diagonal = false } = Astro.props
+const { diagonal = false, direction = 'right' } = Astro.props
+const rotation = { right: 0, down: 90, left: 180 }[direction]
 ---
 
 <svg
@@ -13,6 +15,7 @@ const { diagonal = false } = Astro.props
   stroke="currentColor"
   stroke-width="1.5"
   aria-hidden="true"
+  style={`transform:rotate(${rotation}deg)`}
 >
   <path d={diagonal ? 'M5 19 19 5M5 5h14v14' : 'M4 12h16m-6-6 6 6-6 6'} />
 </svg>

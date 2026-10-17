@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Arrow from '../components/Arrow.astro'
 import Consultation from '../components/Consultation.astro'
 import PublishedContent from '../components/PublishedContent.astro'
 import { articles } from '../data/content'
@@ -40,7 +41,7 @@ import { insightTopics } from '../data/site'
             {insightTopics.map((topic) => (
               <li>
                 {topic}
-                <span aria-hidden="true">↗</span>
+                <Arrow diagonal />
               </li>
             ))}
           </ul>

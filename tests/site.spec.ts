@@ -6,6 +6,9 @@ for (const width of [320, 375, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 })
     const errors: string[] = []
     page.on('pageerror', (e) => errors.push(e.message))
+    page.on('console', (message) => {
+      if (message.type() === 'error') errors.push(message.text())
+    })
     await page.goto('/')
     await expect(page.locator('h1')).toContainText('Software with')
     await page.evaluate(() => document.fonts.ready)
@@ -174,6 +177,15 @@ test('core content remains usable without JavaScript', async ({
   await expect(
     page.locator('.service-item').first().getByRole('link'),
   ).toBeVisible()
+  await expect(page.getByRole('slider')).toBeDisabled()
+  await page.goto('/contact/')
+  await expect(
+    page.getByRole('button', { name: 'Prepare an email' }),
+  ).toBeDisabled()
+  await expect(page.getByLabel('Your email')).toBeDisabled()
+  await expect(
+    page.getByRole('link', { name: 'Choose a call time' }),
+  ).toHaveAttribute('href', 'https://calendly.com/zainsaleemofficial/30min')
   await context.close()
 })
 test('alternate theme and reduced motion preserve contrast and content', async ({

@@ -12,7 +12,7 @@ The approved direction is a navy/forest cinematic introduction followed by spaci
 
 Self-hosted Manrope provides precise, readable body and heading text; Instrument Serif italic creates a warmer editorial counterpoint. Font tokens, fluid heading sizes, weights, line heights, and measures are in `tokens.css`. `typography.css` assigns semantic roles. No external font requests.
 
-The maximum content width is 1240px; prose is 760px. Fluid gutters and section spacing set the rhythm. Breakpoints are 768px and 1024px, documented together in `globals.css` and aligned with the navigation media query. Validate at 320/375/390/768/1024/1440px and landscape. Native disclosures avoid five repetitive service cards.
+The maximum content width is 1240px; prose is 760px. Fluid gutters and section spacing set the rhythm. Main breakpoints are 768px and 1024px, documented together in `globals.css` and aligned with navigation. At 440px and below, expertise panels stack for readability and the focus control highlights the selected panel; a 374px adjustment keeps the hero headline compact. Validate at 320/375/390/768/1024/1440px and landscape. Native disclosures avoid five repetitive service cards.
 
 ## Motion and interaction
 

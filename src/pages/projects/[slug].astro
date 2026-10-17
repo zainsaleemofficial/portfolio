@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import Arrow from '../../components/Arrow.astro'
 import ContentSections from '../../components/ContentSections.astro'
 import Consultation from '../../components/Consultation.astro'
 import { projects } from '../../data/content'
@@ -15,7 +16,7 @@ const { project } = Astro.props
   <section class="section page-intro">
     <div class="container">
       <a class="text-link" href="/work/">
-        ← Work
+        <Arrow direction="left" /> Work
       </a>
       <h1>{project.title}</h1>
       <p class="large-copy">{project.summary}</p>

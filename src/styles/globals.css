@@ -606,8 +606,9 @@ ul {
   margin-left: 15px;
   color: var(--color-text-inverse);
 }
-.flow-art > span {
-  font-size: 12px;
+.flow-art > svg {
+  width: 12px;
+  height: 12px;
   color: var(--color-brand-primary);
 }
 .search-art {
@@ -920,12 +921,13 @@ ul {
 }
 .topic-list li {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
   padding: var(--space-4) 0;
   border-bottom: 1px solid var(--color-border-subtle);
 }
-.topic-list li span {
+.topic-list li svg {
   color: var(--color-brand-dark);
 }
 .consultation {
@@ -1071,6 +1073,12 @@ ul {
   font-size: var(--text-sm);
   font-weight: 500;
   margin-bottom: var(--space-5);
+}
+.brief-form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
 }
 .brief-form input,
 .brief-form select,
@@ -1451,6 +1459,38 @@ ul {
   }
   .work-count {
     font-size: var(--text-xs);
+  }
+}
+@media (max-width: 440px) {
+  .dual-panels {
+    grid-template-columns: 1fr;
+  }
+  .dual-divider {
+    display: none;
+  }
+  .dual-panel {
+    padding: var(--space-6);
+    background: var(--color-bg-mint);
+  }
+  .dual-panel + .dual-panel {
+    background: var(--color-bg-surface);
+    border-top: 1px solid var(--color-border-strong);
+  }
+  .dual-panel > p:not(.eyebrow) {
+    font-size: var(--text-base);
+    max-width: 32ch;
+  }
+  .dual-panel .text-link {
+    font-size: var(--text-sm);
+    align-items: center;
+  }
+  .dual-panel .eyebrow {
+    font-size: var(--text-xs);
+  }
+}
+@media (max-width: 374px) {
+  .hero h1 {
+    font-size: 2.8rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
