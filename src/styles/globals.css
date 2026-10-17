@@ -221,12 +221,8 @@ ul {
 }
 .hero {
   background:
-    radial-gradient(
-      ellipse at 85% 70%,
-      var(--color-bg-forest),
-      transparent 65%
-    ),
-    var(--color-bg-hero);
+    radial-gradient(ellipse at 79% 47%, color-mix(in srgb, var(--color-portrait-glow) 74%, transparent), transparent 55%),
+    linear-gradient(112deg, var(--color-bg-hero) 4%, var(--color-bg-teal) 53%, var(--color-bg-forest) 100%);
   color: var(--color-text-inverse);
   padding-top: var(--space-8);
   overflow: hidden;
@@ -302,10 +298,15 @@ ul {
 }
 .hero-portrait img {
   position: relative;
+  display: block;
   object-fit: contain;
+  object-position: center center;
   width: 100%;
   height: 500px;
   z-index: 1;
+  /* Keep the full portrait while feathering the baked-in background into the hero. */
+  -webkit-mask-image: radial-gradient(ellipse 75% 77% at 50% 54%, #000 55%, transparent 99%);
+  mask-image: radial-gradient(ellipse 75% 77% at 50% 54%, #000 55%, transparent 99%);
 }
 .portrait-orbit {
   position: absolute;

@@ -1,6 +1,6 @@
 # Content and launch prerequisites
 
-- Provide the original portrait or approved transparent cutout, preserving the full head and shoulders. No portrait image was attached to this task.
+- Review the currently integrated, optimized professional portrait (`public/images/zain-portrait.webp`) against the original photograph. Approve the likeness or provide an alternative. Verify framing on real desktop and mobile devices.
 - Provide real project names, screenshots, individual roles, ownership statements, and permission to publish.
 - Provide software case studies: problem, solution, role, decisions, stack, imagery, and verified outcome.
 - Provide SEO case studies: problem, baseline, work, date range, evidence, and verified outcome.

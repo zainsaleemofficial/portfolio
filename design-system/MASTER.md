@@ -1,10 +1,10 @@
 # Dual Contrast — Zain Saleem
 
-The approved direction is a navy/forest cinematic introduction followed by spacious, light editorial sections. Software development leads; search is the complementary perspective. The visual signature is large, restrained typography, dark-to-light rhythm, and an interactive engineering/search split in the middle of the page.
+The approved direction is a deep-forest / dark-teal cinematic introduction followed by spacious, light editorial sections. Software development leads; search is the complementary perspective. The visual signature is large, restrained typography, dark-to-light rhythm, and an interactive engineering/search split in the middle of the page.
 
 ## Tokens
 
-`src/styles/tokens.css` is the global source for semantic colors, type, space, radius, borders, elevation, and timing. The approved navy `#0b1f3b`, forest `#12372e`, emerald `#10b981`, mint `#dcece8`, and near-white `#f8fafc` are retained. Dark emerald is refined to `#076b50` for contrast on mint. Avoid raw color values inside components.
+`src/styles/tokens.css` is the global source for semantic colors, type, space, radius, borders, elevation, and timing. The refined owner-approved palette uses deep evergreen `#071e19`, forest `#124b39`, emerald `#10b981`, mint `#dcece8`, and near-white `#f8fafc`; navy is no longer the dominant hero color. Dark emerald is refined to `#076b50` for contrast on mint. Avoid raw color values inside components.
 
 `themes.css` defines the optional `ink-and-sage` palette. Set the layout HTML's `data-theme` to `ink-and-sage` to preview it. The default is `dual-contrast`. Both must pass contrast checks.
 
@@ -22,7 +22,7 @@ Buttons use a consistent 4px radius, clear hover/active/focus states, and at lea
 
 ## Portrait and content
 
-No portrait was attached. The current monogram explicitly says the original portrait is pending. Set `site.portrait` to the approved original asset with dimensions and alt text; the hero uses `object-fit: contain`. Verify full head and shoulder framing at all widths before sign-off.
+The current hero uses the optional professional portrait supplied in the conversation, optimized to a 760 × 1143 WebP at `public/images/zain-portrait.webp`. The actual subject is displayed using `object-fit: contain`; a gentle radial alpha mask blends the photo background with forest-green CSS lighting. Compare against the supplied original photograph before final personal-brand approval; preserve authentic features. Verify full head and shoulder framing at all widths.
 
 Work visuals are original CSS illustrations with explicit labels. Unapproved content produces no detail pages. Do not introduce fictitious metrics or testimonials to fill space.
 

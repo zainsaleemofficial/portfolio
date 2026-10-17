@@ -4,12 +4,12 @@ export const site = {
   url: 'https://zainsaleem.co',
   email: 'me@zainsaleem.co',
   bookingUrl: 'https://calendly.com/zainsaleemofficial/30min',
-  portrait: null as {
-    src: string
-    width: number
-    height: number
-    alt: string
-  } | null,
+  portrait: {
+    src: '/images/zain-portrait.webp',
+    width: 760,
+    height: 1143,
+    alt: 'Zain Saleem in a navy blazer, looking thoughtfully to the left',
+  },
   socials: [
     { label: 'GitHub', url: 'https://github.com/zainsaleemofficial' },
     { label: 'Facebook', url: 'https://www.facebook.com/ZainSaleemOfficial/' },

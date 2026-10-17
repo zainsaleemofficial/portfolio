@@ -2,7 +2,7 @@
 
 A personal portfolio for a **SaaS & Software Developer × SEO Strategist**, built with static Astro pages and two React islands. Tailwind v4, semantic CSS tokens, self-hosted Manrope/Instrument Serif, Lucide, and Motion support the interface.
 
-This is a working prototype awaiting the original portrait and approved project evidence. Illustrations are explicitly labeled; no client work, testimonials, dates, ownership, or results have been fabricated.
+This is a working prototype with an optional approved-look professional portrait asset; owner verification of likeness and real project evidence remain pending. Illustrations are explicitly labeled; no client work, testimonials, dates, ownership, or results have been fabricated.
 
 ## Local development
 
@@ -45,7 +45,7 @@ tests/              Browser and accessibility checks
 
 Edit verified identity, services, booking, socials, and portrait in `src/data/site.ts`. Add genuine content to `src/data/content.ts`; only entries with `approved: true` generate detail pages. Listings update automatically. Review the surrounding editorial copy when publishing the first entries. Never create thin or fictional case studies to fill slots.
 
-Set `site.portrait` to an approved real asset with `src`, `width`, `height`, and `alt`. The hero preserves the image with `object-fit: contain`. Test actual head/shoulder framing at every required width. The current monogram explicitly marks the missing original photo.
+Set `site.portrait` to an approved real asset with `src`, `width`, `height`, and `alt`. The hero preserves the image with `object-fit: contain`. Test actual head/shoulder framing at every required width. The optional professional portrait is currently set to `/images/zain-portrait.webp`; verify the likeness against the original photograph and replace it if preferred.
 
 Change colors, typography, spacing, and radii in `src/styles/tokens.css`. Try `data-theme="ink-and-sage"` in the layout for the alternate theme. `src/data/motion.ts` maps shared timing into CSS and React. See `design-system/MASTER.md` and `CONTENT_TODO.md`.
 
