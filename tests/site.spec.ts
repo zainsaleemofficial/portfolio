@@ -171,13 +171,13 @@ test('core content remains usable without JavaScript', async ({
   await page.goto('/')
   await expect(page.locator('h1')).toBeVisible()
   await expect(
-    page.getByRole('heading', { name: 'Make it work.' }),
+    page.getByRole('button', { name: /Build something useful/i }),
   ).toBeVisible()
   await page.locator('.service-item').first().locator('summary').click()
   await expect(
     page.locator('.service-item').first().getByRole('link'),
   ).toBeVisible()
-  await expect(page.getByRole('slider')).toBeDisabled()
+  await expect(page.getByRole('slider')).toHaveCount(0)
   await page.goto('/contact/')
   await expect(
     page.getByRole('button', { name: 'Prepare an email' }),
@@ -245,4 +245,27 @@ test('static routes, metadata, local anchors and assets resolve', async ({
   expect(await (await request.get('/sitemap.xml')).text()).toContain('<urlset')
   await page.goto('/not-a-real-page/')
   await expect(page.locator('h1')).toContainText('Nothing here')
+})
+
+test('verified personal brand pages tell the story without private project galleries', async ({ page }) => {
+  const routes = [
+    ['/about/', 'Curious first.'],
+    ['/my-story/', 'Nothing began'],
+    ['/experience/', 'Roles changed.'],
+    ['/expertise/', 'Make the work'],
+    ['/services/ai-automation/', 'AI Automation'],
+  ] as const
+  for (const [route, heading] of routes) {
+    await page.goto(route)
+    await expect(page.locator('h1')).toContainText(heading)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow')
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  }
+  await page.goto('/experience/')
+  await expect(page.getByText('Pearl Lemon', { exact: true })).toBeVisible()
+  await expect(page.getByText('Tracemark Impression', { exact: true })).toBeVisible()
+  await expect(page.getByText('LemStudio', { exact: true })).toBeVisible()
+  await page.goto('/')
+  await expect(page.getByRole('link', { name: 'My full story' })).toHaveAttribute('href', '/my-story/')
+  await expect(page.getByRole('link', { name: 'Book a call' }).first()).toHaveAttribute('href', 'https://calendly.com/zainsaleemofficial/30min')
 })

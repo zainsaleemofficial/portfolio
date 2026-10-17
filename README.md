@@ -1,6 +1,6 @@
 # Zain Saleem — Dual Contrast
 
-A personal portfolio for a **SaaS & Software Developer × SEO Strategist**, built with static Astro pages and two React islands. Tailwind v4, semantic CSS tokens, self-hosted Manrope/Instrument Serif, Lucide, and Motion support the interface.
+A personal brand website for an **AI-assisted SaaS developer, Head of SaaS at LemStudio, and SEO strategist**, built with static Astro pages and two React islands. Tailwind v4, semantic CSS tokens, self-hosted Manrope/Instrument Serif, Lucide, and Motion support the interface.
 
 This is a working prototype with an optional approved-look professional portrait asset; owner verification of likeness and real project evidence remain pending. Illustrations are explicitly labeled; no client work, testimonials, dates, ownership, or results have been fabricated.
 
@@ -77,3 +77,9 @@ Before production, complete the content checklist, verify the hosted preview, ob
 ## Design tools
 
 UI UX Pro Max's existing design-system workflow was used. Refero, Mobbin, and Motionsites.ai have no callable tools in this session. No skill or MCP was installed or reconfigured. Research and reference access limitations are documented in `design-system/REFERENCES.md`.
+
+## Brand source of truth
+
+The owner's October 2026 Final Personal Brand Master Documents (TXT and DOCX) were reviewed in this update. The latest **Final Verified Update** supersedes draft statements. The private source files were not committed. Publication-safe editable experience, metrics and capabilities live in `src/data/brand.ts`; narrative pages live in `src/pages/about/`, `src/pages/my-story/`, `src/pages/experience/` and `src/pages/expertise/`.
+
+Never claim that 50+ projects means 50 launched SaaS products or that LemStudio tools are personally owned. Avoid company-owned screenshots and case studies until approved. Preserve the separate SEO leadership roles at Pearl Lemon and Tracemark Impression. The existing contact draft and external Calendly booking URL are unchanged; see `CONTENT_TODO.md` for publication boundaries.

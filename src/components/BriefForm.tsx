@@ -57,6 +57,7 @@ export default function BriefForm({ email }: { email: string }) {
             </option>
             {[
               'SaaS development',
+              'AI automation',
               'Custom software',
               'Technical SEO',
               'Local SEO',

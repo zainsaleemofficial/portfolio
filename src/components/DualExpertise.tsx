@@ -90,20 +90,20 @@ export default function DualExpertise() {
         </div>
 
         <div className="identity-copy identity-copy--software">
-          <div className="identity-index"><Code2 size={21} aria-hidden="true" /><span>01 / Software engineering</span></div>
+          <div className="identity-index"><Code2 size={21} aria-hidden="true" /><span>01 / SaaS & AI-assisted building</span></div>
           <h3>
             <button type="button" disabled={!ready} aria-pressed={perspective === 'software'} onClick={() => show('software')}>
               Build<span className="identity-editorial">something useful.</span>
             </button>
           </h3>
-          <p>Software products, internal tools and automations built around real problems.</p>
+          <p>SaaS products and practical automations, built with AI-assisted tools around real business problems.</p>
           <a href="/services/saas-development/" className="identity-discover">
             Explore software <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
 
         <div className="identity-copy identity-copy--search">
-          <div className="identity-index"><ScanSearch size={21} aria-hidden="true" /><span>02 / Search strategy</span></div>
+          <div className="identity-index"><ScanSearch size={21} aria-hidden="true" /><span>02 / SEO strategy</span></div>
           <h3>
             <button type="button" disabled={!ready} aria-pressed={perspective === 'search'} onClick={() => show('search')}>
               Make it<span className="identity-editorial">discoverable.</span>

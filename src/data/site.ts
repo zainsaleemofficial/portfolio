@@ -1,6 +1,6 @@
 export const site = {
   name: 'Zain Saleem',
-  title: 'SaaS & Software Developer × SEO Strategist',
+  title: 'Head of SaaS at LemStudio | SaaS Development, AI Automation & SEO Strategy',
   url: 'https://zainsaleem.co',
   email: 'me@zainsaleem.co',
   bookingUrl: 'https://calendly.com/zainsaleemofficial/30min',
@@ -19,36 +19,53 @@ export const site = {
     },
   ],
 }
-// Keep false until the owner approves the hosted preview and production cutover.
+// Keep indexing disabled until the owner approves all public content, regardless of deployment status.
 export const publicationApproved = false
 export const services = [
   {
     slug: 'saas-development',
     title: 'SaaS Product Development',
     group: 'Build',
-    summary: 'From a focused product idea to software people can use.',
+    summary: 'Turn a business problem into a product people can actually use.',
     intro:
-      'A useful product begins with a clear problem. I help turn that problem into a considered application, with a scope that makes sense for the people using it.',
+      'I work from the problem outward: understand the workflow, shape the experience, build with AI-assisted platforms and integrations, then test what happens when real people use it.',
     scope: [
       'Define the core user journey and a practical first release.',
-      'Build responsive interfaces and the application workflows behind them.',
+      'Use AI-assisted development tools to create and iterate on the core workflows.',
       'Connect the services and APIs the product actually needs.',
-      'Prepare the codebase for maintenance and future improvements.',
+      'Plan for testing, administration, maintenance and future improvements.',
     ],
     process:
       'We start with the problem, audience, and constraints. From there, we agree on the core workflow, build in reviewable stages, and test the product before release.',
-    note: 'My experience includes building 50+ SaaS tools while working with a UK-based agency. Product ownership and individual contributions will be documented with approved examples.',
+    note: 'My background includes 50+ AI-assisted software projects, from prototypes and internal tools to launched SaaS. Approximately 20+ products reached launch. Company-owned work is not presented as personally owned IP.',
+  },
+  {
+    slug: 'ai-automation',
+    title: 'AI Automation & Workflows',
+    group: 'Build',
+    summary: 'Make repeatable processes easier for the people doing the work.',
+    intro:
+      'An automation is useful when it reduces friction without creating a new problem to maintain. I help identify the handoffs, data and repetitive decisions that can be handled more reliably with connected tools and AI-assisted workflows.',
+    scope: [
+      'Map the existing process, exceptions and points of friction.',
+      'Design an automation around the right tools, integrations and human checks.',
+      'Build and test the workflow in practical stages.',
+      'Document what should happen when something fails or needs a manual decision.',
+    ],
+    process:
+      'We start with the real work, not a technology demonstration. I identify what is worth automating and what should remain in human hands, then test the approach with actual scenarios.',
+    note: 'Automations need sensible access controls, privacy, monitoring and maintenance. Outcomes depend on the underlying process and systems.',
   },
   {
     slug: 'custom-software',
-    title: 'Custom Software Development',
+    title: 'Custom Business Software',
     group: 'Build',
     summary: 'Applications and automations shaped around the way you work.',
     intro:
       'Repeated manual tasks and disconnected tools can make a straightforward process difficult. Custom software can bring those steps together in one understandable workflow.',
     scope: [
       'Map the current process and identify the practical bottlenecks.',
-      'Build internal tools, custom applications, and automation workflows.',
+      'Develop internal tools and useful applications with AI-assisted workflows.',
       'Integrate existing tools through suitable APIs.',
       'Document the workflow so the next person can maintain it.',
     ],
@@ -114,16 +131,16 @@ export const workAreas = [
     category: 'Software',
     title: 'Products with a purpose.',
     description:
-      'SaaS interfaces and application workflows built around a clear user need.',
+      'AI-assisted products, workflows and applications built for real business needs.',
     service: 'saas-development',
     art: 'product',
   },
   {
     id: 'automation',
     category: 'Software',
-    title: 'Less repetition. More flow.',
-    description: 'Custom tools, connected systems, and practical automations.',
-    service: 'custom-software',
+    title: 'Smarter workflows. Less manual work.',
+    description: 'Useful automations and connected systems shaped around how teams work.',
+    service: 'ai-automation',
     art: 'flow',
   },
   {
@@ -137,8 +154,8 @@ export const workAreas = [
 ] as const
 export const insightTopics = [
   'SaaS development',
-  'Software engineering',
-  'Automation',
+  'AI-assisted product development',
+  'AI automation',
   'Technical SEO',
   'Local SEO',
   'Organic growth',

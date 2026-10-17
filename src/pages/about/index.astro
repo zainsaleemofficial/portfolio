@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Arrow from '../../components/Arrow.astro'
+import Consultation from '../../components/Consultation.astro'
+import { capabilities, interests } from '../../data/brand'
+---
+<Layout
+  title="About Zain Saleem — SaaS, AI Automation & SEO"
+  description="Get to know Zain Saleem, Head of SaaS at LemStudio. From technical curiosity and SEO leadership to AI-assisted SaaS products, teams and operations."
+>
+  <section class="section page-intro brand-intro">
+    <div class="container brand-lede">
+      <div>
+        <p class="eyebrow">About me / Zain Saleem</p>
+        <h1>Curious first.<br /><span class="serif">Building ever since.</span></h1>
+      </div>
+      <div class="brand-intro-copy">
+        <p class="large-copy">I'm Zain, a hands-on AI-assisted SaaS builder, Head of SaaS at LemStudio, and someone whose background in SEO still shapes the way I solve business problems.</p>
+        <p>I've never been particularly interested in doing something just because it sounds impressive. I want to understand the problem, build what helps, and see it work for the people who actually use it.</p>
+        <a class="text-link" href="/my-story/">Read my full story <Arrow diagonal /></a>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container brand-prose-grid">
+      <div>
+        <p class="eyebrow">What shaped me</p>
+        <h2>It started with<br /><span class="serif">curiosity.</span></h2>
+      </div>
+      <div class="brand-reading">
+        <p>In seventh grade, I was learning HTML and CSS from YouTube and experimenting with CMD, batch scripts and Windows customizations. I wasn't building a career plan; I just liked finding out how things worked.</p>
+        <p>At 15, I started working with RedsGlow on WordPress sites, speed, hosting and technical troubleshooting. One unexpected website outage taught me something I still believe: you don't have to know the answer immediately to take responsibility for finding it.</p>
+        <p>SEO became my next chapter. At Pearl Lemon I grew from Off-Page SEO Intern to Head of Off-Page SEO for client-facing work. Alongside US agency experience with Tracemark Impression, I learned to manage campaigns, support teams and understand what growing businesses actually need.</p>
+        <p>A weekend software challenge changed the direction of my work. It led to a chance to work directly with Pearl Lemon's CEO, Deepak Shukla, and helped set LemStudio in motion. Today, I lead its SaaS work: shaping solutions, building with AI-assisted tools, testing, coordinating launches and looking after what happens after a product ships.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section brand-soft-section">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">The work today</p><h2>Three areas.<br /><span class="serif">One practical approach.</span></h2></div>
+        <p class="section-aside">Software, automation and SEO make sense together when the starting point is a real business need.</p>
+      </div>
+      <div class="brand-capabilities">
+        {capabilities.map((item, i) => <article class="brand-capability">
+          <span class="eyebrow">{String(i + 1).padStart(2, '0')} / {item.label}</span>
+          <h3>{item.heading}</h3><p>{item.description}</p>
+          <a class="text-link" href={item.href}>Explore this area <Arrow diagonal /></a>
+        </article>)}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container brand-prose-grid">
+      <div><p class="eyebrow">Beyond work</p><h2>There's more<br /><span class="serif">to the story.</span></h2></div>
+      <div class="brand-reading">
+        <p>I write poetry, read books, enjoy cooking and play cricket with friends. I like having interests that aren't about shipping features or checking campaign performance.</p>
+        <ul class="brand-interests">{interests.map((item) => <li>{item}</li>)}</ul>
+        <p>I'm interested in meeting clients and partners who have meaningful challenges to solve. Over time, I want to build something of my own at the intersection of SEO and software—but I care more about doing the current work well than making grand claims about the future.</p>
+        <a class="text-link" href="/experience/">Explore my experience <Arrow diagonal /></a>
+      </div>
+    </div>
+  </section>
+  <Consultation />
+</Layout>

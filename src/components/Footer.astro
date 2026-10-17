@@ -10,14 +10,19 @@ import Arrow from './Arrow.astro'
         Zain Saleem<span class="accent">.</span>
       </a>
       <p>
-        Building software.
+        Building useful software.
         <br />
-        Understanding growth.
+        Helping work move forward.
       </p>
     </div>
     <div class="footer-bottom">
       <p>© {new Date().getFullYear()} Zain Saleem</p>
-      <nav aria-label="Social links">
+      <nav aria-label="More about Zain and social links">
+        <a href="/about/">About</a>
+        <a href="/my-story/">My Story</a>
+        <a href="/experience/">Experience</a>
+        <a href="/expertise/">Expertise</a>
+        <a href="/insights/">Insights</a>
         {site.socials.map((s) => (
           <a href={s.url} target="_blank" rel="noopener noreferrer">
             {s.label}
