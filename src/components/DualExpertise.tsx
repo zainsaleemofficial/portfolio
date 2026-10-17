@@ -73,7 +73,8 @@ export default function DualExpertise() {
             alt=""
             width="620"
             height="775"
-            loading="lazy"
+            loading="eager"
+            fetchPriority="low"
             decoding="async"
           />
           <img
@@ -82,7 +83,8 @@ export default function DualExpertise() {
             alt=""
             width="620"
             height="775"
-            loading="lazy"
+            loading="eager"
+            fetchPriority="low"
             decoding="async"
           />
         </div>
