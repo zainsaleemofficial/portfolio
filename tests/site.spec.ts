@@ -80,31 +80,35 @@ test('filters and service disclosures work', async ({ page }) => {
   await expect(page).toHaveURL(/services\/technical-seo\/$/)
   await expect(page.locator('h1')).toContainText('Technical SEO')
 })
-test('expertise supports presets and keyboard', async ({ page }) => {
+test('expertise responds to mouse, focus controls, and keyboard without a slider', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/#expertise')
-  const slider = page.getByRole('slider')
-  await slider.scrollIntoViewIfNeeded()
-  await page.waitForFunction(
-    () => !document.querySelector('astro-island')?.hasAttribute('ssr'),
-  )
-  await page.getByRole('button', { name: 'Build', exact: true }).click()
-  await expect(slider).toHaveValue('25')
-  await slider.focus()
+  await page.locator('.identity-scene').scrollIntoViewIfNeeded()
+  await page.waitForFunction(() => !document.querySelector('astro-island')?.hasAttribute('ssr'))
+  await expect(page.getByRole('slider')).toHaveCount(0)
+  const scene = page.locator('.identity-scene')
+  const software = scene.getByRole('button', { name: /Build something useful/i })
+  const seo = scene.getByRole('button', { name: /Make it discoverable/i })
+  await software.click()
+  await expect(software).toHaveAttribute('aria-pressed', 'true')
+  await expect(scene).toHaveCSS('--identity-split', '77%')
+  await seo.click()
+  await expect(seo).toHaveAttribute('aria-pressed', 'true')
+  await expect(scene).toHaveCSS('--identity-split', '23%')
+  await scene.focus()
   await page.keyboard.press('ArrowRight')
-  await expect(slider).toHaveValue('30')
-  await page.keyboard.press('End')
-  await expect(slider).toHaveValue('80')
-  await expect(slider).toHaveAttribute(
-    'aria-valuetext',
-    'Search strategy in focus',
-  )
-  expect(
-    (await new AxeBuilder({ page }).withTags(tags).analyze()).violations,
-  ).toEqual([])
-  await page.getByRole('button', { name: 'Both', exact: true }).click()
-  await expect(slider).toHaveValue('50')
+  await expect(scene).toHaveCSS('--identity-split', '77%')
+  await page.keyboard.press('Escape')
+  await expect(scene).toHaveCSS('--identity-split', '50%')
+  const box = await scene.boundingBox()
+  if (!box) throw Error('Identity scene missing')
+  await page.mouse.move(box.x + box.width * 0.73, box.y + box.height * 0.57)
+  await expect.poll(async () => Number((await scene.evaluate(el => el.style.getPropertyValue('--identity-split'))).replace('%', ''))).toBeGreaterThan(65)
+  await expect(scene.getByRole('link', { name: /Explore software/i })).toHaveAttribute('href', '/services/saas-development/')
+  await expect(scene.getByRole('link', { name: /Explore SEO/i })).toHaveAttribute('href', '/services/technical-seo/')
+  expect((await new AxeBuilder({ page }).withTags(tags).analyze()).violations).toEqual([])
 })
-test('expertise supports touch', async ({ browser, baseURL }) => {
+test('expertise works by touch without requiring drag', async ({ browser, baseURL }) => {
   const context = await browser.newContext({
     baseURL,
     viewport: { width: 390, height: 844 },
@@ -113,17 +117,13 @@ test('expertise supports touch', async ({ browser, baseURL }) => {
   })
   const page = await context.newPage()
   await page.goto('/#expertise')
-  const slider = page.getByRole('slider')
-  await slider.scrollIntoViewIfNeeded()
-  await page.waitForFunction(
-    () => !document.querySelector('astro-island')?.hasAttribute('ssr'),
-  )
-  await page.getByRole('button', { name: 'Grow', exact: true }).tap()
-  await expect(slider).toHaveValue('75')
-  const box = await slider.boundingBox()
-  if (!box) throw Error('Slider missing')
-  await page.touchscreen.tap(box.x + box.width * 0.25, box.y + box.height / 2)
-  expect(Number(await slider.inputValue())).toBeLessThan(50)
+  await page.locator('.identity-scene').scrollIntoViewIfNeeded()
+  await page.waitForFunction(() => !document.querySelector('astro-island')?.hasAttribute('ssr'))
+  await page.getByRole('button', { name: /Make it discoverable/i }).tap()
+  await expect(page.locator('.identity-scene')).toHaveCSS('--identity-split', '23%')
+  await page.getByRole('button', { name: /Both perspectives/i }).tap()
+  await expect(page.locator('.identity-scene')).toHaveCSS('--identity-split', '50%')
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   await context.close()
 })
 test('contact validates and creates a draft without claiming delivery', async ({
