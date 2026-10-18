@@ -1,85 +1,62 @@
-# Zain Saleem — Dual Contrast
+# Zain Saleem — Dual Contrast portfolio
 
-A personal brand website for an **AI-assisted SaaS developer, Head of SaaS at LemStudio, and SEO strategist**, built with static Astro pages and two React islands. Tailwind v4, semantic CSS tokens, self-hosted Manrope/Instrument Serif, Lucide, and Motion support the interface.
+Personal-brand portfolio for SaaS development, AI automation, and SEO strategy. The live site is `https://zainsaleem.co`; GitHub `main` deploys to Cloudflare Worker `portfolio`. **The site is deliberately not approved for search indexing.**
 
-This is a working prototype with an optional approved-look professional portrait asset; owner verification of likeness and real project evidence remain pending. Illustrations are explicitly labeled; no client work, testimonials, dates, ownership, or results have been fabricated.
+## Technology
 
-## Local development
+Astro 7 static output, React 19 islands, TypeScript, Tailwind CSS 4, semantic CSS, self-hosted Manrope and Instrument Serif, Playwright/axe, and Cloudflare Workers static assets. The existing contact form prepares an email draft and text download; it does not send or store submissions.
 
-Use Node 24 and npm 11. Dependency versions are locked in `package-lock.json`.
+## Develop locally
+
+Use a supported Node version consistent with the lockfile and CI (GitHub Actions currently uses Node 22). Install dependencies with `npm ci`.
 
 ```bash
 npm ci
 npm run dev
-```
-
-In the managed cloud machine, set `NPM_CONFIG_CACHE=/tmp/npm-cache` and `ASTRO_TELEMETRY_DISABLED=1` first because the home directory is read-only. Astro uses port 4321. In agent sessions it may daemonize; use `npx astro dev status`, `npx astro dev logs`, or `npx astro dev stop`. Add `--ignore-lock` for foreground operation.
-
-```bash
 npm run typecheck
 npm run lint
 npm run format:check
 npm run build
 npm test
-npm audit
 ```
 
-`npm run format` applies formatting. The production build verifies pages, links, metadata, and preview indexing protection. Playwright uses `/usr/bin/chromium`; override `CHROMIUM_PATH` elsewhere. Set `TEST_BASE_URL` to test an existing local or deployed preview. Tests cover six viewport widths, axe checks, navigation, filters, service disclosures, keyboard/touch expertise controls, contact drafts, reduced motion, alternate theme, routes, and no-JavaScript content. Reports and screenshots are ignored under `artifacts/`. See `QA.md` for actual results and limitations.
+`npm run build` also executes `scripts/verify-build.mjs`, which checks generated content and indexing restrictions. Playwright starts an Astro preview unless `TEST_BASE_URL` is set. In CI it uses Playwright-managed Chromium; local setups may use `/usr/bin/chromium` or override `CHROMIUM_PATH`. See `playwright.config.ts`.
 
-## Project structure
+The local Worker header check is performed by `.github/workflows/portfolio-checks.yml` using `wrangler dev --local` and `scripts/verify-worker-headers.mjs`. Do not treat a local Worker response as live production evidence.
 
-```text
-src/components/     Static components and two React islands
-src/data/site.ts    Services, contact details, socials, portrait
-src/data/content.ts Typed projects, software/SEO case studies, articles
-src/data/motion.ts  Shared timing and easing
-src/layouts/        Metadata, document, navigation, footer
-src/pages/          Static pages and approved-content templates
-src/styles/         Tokens, themes, typography, layout
-design-system/      Design decisions and research record
-scripts/            Build integrity checks
-tests/              Browser and accessibility checks
-```
+## Source map
 
-## Update content and design
+| Location                                              | Responsibility                                                               |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------- |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `src/layouts/Layout.astro`                            | Document metadata, canonical URLs, global shell, indexing meta               |
+| `src/components/`                                     | Astro components and two interactive React islands                           |
+| `src/data/site.ts`                                    | Public identity/contact, service definitions, publication gate               |
+| `src/data/brand.ts`                                   | Approved professional facts and career narrative data                        |
+| `src/data/content.ts`                                 | Typed projects, case studies, and articles; currently empty pending approval |
+| `src/styles/`                                         | Semantic tokens, themes, typography, and global styles/motion                |
+| `public/_headers`                                     | Static asset security and indexing response headers                          |
+| `src/pages/robots.txt.ts`, `src/pages/sitemap.xml.ts` | Crawling and sitemap policy                                                  |
+| `scripts/`                                            | Generated-build and local Worker integrity checks                            |
+| `tests/`                                              | Functional, accessibility, responsive, and visual Playwright tests           |
+| `.github/workflows/portfolio-checks.yml`              | Automated CI quality gates                                                   |
 
-Edit verified identity, services, booking, socials, and portrait in `src/data/site.ts`. Add genuine content to `src/data/content.ts`; only entries with `approved: true` generate detail pages. Listings update automatically. Review the surrounding editorial copy when publishing the first entries. Never create thin or fictional case studies to fill slots.
+See `docs/ARCHITECTURE.md` for detail and `design-system/MASTER.md` for approved design decisions.
 
-Set `site.portrait` to an approved real asset with `src`, `width`, `height`, and `alt`. The hero preserves the image with `object-fit: contain`. Test actual head/shoulder framing at every required width. The optional professional portrait is currently set to `/images/zain-portrait.webp`; verify the likeness against the original photograph and replace it if preferred.
+## Content, design, and privacy
 
-Change colors, typography, spacing, and radii in `src/styles/tokens.css`. Try `data-theme="ink-and-sage"` in the layout for the alternate theme. `src/data/motion.ts` maps shared timing into CSS and React. See `design-system/MASTER.md` and `CONTENT_TODO.md`.
+Edit service/contact links in `src/data/site.ts`, verified professional facts in `src/data/brand.ts`, and evidence-backed approved editorial entries in `src/data/content.ts`. Never invent client work or publish company-owned screenshots without permission. Review `CONTENT_TODO.md` before any public-content change.
 
-## Contact and privacy
+Use semantic variables from `src/styles/tokens.css`, and preserve the approved Dual Contrast layout and both themes. Read `docs/DESIGN-CONTENT-CONVENTIONS.md` before visual changes. The contact draft is client-side; no analytics, database, or contact-form backend is configured.
 
-The verified Calendly URL opens externally without an embedded widget. The brief form validates input, prepares a `mailto:` draft, and provides a text download. It never sends a message or stores data on a server. Visitors review and send email themselves. Direct email and verified social links are available. No analytics, database, tracking scripts, or authentication are required.
+## Deployment and indexing
 
-## Cloudflare preview
+`main` is the production deployment branch. The actual production Worker is `portfolio`; the checked-in `wrangler.jsonc` names `zain-saleem-portfolio-preview` for a separate manual preview workflow. **Do not run a manual Wrangler deploy expecting it to target production.** Verify the intended target and obtain approval first.
 
-Current Astro guidance recommends **Cloudflare Workers Static Assets** for new projects. `wrangler.jsonc` targets a separate `zain-saleem-portfolio-preview` Worker, uploads `dist/`, and enables custom 404 handling. It includes no production zone, custom domain, or route.
+`publicationApproved = false`; generated HTML contains `noindex, nofollow`, `robots.txt` disallows crawling, `sitemap.xml` contains no URL entries, and `public/_headers` sends `X-Robots-Tag: noindex, nofollow`. These controls must not be relaxed without explicit approval.
 
-```bash
-npm run build
-npm run cf:preview
-# After account authentication is available:
-npm run deploy:preview
-```
+The Phase 3 QA suite was merged to `main` at `6705916d7b6c7e435d60d36bb309b919ce5fd0d7`. GitHub Actions Run #4 passed and the production release was smoke-tested; see `docs/PHASE3-RELEASE.md` for evidence and limitations. `QA.md` is an earlier prototype verification record, not the current release status.
 
-For this cloud machine use `WRANGLER_SEND_METRICS=false` and `XDG_CONFIG_HOME=/tmp/zain-cloudflare-config`. Supply `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` securely in environment settings, never in chat or Git. Scope the token to the intended account with Workers Scripts Edit; Account Settings Read may be needed for the workers.dev subdomain lookup. Preview deployment does not need DNS-edit permission. Allow access to `api.cloudflare.com` and the resulting `*.workers.dev` hostname.
+## Working with AI tools
 
-Verify the returned hosted URL, headers, mobile layouts, interactions, and Lighthouse before claiming deployment success. The local Worker runtime is not a hosted preview. The temporary-account flow requires accepting Cloudflare terms and has not been used.
-
-## Production approval gate
-
-Preview HTML and `_headers` send `noindex, nofollow`; robots.txt disallows crawling and the sitemap is empty. Canonical metadata, Person schema, and a 1200×630 social image are present.
-
-Before production, complete the content checklist, verify the hosted preview, obtain explicit owner approval, and inspect the existing domain/redirect/DNS state. Then coordinate `publicationApproved`, `PUBLIC_DEPLOYMENT_ENV`, `_headers`, robots/sitemap policy, and build assertions. Keep changes minimal and reversible. No DNS, nameservers, existing redirects, or production traffic have been changed.
-
-## Design tools
-
-UI UX Pro Max's existing design-system workflow was used. Refero, Mobbin, and Motionsites.ai have no callable tools in this session. No skill or MCP was installed or reconfigured. Research and reference access limitations are documented in `design-system/REFERENCES.md`.
-
-## Brand source of truth
-
-The owner's October 2026 Final Personal Brand Master Documents (TXT and DOCX) were reviewed in this update. The latest **Final Verified Update** supersedes draft statements. The private source files were not committed. Publication-safe editable experience, metrics and capabilities live in `src/data/brand.ts`; narrative pages live in `src/pages/about/`, `src/pages/my-story/`, `src/pages/experience/` and `src/pages/expertise/`.
-
-Never claim that 50+ projects means 50 launched SaaS products or that LemStudio tools are personally owned. Avoid company-owned screenshots and case studies until approved. Preserve the separate SEO leadership roles at Pearl Lemon and Tracemark Impression. The existing contact draft and external Calendly booking URL are unchanged; see `CONTENT_TODO.md` for publication boundaries.
+Read `AGENTS.md` and `docs/DEVELOPMENT-WORKFLOW.md`. Prefer direct GitHub integration for inspection and documentation; use Codex when local execution or browser debugging is necessary. Require explicit authorization for remote writes and production operations.
