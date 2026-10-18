@@ -6,7 +6,12 @@ export function GET() {
     import.meta.env.PUBLIC_DEPLOYMENT_ENV === 'production'
       ? [
           '/',
+          '/about/',
+          '/my-story/',
+          '/experience/',
+          '/expertise/',
           '/work/',
+          '/insights/',
           ...services.map((s) => `/services/${s.slug}/`),
           ...projects
             .filter((p) => p.approved)
