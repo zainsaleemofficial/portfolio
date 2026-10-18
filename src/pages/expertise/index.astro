@@ -4,20 +4,50 @@ import Consultation from '../../components/Consultation.astro'
 import Arrow from '../../components/Arrow.astro'
 import { capabilities } from '../../data/brand'
 ---
-<Layout title="Expertise — SaaS, AI Automation & SEO | Zain Saleem" description="Explore Zain Saleem's SaaS development, AI automation and SEO strategy expertise, informed by hands-on product building and client leadership.">
+
+<Layout
+  title="Expertise — SaaS, AI Automation & SEO | Zain Saleem"
+  description="Explore Zain Saleem's SaaS development, AI automation and SEO strategy expertise, informed by hands-on product building and client leadership."
+>
   <section class="section page-intro brand-intro">
     <div class="container brand-lede">
-      <div><p class="eyebrow">Expertise / My approach</p><h1>Make the work<br /><span class="serif">actually easier.</span></h1></div>
-      <div class="brand-intro-copy"><p class="large-copy">Software, automation and SEO are different tools. I use them to tackle the same question: what's getting in the way, and how can we make it better?</p><p>I'm an AI-assisted product builder and an SEO strategist—not someone promising to hand-code every technology or guarantee a ranking.</p></div>
+      <div>
+        <p class="eyebrow">Expertise / My approach</p>
+        <h1>
+          Make the work
+          <br />
+          <span class="serif">actually easier.</span>
+        </h1>
+      </div>
+      <div class="brand-intro-copy">
+        <p class="large-copy">
+          Software, automation and SEO are different tools. I use them to tackle
+          the same question: what's getting in the way, and how can we make it
+          better?
+        </p>
+        <p>
+          I'm an AI-assisted product builder and an SEO strategist—not someone
+          promising to hand-code every technology or guarantee a ranking.
+        </p>
+      </div>
     </div>
   </section>
   <section class="section">
     <div class="container expertise-rows">
-      {capabilities.map((item,i) => <article class="expertise-row">
-        <p class="eyebrow">{String(i + 1).padStart(2, '0')} / {item.label}</p>
-        <h2>{item.heading}</h2>
-        <div><p>{item.description}</p><a class="text-link" href={item.href}>See how I can help <Arrow diagonal /></a></div>
-      </article>)}
+      {capabilities.map((item, i) => (
+        <article class="expertise-row">
+          <p class="eyebrow">
+            {String(i + 1).padStart(2, '0')} / {item.label}
+          </p>
+          <h2>{item.heading}</h2>
+          <div>
+            <p>{item.description}</p>
+            <a class="text-link" href={item.href}>
+              See how I can help <Arrow diagonal />
+            </a>
+          </div>
+        </article>
+      ))}
     </div>
   </section>
   <Consultation />

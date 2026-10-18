@@ -1,6 +1,8 @@
+import { brandIdentity, brandNumbers } from './brand'
+
 export const site = {
   name: 'Zain Saleem',
-  title: 'Head of SaaS at LemStudio | SaaS Development, AI Automation & SEO Strategy',
+  title: `${brandIdentity.currentRole} at ${brandIdentity.currentCompany} | ${brandIdentity.primaryPositioning}`,
   url: 'https://zainsaleem.co',
   email: 'me@zainsaleem.co',
   bookingUrl: 'https://calendly.com/zainsaleemofficial/30min',
@@ -37,7 +39,7 @@ export const services = [
     ],
     process:
       'We start with the problem, audience, and constraints. From there, we agree on the core workflow, build in reviewable stages, and test the product before release.',
-    note: 'My background includes 50+ AI-assisted software projects, from prototypes and internal tools to launched SaaS. Approximately 20+ products reached launch. Company-owned work is not presented as personally owned IP.',
+    note: `My background includes ${brandNumbers.softwareProjects} AI-assisted software projects, from prototypes and internal tools to launched SaaS. Approximately ${brandNumbers.launchedProducts} products reached launch. Company-owned work is not presented as personally owned IP.`,
   },
   {
     slug: 'ai-automation',
@@ -139,7 +141,8 @@ export const workAreas = [
     id: 'automation',
     category: 'Software',
     title: 'Smarter workflows. Less manual work.',
-    description: 'Useful automations and connected systems shaped around how teams work.',
+    description:
+      'Useful automations and connected systems shaped around how teams work.',
     service: 'ai-automation',
     art: 'flow',
   },

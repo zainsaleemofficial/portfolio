@@ -5,7 +5,7 @@ import '../styles/globals.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { site, publicationApproved } from '../data/site'
-import { motionTokens } from '../data/motion'
+import { brandIdentity } from '../data/brand'
 interface Props {
   title?: string
   description?: string
@@ -13,7 +13,7 @@ interface Props {
 }
 const {
   title = 'Zain Saleem — SaaS Development, AI Automation & SEO Strategy',
-  description = 'Zain Saleem is Head of SaaS at LemStudio, an AI-assisted product builder and SEO strategist working across SaaS development, AI automation, teams and business challenges.',
+  description = `Zain Saleem is ${brandIdentity.currentRole} at ${brandIdentity.currentCompany}, an AI-assisted product builder and SEO strategist working across SaaS development, AI automation, teams and business challenges.`,
   noindex = false,
 } = Astro.props
 const canonical = new URL(Astro.url.pathname, site.url)
@@ -32,11 +32,7 @@ const schema = {
 ---
 
 <!doctype html>
-<html
-  lang="en"
-  data-theme="dual-contrast"
-  style={`--motion-duration-fast:${motionTokens.fast}s;--motion-duration-normal:${motionTokens.normal}s;--motion-duration-slow:${motionTokens.slow}s;--motion-entrance:${motionTokens.entrance}px;--motion-ease-standard:cubic-bezier(${motionTokens.ease.join(',')})`}
->
+<html lang="en" data-theme="dual-contrast">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

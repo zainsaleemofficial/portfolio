@@ -80,14 +80,20 @@ test('filters and service disclosures work', async ({ page }) => {
   await expect(page).toHaveURL(/services\/technical-seo\/$/)
   await expect(page.locator('h1')).toContainText('Technical SEO')
 })
-test('expertise responds to mouse, focus controls, and keyboard without a slider', async ({ page }) => {
+test('expertise responds to mouse, focus controls, and keyboard without a slider', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/#expertise')
   await page.locator('.identity-scene').scrollIntoViewIfNeeded()
-  await page.waitForFunction(() => !document.querySelector('astro-island')?.hasAttribute('ssr'))
+  await page.waitForFunction(
+    () => !document.querySelector('astro-island')?.hasAttribute('ssr'),
+  )
   await expect(page.getByRole('slider')).toHaveCount(0)
   const scene = page.locator('.identity-scene')
-  const software = scene.getByRole('button', { name: /Build something useful/i })
+  const software = scene.getByRole('button', {
+    name: /Build something useful/i,
+  })
   const seo = scene.getByRole('button', { name: /Make it discoverable/i })
   await software.click()
   await expect(software).toHaveAttribute('aria-pressed', 'true')
@@ -103,12 +109,31 @@ test('expertise responds to mouse, focus controls, and keyboard without a slider
   const box = await scene.boundingBox()
   if (!box) throw Error('Identity scene missing')
   await page.mouse.move(box.x + box.width * 0.73, box.y + box.height * 0.57)
-  await expect.poll(async () => Number((await scene.evaluate(el => el.style.getPropertyValue('--identity-split'))).replace('%', ''))).toBeGreaterThan(65)
-  await expect(scene.getByRole('link', { name: /Explore software/i })).toHaveAttribute('href', '/services/saas-development/')
-  await expect(scene.getByRole('link', { name: /Explore SEO/i })).toHaveAttribute('href', '/services/technical-seo/')
-  expect((await new AxeBuilder({ page }).withTags(tags).analyze()).violations).toEqual([])
+  await expect
+    .poll(async () =>
+      Number(
+        (
+          await scene.evaluate((el) =>
+            el.style.getPropertyValue('--identity-split'),
+          )
+        ).replace('%', ''),
+      ),
+    )
+    .toBeGreaterThan(65)
+  await expect(
+    scene.getByRole('link', { name: /Explore software/i }),
+  ).toHaveAttribute('href', '/services/saas-development/')
+  await expect(
+    scene.getByRole('link', { name: /Explore SEO/i }),
+  ).toHaveAttribute('href', '/services/technical-seo/')
+  expect(
+    (await new AxeBuilder({ page }).withTags(tags).analyze()).violations,
+  ).toEqual([])
 })
-test('expertise works by touch without requiring drag', async ({ browser, baseURL }) => {
+test('expertise works by touch without requiring drag', async ({
+  browser,
+  baseURL,
+}) => {
   const context = await browser.newContext({
     baseURL,
     viewport: { width: 390, height: 844 },
@@ -118,12 +143,24 @@ test('expertise works by touch without requiring drag', async ({ browser, baseUR
   const page = await context.newPage()
   await page.goto('/#expertise')
   await page.locator('.identity-scene').scrollIntoViewIfNeeded()
-  await page.waitForFunction(() => !document.querySelector('astro-island')?.hasAttribute('ssr'))
+  await page.waitForFunction(
+    () => !document.querySelector('astro-island')?.hasAttribute('ssr'),
+  )
   await page.getByRole('button', { name: /Make it discoverable/i }).tap()
-  await expect(page.locator('.identity-scene')).toHaveCSS('--identity-split', '23%')
+  await expect(page.locator('.identity-scene')).toHaveCSS(
+    '--identity-split',
+    '23%',
+  )
   await page.getByRole('button', { name: /Both perspectives/i }).tap()
-  await expect(page.locator('.identity-scene')).toHaveCSS('--identity-split', '50%')
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  await expect(page.locator('.identity-scene')).toHaveCSS(
+    '--identity-split',
+    '50%',
+  )
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true)
   await context.close()
 })
 test('contact validates and creates a draft without claiming delivery', async ({
@@ -247,7 +284,9 @@ test('static routes, metadata, local anchors and assets resolve', async ({
   await expect(page.locator('h1')).toContainText('Nothing here')
 })
 
-test('verified personal brand pages tell the story without private project galleries', async ({ page }) => {
+test('verified personal brand pages tell the story without private project galleries', async ({
+  page,
+}) => {
   const routes = [
     ['/about/', 'Curious first.'],
     ['/my-story/', 'Nothing began'],
@@ -258,14 +297,27 @@ test('verified personal brand pages tell the story without private project galle
   for (const [route, heading] of routes) {
     await page.goto(route)
     await expect(page.locator('h1')).toContainText(heading)
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow')
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      'content',
+      'noindex, nofollow',
+    )
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true)
   }
   await page.goto('/experience/')
   await expect(page.getByText('Pearl Lemon', { exact: true })).toBeVisible()
-  await expect(page.getByText('Tracemark Impression', { exact: true })).toBeVisible()
+  await expect(
+    page.getByText('Tracemark Impression', { exact: true }),
+  ).toBeVisible()
   await expect(page.getByText('LemStudio', { exact: true })).toBeVisible()
   await page.goto('/')
-  await expect(page.getByRole('link', { name: 'My full story' })).toHaveAttribute('href', '/my-story/')
-  await expect(page.getByRole('link', { name: 'Book a call' }).first()).toHaveAttribute('href', 'https://calendly.com/zainsaleemofficial/30min')
+  await expect(
+    page.getByRole('link', { name: 'My full story' }),
+  ).toHaveAttribute('href', '/my-story/')
+  await expect(
+    page.getByRole('link', { name: 'Book a call' }).first(),
+  ).toHaveAttribute('href', 'https://calendly.com/zainsaleemofficial/30min')
 })

@@ -6,6 +6,8 @@
   --color-bg-surface: #ffffff;
   --color-bg-alternate: #eff5f1;
   --color-bg-mint: #b8e9cc;
+  --color-identity-mint-start: #d5f2df;
+  --color-identity-mint-end: #b5dfc8;
   --color-header-bg: var(--color-bg-surface);
   --color-header-text: var(--color-text-primary);
   --color-header-muted: var(--color-text-muted);

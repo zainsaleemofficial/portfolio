@@ -4,6 +4,7 @@ import WorkGallery from '../components/WorkGallery.astro'
 import PublishedContent from '../components/PublishedContent.astro'
 import Consultation from '../components/Consultation.astro'
 import { projects, caseStudies } from '../data/content'
+import { brandNumbers } from '../data/brand'
 ---
 
 <Layout title="Software & search experience — Zain Saleem">
@@ -16,10 +17,15 @@ import { projects, caseStudies } from '../data/content'
         <span class="serif">Thoughtful decisions.</span>
       </h1>
       <p class="large-copy">
-        I've worked hands-on across 50+ AI-assisted software projects, from experiments and internal tools to products that launched. I also bring experience leading off-page and local SEO delivery.
+        I've worked hands-on across {brandNumbers.softwareProjects} AI-assisted
+        software projects, from experiments and internal tools to products that
+        launched. I also bring experience leading off-page and local SEO
+        delivery.
       </p>
       <p>
-        The visuals below are original illustrations of work areas—not screenshots of LemStudio products or client case studies. Company-owned work stays private unless publication is approved.
+        The visuals below are original illustrations of work areas—not
+        screenshots of LemStudio products or client case studies. Company-owned
+        work stays private unless publication is approved.
       </p>
     </div>
   </section>

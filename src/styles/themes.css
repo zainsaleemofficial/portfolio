@@ -12,4 +12,6 @@ html[data-theme='ink-and-sage'] {
   --color-text-muted: #536252;
   --color-focus-ring: #365f36;
   --color-portrait-glow: #557349;
+  --color-identity-mint-start: #d5f2df;
+  --color-identity-mint-end: #b5dfc8;
 }
