@@ -5,7 +5,11 @@ export default defineConfig({
   workers: 2,
   timeout: 45000,
   expect: { timeout: 8000 },
-  reporter: [['list'], ['json', { outputFile: 'artifacts/test-results.json' }]],
+  reporter: [
+    ['list'],
+    ...(process.env.CI ? ([['github']] as const) : []),
+    ['json', { outputFile: 'artifacts/test-results.json' }],
+  ],
   use: {
     baseURL: process.env.TEST_BASE_URL || 'http://127.0.0.1:4321',
     headless: true,
