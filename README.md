@@ -28,7 +28,6 @@ The local Worker header check is performed by `.github/workflows/portfolio-check
 
 | Location                                              | Responsibility                                                               |
 | ----------------------------------------------------- | ---------------------------------------------------------------------------- |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `src/layouts/Layout.astro`                            | Document metadata, canonical URLs, global shell, indexing meta               |
 | `src/components/`                                     | Astro components and two interactive React islands                           |
 | `src/data/site.ts`                                    | Public identity/contact, service definitions, publication gate               |
