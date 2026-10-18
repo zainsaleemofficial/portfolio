@@ -31,6 +31,10 @@ for (const theme of ['dual-contrast', 'ink-and-sage'] as const) {
     await page.evaluate((selectedTheme) => {
       document.documentElement.dataset.theme = selectedTheme
     }, theme)
+    await page.locator('form').scrollIntoViewIfNeeded()
+    await page.waitForFunction(
+      () => !document.querySelector('astro-island')?.hasAttribute('ssr'),
+    )
     const name = page.getByLabel('Your name')
     await expect(name).toBeEnabled()
     await name.fill('QA Visitor')
@@ -42,7 +46,9 @@ for (const theme of ['dual-contrast', 'ink-and-sage'] as const) {
       .getByLabel('A little about your project')
       .fill('Please advise on a reliable workflow automation.')
     await page.getByRole('button', { name: 'Prepare an email' }).click()
-    await expect(page.getByRole('status')).toContainText('nothing has been sent')
+    await expect(page.getByRole('status')).toContainText(
+      'nothing has been sent',
+    )
     const results = await new AxeBuilder({ page }).withTags(wcagTags).analyze()
     expect(results.violations).toEqual([])
   })

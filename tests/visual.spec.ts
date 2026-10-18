@@ -6,7 +6,12 @@ const views = [
   { label: 'home-mobile', route: '/', width: 390, theme: 'dual-contrast' },
   { label: 'home-desktop', route: '/', width: 1440, theme: 'dual-contrast' },
   { label: 'home-sage-mobile', route: '/', width: 390, theme: 'ink-and-sage' },
-  { label: 'home-sage-desktop', route: '/', width: 1440, theme: 'ink-and-sage' },
+  {
+    label: 'home-sage-desktop',
+    route: '/',
+    width: 1440,
+    theme: 'ink-and-sage',
+  },
   {
     label: 'contact-mobile',
     route: '/contact/',

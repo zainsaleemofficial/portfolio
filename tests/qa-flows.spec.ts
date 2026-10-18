@@ -27,6 +27,10 @@ test('contact validation rejects invalid email and editing clears an obsolete dr
   page,
 }) => {
   await page.goto('/contact/')
+  await page.locator('form').scrollIntoViewIfNeeded()
+  await page.waitForFunction(
+    () => !document.querySelector('astro-island')?.hasAttribute('ssr'),
+  )
   const name = page.getByLabel('Your name')
   const email = page.getByLabel('Your email')
   const focus = page.getByLabel('What can I help with?')
@@ -51,7 +55,9 @@ test('contact validation rejects invalid email and editing clears an obsolete dr
   await page.getByRole('button', { name: 'Prepare an email' }).click()
   const draft = page.getByRole('link', { name: 'Open email draft' })
   await expect(draft).toHaveAttribute('href', /mailto:me@zainsaleem\.co/)
-  await message.fill('A revised project description with different requirements.')
+  await message.fill(
+    'A revised project description with different requirements.',
+  )
   await expect(draft).toHaveCount(0)
   await expect(page.getByRole('status')).toHaveCount(0)
 })

@@ -47,7 +47,11 @@ for (const file of html) {
   const descriptions = metaTags.filter(
     (tag) => attribute(tag, 'name')?.toLowerCase() === 'description',
   )
-  assert.equal(descriptions.length, 1, `${file}: exactly one description meta tag`)
+  assert.equal(
+    descriptions.length,
+    1,
+    `${file}: exactly one description meta tag`,
+  )
   assert(attribute(descriptions[0], 'content'), `${file}: nonempty description`)
 
   const links = [...head.matchAll(/<link\b[^>]*>/gi)].map((m) => m[0])
@@ -105,9 +109,18 @@ assert.match(
 )
 
 const home = await readFile('dist/index.html', 'utf8')
-assert(home.includes('50+ software projects'), 'Homepage must label project count accurately')
-assert(home.includes('Head of SaaS at LemStudio'), 'Homepage should reflect verified current role')
-assert(home.includes('/my-story/'), 'Homepage should link to the complete story')
+assert(
+  home.includes('50+ software projects'),
+  'Homepage must label project count accurately',
+)
+assert(
+  home.includes('Head of SaaS at LemStudio'),
+  'Homepage should reflect verified current role',
+)
+assert(
+  home.includes('/my-story/'),
+  'Homepage should link to the complete story',
+)
 
 for (const page of [
   'about',
