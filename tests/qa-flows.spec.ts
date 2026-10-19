@@ -68,8 +68,8 @@ test('booking calls to action use the approved URL and safe external-link attrib
   for (const route of [
     '/',
     '/contact/',
-    '/services/saas-development/',
-    '/services/technical-seo/',
+    '/services/',
+    ...services.map((service) => `/services/${service.slug}/`),
   ]) {
     await page.goto(route)
     const bookings = page.locator('a[href*="calendly.com"]')
@@ -109,6 +109,8 @@ test('every approved service has matching heading, description, canonical and co
     await expect(
       page.getByRole('heading', { name: 'How we start' }),
     ).toBeVisible()
-    await expect(page.locator('main a[href="/contact/"]')).toHaveCount(1)
+    await expect(
+      page.locator('main a[href="/contact/#email-brief"]'),
+    ).toHaveCount(1)
   }
 })

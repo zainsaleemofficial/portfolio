@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Arrow from '../../components/Arrow.astro'
+import Consultation from '../../components/Consultation.astro'
+import { services } from '../../data/site'
+const groups = ['Build', 'Grow'] as const
+---
+
+<Layout
+  title="Services — SaaS Development, AI Automation & SEO | Zain Saleem"
+  description="Explore SaaS product development, AI automation, custom business software, technical SEO, local SEO and link building services with Zain Saleem."
+>
+  <section class="section page-intro">
+    <div class="container">
+      <p class="eyebrow">Services / How I can help</p>
+      <h1>
+        Clear problems.
+        <br />
+        <span class="serif">Useful solutions.</span>
+      </h1>
+      <p class="large-copy">
+        Find the right starting point for your product, workflow or search
+        presence. Explore a service, then book a call or email me about what you
+        need.
+      </p>
+    </div>
+  </section>
+  {groups.map((group) => (
+    <section
+      class="section"
+      aria-labelledby={`services-${group.toLowerCase()}`}
+    >
+      <div class="container services-grid">
+        <div class="services-intro" data-reveal>
+          <h2 id={`services-${group.toLowerCase()}`}>{group}</h2>
+          <p>
+            {group === 'Build'
+              ? 'Products, applications and workflows shaped around the way you work.'
+              : 'Technical foundations, local visibility and a relevant search presence.'}
+          </p>
+        </div>
+        <div class="service-directory">
+          {services
+            .filter((service) => service.group === group)
+            .map((service) => (
+              <article class="service-directory-entry">
+                <h3 class="service-title">
+                  <a
+                    class="service-directory-link"
+                    href={`/services/${service.slug}/`}
+                  >
+                    {service.title} <Arrow />
+                  </a>
+                </h3>
+                <p>{service.summary}</p>
+              </article>
+            ))}
+        </div>
+      </div>
+    </section>
+  ))}
+  <Consultation />
+</Layout>

@@ -2,11 +2,19 @@
 import { site } from '../data/site'
 import Arrow from './Arrow.astro'
 const links = [
-  ['Work', '/#work'],
+  ['Work', '/work/'],
+  ['Services', '/services/'],
   ['About', '/about/'],
-  ['My Story', '/my-story/'],
-  ['Services', '/#services'],
+  ['Experience', '/experience/'],
+  ['Contact', '/contact/'],
 ]
+const currentPath = Astro.url.pathname
+const current = (href: string) =>
+  currentPath === href
+    ? 'page'
+    : href === '/services/' && currentPath.startsWith(href)
+      ? 'location'
+      : undefined
 ---
 
 <header class="site-header">
@@ -21,7 +29,9 @@ const links = [
     </a>
     <nav class="desktop-nav" aria-label="Main navigation">
       {links.map(([label, href]) => (
-        <a href={href}>{label}</a>
+        <a href={href} aria-current={current(href)}>
+          {label}
+        </a>
       ))}
     </nav>
     <a
@@ -30,7 +40,7 @@ const links = [
       target="_blank"
       rel="noopener noreferrer"
     >
-      Book a call <Arrow diagonal />
+      Book a Call <Arrow diagonal />
     </a>
     <button
       class="menu-toggle"
@@ -45,17 +55,34 @@ const links = [
   </div>
   <nav id="mobile-nav" aria-label="Mobile navigation" hidden>
     {links.map(([label, href]) => (
-      <a href={href}>{label}</a>
+      <a href={href} aria-current={current(href)}>
+        {label}
+      </a>
     ))}
-    <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer">
-      Book a call <Arrow diagonal />
+    <a
+      class="button"
+      href={site.bookingUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Book a Call <Arrow diagonal />
     </a>
   </nav>
   <noscript>
     <nav class="no-js-nav" aria-label="Navigation without JavaScript">
       {links.map(([label, href]) => (
-        <a href={href}>{label}</a>
+        <a href={href} aria-current={current(href)}>
+          {label}
+        </a>
       ))}
+      <a
+        class="button"
+        href={site.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Book a Call <Arrow diagonal />
+      </a>
     </nav>
   </noscript>
 </header>
