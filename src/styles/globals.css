@@ -1059,6 +1059,10 @@ ul {
   display: flex;
   margin-top: var(--space-5);
 }
+.contact-email + .small {
+  margin-top: var(--space-3);
+  max-width: 40ch;
+}
 .contact-methods {
   display: grid;
   align-content: start;

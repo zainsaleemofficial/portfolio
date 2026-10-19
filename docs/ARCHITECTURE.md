@@ -15,12 +15,15 @@ This document describes the checked-in implementation at Phase 3 production merg
 - `src/data/brand.ts`: verified role, positioning, career facts, and quantitative claims.
 - `src/data/content.ts`: typed projects, case studies, and articles. Arrays are intentionally empty until evidence and owner approval are supplied.
 - `src/pages/services/[slug].astro`: statically generates six service routes from `services`.
+- `src/pages/services/index.astro`: Build/Grow directory using the same service titles, summaries and slugs. Header links target Work, Services, About, Experience and Contact pages; My Story, Expertise and Insights remain in footer/contextual links. Exact pages use `aria-current="page"`; service detail pages mark the Services ancestor with `aria-current="location"`.
 - `src/pages/projects/[slug].astro`, `case-studies/[slug].astro`, and `insights/[slug].astro`: content detail routes governed by approved entries.
 - Other pages include homepage, contact, about, my-story, experience, expertise, work, insights, privacy, and 404.
 
 ## Contact and booking data flow
 
 Visitor -> hydrated `BriefForm.tsx` -> browser validation -> `mailto:` URL or downloaded text file. No form backend, stored submission, or automatic email delivery exists. Booking links open the existing external Calendly destination. Do not introduce tracking or third-party processing without a separate privacy review.
+
+Contact presents Calendly booking and direct email before the optional email brief. Shared Consultation links provide both methods plus `/contact/#email-brief`. Service detail inquiries add only the public service title to a URL-encoded mailto subject; the contact page does not parse query parameters or prefill personal information.
 
 ## Styling, themes, and interaction
 

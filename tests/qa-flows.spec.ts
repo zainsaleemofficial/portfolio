@@ -69,8 +69,7 @@ test('booking calls to action use the approved URL and safe external-link attrib
     '/',
     '/contact/',
     '/services/',
-    '/services/saas-development/',
-    '/services/technical-seo/',
+    ...services.map((service) => `/services/${service.slug}/`),
   ]) {
     await page.goto(route)
     const bookings = page.locator('a[href*="calendly.com"]')

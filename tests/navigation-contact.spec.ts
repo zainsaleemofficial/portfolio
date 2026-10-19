@@ -176,6 +176,7 @@ test('contact distinguishes booking, direct email and optional browser-only draf
     main.getByRole('link', { name: 'Send an Email', exact: true }),
   ).toHaveAttribute('href', `mailto:${site.email}`)
   await expect(main).toContainText('Calendly opens in a new tab')
+  await expect(main).toContainText(`directly to ${site.email}.`)
   await expect(main).toContainText('Nothing is submitted through this website.')
   const requests: string[] = []
   page.on('request', (request) => {
@@ -271,6 +272,11 @@ for (const theme of ['dual-contrast', 'ink-and-sage']) {
           document.documentElement.dataset.theme = value
         }, theme)
         await page.evaluate(() => document.fonts.ready)
+        if (route === 'contact') {
+          await page.locator('form').scrollIntoViewIfNeeded()
+          await expect(page.getByLabel('Your name')).toBeEnabled()
+          await page.evaluate(() => window.scrollTo(0, 0))
+        }
         const screenshot = await page.screenshot({
           path: `artifacts/${route}-${theme}-${width}-candidate.png`,
           fullPage: true,
