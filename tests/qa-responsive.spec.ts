@@ -1,12 +1,14 @@
 import { expect, test } from '@playwright/test'
+import { services } from '../src/data/site'
 
 const representativeRoutes = [
   '/about/',
+  '/services/',
   '/contact/',
-  '/services/ai-automation/',
+  ...services.map((service) => `/services/${service.slug}/`),
 ]
 
-for (const width of [320, 390, 768, 1024, 1440]) {
+for (const width of [320, 375, 390, 768, 1024, 1440]) {
   test(`supporting pages fit the ${width}px viewport without horizontal overflow`, async ({
     page,
   }) => {
@@ -30,3 +32,20 @@ for (const width of [320, 390, 768, 1024, 1440]) {
     }
   })
 }
+
+test('services and contact fit a short landscape viewport', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 844, height: 390 })
+  for (const route of ['/services/', '/contact/']) {
+    await page.goto(route)
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true)
+    await expect(page.locator('.header-cta')).toBeVisible()
+    await page.locator('.header-cta').focus()
+    await expect(page.locator('.header-cta')).toBeFocused()
+  }
+})

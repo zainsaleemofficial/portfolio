@@ -78,6 +78,28 @@ for (const file of html) {
     const found = await stat(path).catch(() => null)
     assert(found, `${file}: missing target ${target}`)
   }
+  // Check fragment destinations across pages as well as local skip links.
+  for (const match of text.matchAll(/href="([^"\s]*)"/g)) {
+    const href = match[1]
+    if (!href.startsWith('/') && !href.startsWith('#')) continue
+    const destination = new URL(href, canonical)
+    assert.equal(destination.origin, SITE_URL, `${file}: internal link origin`)
+    if (!destination.hash) continue
+    let targetHtml = text
+    if (!href.startsWith('#')) {
+      const targetPath = join('dist', decodeURIComponent(destination.pathname))
+      const targetStat = await stat(targetPath)
+      targetHtml = await readFile(
+        targetStat.isDirectory() ? join(targetPath, 'index.html') : targetPath,
+        'utf8',
+      )
+    }
+    const ids = [...targetHtml.matchAll(/\bid="([^"]*)"/g)].map((m) => m[1])
+    assert(
+      ids.includes(decodeURIComponent(destination.hash.slice(1))),
+      `${file}: missing fragment destination ${href}`,
+    )
+  }
 }
 
 const robotsTxt = await readFile('dist/robots.txt', 'utf8')
@@ -127,6 +149,7 @@ for (const page of [
   'my-story',
   'experience',
   'expertise',
+  'services',
   'services/ai-automation',
   'services/saas-development',
   'services/custom-software',

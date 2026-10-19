@@ -44,7 +44,7 @@ for (const width of [320, 375, 390, 768, 1024, 1440]) {
     ).toBe(true)
   })
 }
-test('mobile navigation opens, closes on Escape, and follows anchors', async ({
+test('mobile navigation opens, closes on Escape, and follows page links', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 })
@@ -60,7 +60,7 @@ test('mobile navigation opens, closes on Escape, and follows anchors', async ({
     .getByRole('navigation', { name: 'Mobile navigation' })
     .getByRole('link', { name: 'Services' })
     .click()
-  await expect(page).toHaveURL(/#services$/)
+  await expect(page).toHaveURL(/\/services\/$/)
   await expect(page.locator('#mobile-nav')).toBeHidden()
 })
 test('filters and service disclosures work', async ({ page }) => {
@@ -190,7 +190,9 @@ test('contact validates and creates a draft without claiming delivery', async ({
   await page.getByRole('button', { name: 'Download a copy' }).click()
   expect((await download).suggestedFilename()).toBe('project-brief.txt')
   await expect(
-    page.getByRole('link', { name: 'Choose a call time' }),
+    page
+      .locator('main')
+      .getByRole('link', { name: 'Book a Call', exact: true }),
   ).toHaveAttribute('href', 'https://calendly.com/zainsaleemofficial/30min')
   expect(
     (await new AxeBuilder({ page }).withTags(tags).analyze()).violations,
@@ -221,7 +223,9 @@ test('core content remains usable without JavaScript', async ({
   ).toBeDisabled()
   await expect(page.getByLabel('Your email')).toBeDisabled()
   await expect(
-    page.getByRole('link', { name: 'Choose a call time' }),
+    page
+      .locator('main')
+      .getByRole('link', { name: 'Book a Call', exact: true }),
   ).toHaveAttribute('href', 'https://calendly.com/zainsaleemofficial/30min')
   await context.close()
 })
@@ -254,6 +258,8 @@ test('static routes, metadata, local anchors and assets resolve', async ({
   const routes = [
     '/',
     '/work/',
+    '/services/',
+    '/services/ai-automation/',
     '/insights/',
     '/privacy/',
     '/contact/',

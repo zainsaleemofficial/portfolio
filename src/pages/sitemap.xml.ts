@@ -11,6 +11,7 @@ export function GET() {
           '/experience/',
           '/expertise/',
           '/work/',
+          '/services/',
           '/insights/',
           ...services.map((s) => `/services/${s.slug}/`),
           ...projects

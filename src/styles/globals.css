@@ -178,6 +178,12 @@ ul {
 .desktop-nav a:hover {
   color: var(--color-brand-dark);
 }
+.site-header a[aria-current] {
+  color: var(--color-brand-dark);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
 .header-cta {
   display: inline-flex;
   align-items: center;
@@ -231,7 +237,7 @@ ul {
   padding: 12px;
 }
 .no-js-nav {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
 }
 .hero {
@@ -782,6 +788,27 @@ ul {
 .service-body .text-link {
   margin-top: var(--space-4);
 }
+.service-directory-entry {
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--color-border-subtle);
+}
+.service-directory-entry:last-child {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.service-directory-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: 44px;
+}
+.service-directory-link:hover {
+  color: var(--color-brand-dark);
+}
+.service-directory-entry p {
+  margin-top: var(--space-3);
+  max-width: var(--measure);
+}
 .experience-section {
   background: var(--color-bg-forest);
   color: var(--color-text-inverse);
@@ -1032,6 +1059,21 @@ ul {
   display: flex;
   margin-top: var(--space-5);
 }
+.contact-methods {
+  display: grid;
+  align-content: start;
+  gap: var(--space-7);
+}
+.contact-grid h2 {
+  font-size: var(--text-subheading);
+  letter-spacing: -0.03em;
+}
+.contact-brief > p {
+  margin-block: var(--space-5);
+}
+#email-brief {
+  scroll-margin-top: var(--space-6);
+}
 .brief-form {
   padding: var(--space-7);
   background: var(--color-bg-mint);
@@ -1222,6 +1264,10 @@ ul {
   .menu-toggle {
     display: block;
     margin-left: auto;
+  }
+  .no-js-nav {
+    display: flex;
+    padding: var(--space-5) var(--gutter);
   }
   .hero {
     padding-top: var(--space-5);

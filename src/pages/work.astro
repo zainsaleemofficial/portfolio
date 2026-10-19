@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro'
 import WorkGallery from '../components/WorkGallery.astro'
 import PublishedContent from '../components/PublishedContent.astro'
 import Consultation from '../components/Consultation.astro'
+import Arrow from '../components/Arrow.astro'
 import { projects, caseStudies } from '../data/content'
 import { brandNumbers } from '../data/brand'
 ---
@@ -30,6 +31,9 @@ import { brandNumbers } from '../data/brand'
         screenshots of LemStudio products or client case studies. Company-owned
         work stays private unless publication is approved.
       </p>
+      <a class="text-link" href="/services/">
+        Explore services for your project <Arrow />
+      </a>
     </div>
   </section>
   <section class="section">

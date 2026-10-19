@@ -7,7 +7,7 @@ import { site } from '../data/site'
 
 <Layout
   title="Start a conversation — Zain Saleem"
-  description="Book a call with Zain Saleem about SaaS development, AI automation or SEO strategy, or prepare an email inquiry draft in your browser."
+  description="Book a call with Zain Saleem through Calendly, email me@zainsaleem.co directly, or prepare an optional email brief in your browser. Nothing is submitted online."
   noindex
 >
   <section class="section page-intro">
@@ -26,28 +26,44 @@ import { site } from '../data/site'
   </section>
   <section class="section">
     <div class="container contact-grid">
-      <div>
-        <h2>
-          Let’s find a<br />
-          <span class="serif">useful starting point.</span>
-        </h2>
-        <p>
-          SaaS ideas, AI automation, or a search strategy that needs attention.
-          We can start with the problem in front of you.
-        </p>
-        <a
-          class="button"
-          href={site.bookingUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Choose a call time <Arrow diagonal />
-        </a>
-        <a class="text-link contact-email" href={`mailto:${site.email}`}>
-          {site.email} <Arrow diagonal />
-        </a>
+      <div class="contact-methods">
+        <div>
+          <h2>Book a Call</h2>
+          <p>
+            Schedule a conversation about your project. Calendly opens in a new
+            tab so you can choose an available time and confirm your booking.
+          </p>
+          <a
+            class="button"
+            href={site.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Book a Call <Arrow diagonal />
+          </a>
+        </div>
+        <div>
+          <h2>Send an Email</h2>
+          <p>
+            Prefer to write? Open your email app and send a message directly to
+            {site.email}.
+          </p>
+          <a class="text-link contact-email" href={`mailto:${site.email}`}>
+            Send an Email <Arrow diagonal />
+          </a>
+          <p class="small">
+            If an email app doesn’t open, copy {site.email} into your email
+            service.
+          </p>
+        </div>
       </div>
-      <div>
+      <div id="email-brief" class="contact-brief">
+        <h2>Prepare an Email Brief</h2>
+        <p>
+          Optional: organize your project details into a draft, then review and
+          send it from your email app. Nothing is submitted through this
+          website.
+        </p>
         <BriefForm email={site.email} client:visible />
         <noscript>
           <p>
