@@ -1545,9 +1545,17 @@ ul {
 .identity-experience {
   color: var(--color-text-primary);
 }
+.identity-filters {
+  position: absolute;
+}
 .identity-scene {
   --identity-split: 50%;
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 27fr) minmax(0, 36fr) minmax(0, 27fr);
+  grid-template-rows: repeat(4, auto);
+  align-content: start;
+  padding: 5rem 5% 1.25rem;
   min-height: 610px;
   isolation: isolate;
   overflow: hidden;
@@ -1602,7 +1610,7 @@ ul {
   flex-direction: column;
 }
 .identity-technical {
-  right: 14%;
+  right: 40%;
   bottom: 8%;
   color: var(--color-text-muted);
   transform: rotate(-8deg);
@@ -1614,50 +1622,47 @@ ul {
   transform: rotate(90deg);
   transform-origin: left bottom;
 }
+/* Reserve the centre for the photograph; fade the actual image box, not a
+   letterboxed object-fit area. The edge filter leaves opaque facial detail intact. */
 .identity-photo {
   position: absolute;
   pointer-events: none;
   z-index: 2;
-  inset: 0;
-  overflow: hidden;
+  left: 50%;
+  bottom: 0;
+  width: 36%;
+  aspect-ratio: 620 / 775;
+  transform: translateX(-50%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 94%);
+  mask-image: linear-gradient(to bottom, #000 78%, transparent 94%);
 }
 .identity-photo img {
   position: absolute;
-  left: 50%;
-  bottom: -4.5%;
-  width: 49%;
-  height: 105%;
-  object-fit: contain;
-  object-position: center bottom;
-  transform: translateX(-50%);
-  max-width: none;
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 89%,
-    transparent 99%
-  );
-  mask-image: linear-gradient(to bottom, #000 0%, #000 89%, transparent 99%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: url('#identity-edge');
 }
-.identity-photo-treatment {
-  filter: grayscale(0.85) contrast(1.14) sepia(0.12);
+.identity-photo .identity-photo-treatment {
+  filter: url('#identity-edge') grayscale(0.85) contrast(1.14) sepia(0.12);
   opacity: 0.76;
   clip-path: inset(0 calc(100% - var(--identity-split)) 0 0);
 }
+/* Shared rows align indices, headings, descriptions and links despite wrapping. */
 .identity-copy {
-  position: absolute;
+  position: relative;
   z-index: 4;
-  top: 13%;
-  width: 27%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  min-width: 0;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 1 / 5;
+  justify-items: start;
 }
 .identity-copy--software {
-  left: 5%;
+  grid-column: 1;
 }
 .identity-copy--search {
-  right: 5%;
+  grid-column: 3;
 }
 .identity-index {
   display: flex;
@@ -1674,7 +1679,7 @@ ul {
 }
 .identity-copy h3 {
   margin: 2.4rem 0 1.7rem;
-  font-size: clamp(3.1rem, 4.8vw, 4.9rem);
+  font-size: clamp(3.1rem, 4.8vw, 4.3rem);
   line-height: 0.94;
   letter-spacing: -0.065em;
 }
@@ -1720,6 +1725,7 @@ ul {
   align-items: center;
   gap: 1rem;
   border-bottom: 1px solid currentColor;
+  align-self: start;
   margin-top: 2.3rem;
   padding-bottom: 0.4rem;
   color: var(--color-text-primary);
@@ -1766,22 +1772,10 @@ ul {
 @media (max-width: 1090px) {
   .identity-scene {
     min-height: 560px;
-  }
-  .identity-copy {
-    top: 13%;
-    width: 27%;
-  }
-  .identity-copy--software {
-    left: 3%;
-  }
-  .identity-copy--search {
-    right: 3%;
+    padding-inline: 3%;
   }
   .identity-copy h3 {
-    font-size: clamp(2.5rem, 4.4vw, 3.7rem);
-  }
-  .identity-photo img {
-    width: 45%;
+    font-size: clamp(2rem, 4.4vw, 3.7rem);
   }
   .identity-index {
     gap: 1.1rem;
@@ -1790,19 +1784,16 @@ ul {
 @media (max-width: 767px) {
   .identity-scene {
     min-height: 720px;
-  }
-  .identity-copy {
-    top: 5%;
-    width: 44%;
-  }
-  .identity-copy--software {
-    left: 5%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(5, auto);
+    column-gap: 4%;
+    padding: 2rem 5% 0;
   }
   .identity-copy--search {
-    right: 5%;
+    grid-column: 2;
   }
   .identity-copy h3 {
-    font-size: clamp(1.7rem, 6vw, 2.7rem);
+    font-size: clamp(1.375rem, 6vw, 2.7rem);
     margin: 1.05rem 0 0.8rem;
     letter-spacing: -0.05em;
   }
@@ -1827,10 +1818,15 @@ ul {
   .identity-discover svg {
     width: 15px;
   }
-  .identity-photo img {
-    width: 103%;
-    height: 63%;
-    bottom: -3%;
+  .identity-photo {
+    position: relative;
+    grid-row: 5;
+    grid-column: 1 / -1;
+    justify-self: center;
+    left: auto;
+    width: min(calc(100% - 1rem), 420px);
+    margin-top: 1.5rem;
+    transform: none;
   }
   .identity-technical {
     bottom: 6%;
@@ -1852,17 +1848,8 @@ ul {
   }
 }
 @media (max-width: 380px) {
-  .identity-scene {
-    min-height: 710px;
-  }
-  .identity-copy h3 {
-    font-size: 1.7rem;
-  }
   .identity-copy > p {
     font-size: 0.705rem;
-  }
-  .identity-copy {
-    width: 45%;
   }
   .identity-discover {
     font-size: 0.69rem;
