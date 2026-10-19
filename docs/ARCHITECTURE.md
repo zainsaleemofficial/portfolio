@@ -37,7 +37,7 @@ The indexing decision is gated by both `publicationApproved` and `PUBLIC_DEPLOYM
 
 - `npm run build` invokes `astro build` followed by `scripts/verify-build.mjs`.
 - Playwright and axe tests live under `tests/`; `playwright.config.ts` uses local preview by default and browser-managed Chromium in CI.
-- `.github/workflows/portfolio-checks.yml` runs dependency installation, typecheck, ESLint, Prettier, build, Playwright, Worker-header verification, and evidence upload. Visual tests compare committed baselines and Phase 2 reference rendering in CI.
+- `.github/workflows/portfolio-checks.yml` runs dependency installation, typecheck, ESLint, Prettier, build, Playwright, Worker-header verification, and evidence upload. Visual tests compare all eight scenarios against reviewed PNG references committed under `tests/visual.spec.ts-snapshots/`, with zero differing pixels allowed and snapshot updates disabled in normal runs. See `docs/VISUAL-BASELINES.md` for review provenance and future updates.
 - GitHub `main` is linked to the production Cloudflare Worker `portfolio`. The checked-in `wrangler.jsonc` is configured for a distinct preview Worker named `zain-saleem-portfolio-preview`; do not conflate the two.
 - Production smoke verification and the exact deployed merge commit are recorded in `docs/PHASE3-RELEASE.md`.
 

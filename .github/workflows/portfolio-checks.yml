@@ -44,44 +44,8 @@ jobs:
       - name: Build and verify generated HTML
         id: build
         run: npm run build
-      - name: Detect committed visual baselines
-        id: visuals
-        shell: bash
-        run: |
-          if compgen -G 'tests/visual.spec.ts-snapshots/*.png' > /dev/null; then
-            echo 'approved=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'approved=false' >> "$GITHUB_OUTPUT"
-          fi
-      - name: Run complete Playwright suite
-        if: ${{ steps.visuals.outputs.approved == 'true' }}
-        shell: bash
-        run: |
-          baseline_dir="${RUNNER_TEMP}/portfolio-phase2-visual"
-          git worktree add --detach "$baseline_dir" 776d74743c70e3e2f9ea8946c2148b1ed5c5e650
-          ln -s "$GITHUB_WORKSPACE/node_modules" "$baseline_dir/node_modules"
-          npm --prefix "$baseline_dir" run build
-          "$GITHUB_WORKSPACE/node_modules/.bin/astro" preview --root "$baseline_dir" --host 127.0.0.1 --port 4322 > "${RUNNER_TEMP}/portfolio-phase2-preview.log" 2>&1 &
-          baseline_pid=$!
-          trap 'kill "$baseline_pid" 2>/dev/null || true' EXIT
-          for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4322/ > /dev/null; then
-              break
-            fi
-            if ! kill -0 "$baseline_pid" 2>/dev/null; then
-              cat "${RUNNER_TEMP}/portfolio-phase2-preview.log"
-              exit 1
-            fi
-            sleep 1
-          done
-          curl --fail --silent http://127.0.0.1:4322/ > /dev/null
-          VISUAL_BASE_URL=http://127.0.0.1:4322 npm test
-      - name: Run nonvisual Playwright tests pending screenshot review
-        if: ${{ steps.visuals.outputs.approved == 'false' }}
-        run: npx playwright test tests/site.spec.ts tests/qa-flows.spec.ts tests/qa-accessibility.spec.ts tests/qa-responsive.spec.ts
-      - name: Capture visual candidates (not approved)
-        if: ${{ steps.visuals.outputs.approved == 'false' }}
-        run: npx playwright test tests/visual.spec.ts --update-snapshots
+      - name: Run complete Playwright suite against committed references
+        run: npm test
       - name: Verify Worker response headers (local only)
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         shell: bash
@@ -90,12 +54,6 @@ jobs:
           worker_pid=$!
           trap 'kill "$worker_pid" 2>/dev/null || true' EXIT
           node scripts/verify-worker-headers.mjs
-      - name: Require reviewed visual baselines
-        if: ${{ steps.visuals.outputs.approved == 'false' }}
-        run: |
-          echo 'Visual candidate screenshots were captured, but no reviewed/committed baselines exist.'
-          echo 'Review the visual-candidates artifact against the approved Phase 2 website before adding snapshots.'
-          exit 1
       - name: Upload QA evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -107,11 +65,3 @@ jobs:
             /tmp/portfolio-wrangler.log
           if-no-files-found: ignore
           retention-days: 7
-      - name: Upload visual candidates
-        if: always() && steps.visuals.outputs.approved == 'false'
-        uses: actions/upload-artifact@v4
-        with:
-          name: portfolio-visual-baselines
-          path: tests/visual.spec.ts-snapshots/*.png
-          if-no-files-found: ignore
-          retention-days: 14
