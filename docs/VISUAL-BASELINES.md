@@ -26,6 +26,25 @@ Review found only the requested header/Services-link, contact, Consultation and 
 | `service-mobile-linux.png`         | 390 × 3041  | Service content retained; overview backlink, email/brief actions and footer links updated.                                              |
 | `mobile-navigation-open-linux.png` | 390 × 439   | Five page links and prominent booking button; spacing/alignment inspected.                                                              |
 
+## Reviewed homepage portrait correction for PR #5
+
+Owner authorization: the request to fix the supplied homepage dual-contrast screenshot explicitly authorizes scoped implementation, reviewed baseline updates and production release only after green CI.
+
+Source UI commit: `61c5eb84924c93d3ccfa8e3e2917d234b6da0890`, based on production merge `53dcd5f595e6216fe221a99a613dacae7a1264bb`. Source evidence: [Actions run 39308401430](https://github.com/zainsaleemofficial/portfolio/actions/runs/39308401430), artifact `portfolio-qa-evidence` (ID `12214906974`). Only its four native `home-*-actual.png` files were accepted, after inspecting original/candidate pairs in both themes and desktop/mobile. They are copied byte-for-byte, without masking or editing. The other four references are unchanged.
+
+Review confirmed a clean hair/shoulder contour, a smooth bottom fade, preserved portrait identity and split treatment, aligned index/heading/description/link rows, and clearly visible Explore links. The original portrait asset is unchanged (SHA-256 `554110be131c7da9a61be1e0271e9d0af36a0589d30a88b8210fe236cb08798f`). A small SVG edge filter repairs the existing alpha contour; it does not regenerate the photograph. Desktop/tablet copy has reserved space beside the portrait; mobile copy precedes it. Existing interaction handlers and motion tokens are unchanged.
+
+Full-image pixel comparisons confirmed the exact original dimensions and no changed pixels outside the expertise scene. Thus no header, other section, footer, or later section position was accepted as an incidental change:
+
+| References                    | Dimensions  | Changed pixel bounds (left, top, right, bottom) |
+| ----------------------------- | ----------- | ----------------------------------------------- |
+| Default and sage home mobile  | 390 × 10795 | `(35, 4595, 354, 5258)`                         |
+| Default and sage home desktop | 1440 × 7810 | `(161, 3183, 1236, 3707)`                       |
+
+The candidate run passed all 49 functional tests, including the added 320/375/390/768/844-landscape/1024/1440/1920 alignment, clearance, overflow, hit-target, keyboard and no-JavaScript cases, plus all 12 local Worker-header checks. Its only failures were these four intentional homepage comparisons. Release still requires a fresh complete green CI run against the accepted references. The zero-difference policy, eight scenarios, viewport/theme coverage and copyright-only mask remain unchanged.
+
+Local fallback Chromium was used for functional checks and visual investigation, but its system monospace fallback differs from CI even on unchanged production source. Its images were not accepted as references. The committed references come from the pinned CI browser only.
+
 ## Future changes
 
 1. Run `npm ci`, `npm run build` and `npm test` in the same Linux/browser environment as CI. Ordinary CI must stay in compare-only mode; never add an automatic update fallback.
@@ -36,10 +55,10 @@ Review found only the requested header/Services-link, contact, Consultation and 
 
 ## Reference SHA-256 hashes
 
-- `home-mobile-linux.png`: `04357bb3952f0d2efa9206566cebdb61de843863c9c82c5c50654bf6c9719946`
-- `home-desktop-linux.png`: `dd38105713fc1a555e78a71e06049d157a017309e78d6cb97153c6a9b1bde162`
-- `home-sage-mobile-linux.png`: `93777cc688f0d5e11651576d6a3859b883dbac60be2585f3c368d6a1c5378744`
-- `home-sage-desktop-linux.png`: `1b48e7036cfab13e524a9bfd401675cab60256a3c9739ef48419d701dbc9e5c0`
+- `home-mobile-linux.png`: `58ed36927953f83f6ff01045d568b4f7665dfbe91e611de345164316b7c667e2`
+- `home-desktop-linux.png`: `b63b7f3c189f72669f45460f7982091ca0129a880fd05200093da52b0d4ccdaf`
+- `home-sage-mobile-linux.png`: `86cb6eca07c8ea13ffc57720c58fffd063d54e6576379219b1cbf14123cd7c2b`
+- `home-sage-desktop-linux.png`: `6064a898b913cd5624812f9a1a98ea8cbc07fb6f8a7647b5d31807b7bb8849f1`
 - `contact-mobile-linux.png`: `555035b543e3c2f32dca8814cafab96088d7c04f2b6b07e23aa4a2185c44c458`
 - `contact-desktop-linux.png`: `8b77f9eb38411e662a41700300fd03fd70214cf9744886491fa46fdd59d535b1`
 - `service-mobile-linux.png`: `d220e14cab12e9d5dffba3f01675d0983522e906ee1f3c54c1c484ebcf1119c2`
