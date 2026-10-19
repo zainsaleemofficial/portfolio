@@ -58,6 +58,23 @@ export default function DualExpertise() {
 
   return (
     <div className="identity-experience">
+      <svg className="identity-filters" aria-hidden="true" width="0" height="0">
+        <defs>
+          <filter id="identity-edge" colorInterpolationFilters="sRGB">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="3" />
+            <feMorphology operator="erode" radius="4" />
+            <feGaussianBlur stdDeviation="0.6" result="edgeAlpha" />
+            <feMorphology
+              in="SourceGraphic"
+              operator="dilate"
+              radius="3"
+              result="edgeColor"
+            />
+            <feComposite in="SourceGraphic" in2="edgeColor" operator="over" />
+            <feComposite in2="edgeAlpha" operator="in" />
+          </filter>
+        </defs>
+      </svg>
       <div
         className="identity-scene"
         ref={scene}
