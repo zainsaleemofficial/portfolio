@@ -16,7 +16,7 @@ Use ChatGPT's connected GitHub integration for read-only inspection, drafting, b
 
 ## Quality and approval boundaries
 
-- Preserve `publicationApproved = false` and all other indexing restrictions until separately authorized.
+- Public search launch was separately authorized on 20 October 2026. Preserve `publicationApproved = true` with the explicit route inventory and independent preview/host safeguards; adding indexable content requires approval. Run both build modes and Worker checks. See `SEO-LAUNCH.md`.
 - Preserve the approved Phase 2 design, verified professional facts, portrait identity, and honest contact-form behavior.
 - Do not weaken assertions, blindly update snapshots, force-push, or add unrelated refactors to clear CI.
 - Stop on failed checks, report exact logs and smallest safe correction, and request authorization before additional remote commits if that is the current agreed approval gate.

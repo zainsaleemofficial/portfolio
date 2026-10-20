@@ -1,6 +1,6 @@
 # Zain Saleem — Dual Contrast portfolio
 
-Personal-brand portfolio for SaaS development, AI automation, and SEO strategy. The live site is `https://zainsaleem.co`; GitHub `main` deploys to Cloudflare Worker `portfolio`. **The site is deliberately not approved for search indexing.**
+Personal-brand portfolio for SaaS development, AI automation, and SEO strategy. The live site is `https://zainsaleem.co`; GitHub `main` deploys to Cloudflare Worker `portfolio`. **Public search launch was approved on 20 October 2026; preview builds and preview hosts remain protected.**
 
 ## Technology
 
@@ -52,7 +52,7 @@ Use semantic variables from `src/styles/tokens.css`, and preserve the approved D
 
 `main` is the production deployment branch. The actual production Worker is `portfolio`; the checked-in `wrangler.jsonc` names `zain-saleem-portfolio-preview` for a separate manual preview workflow. **Do not run a manual Wrangler deploy expecting it to target production.** Verify the intended target and obtain approval first.
 
-`publicationApproved = false`; generated HTML contains `noindex, nofollow`, `robots.txt` disallows crawling, `sitemap.xml` contains no URL entries, and `public/_headers` sends `X-Robots-Tag: noindex, nofollow`. These controls must not be relaxed without explicit approval.
+`publicationApproved = true` is scoped to the explicit production inventory in `src/data/seo.mjs`. Default builds remain previews with HTML/HTTP noindex, blocked robots and an empty sitemap. The existing Cloudflare main pipeline selects production through documented Workers Builds variables. The Worker protects all other hosts, including workers.dev/version URLs. See [SEO launch policy](docs/SEO-LAUNCH.md) for build commands, route decisions, crawler policy and validation.
 
 The Phase 3 QA suite was merged to `main` at `6705916d7b6c7e435d60d36bb309b919ce5fd0d7`. GitHub Actions Run #4 passed and the production release was smoke-tested; see `docs/PHASE3-RELEASE.md` for evidence and limitations. `QA.md` is an earlier prototype verification record, not the current release status.
 

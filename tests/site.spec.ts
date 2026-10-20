@@ -1,3 +1,4 @@
+import { expectedRobots, productionBuild } from './seo-helpers'
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 const tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']
@@ -274,7 +275,7 @@ test('static routes, metadata, local anchors and assets resolve', async ({
     await expect(page.locator('h1')).toHaveCount(1)
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
       'content',
-      'noindex, nofollow',
+      expectedRobots(route),
     )
     const links = await page
       .locator('a[href^="#"]')
@@ -283,7 +284,7 @@ test('static routes, metadata, local anchors and assets resolve', async ({
   }
   expect((await request.get('/social-preview.png')).status()).toBe(200)
   expect(await (await request.get('/robots.txt')).text()).toContain(
-    'Disallow: /',
+    productionBuild ? 'Allow: /' : 'Disallow: /',
   )
   expect(await (await request.get('/sitemap.xml')).text()).toContain('<urlset')
   await page.goto('/not-a-real-page/')
@@ -305,7 +306,7 @@ test('verified personal brand pages tell the story without private project galle
     await expect(page.locator('h1')).toContainText(heading)
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
       'content',
-      'noindex, nofollow',
+      expectedRobots(route),
     )
     expect(
       await page.evaluate(

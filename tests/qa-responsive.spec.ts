@@ -1,3 +1,4 @@
+import { expectedRobots } from './seo-helpers'
 import { expect, test } from '@playwright/test'
 import { services } from '../src/data/site'
 
@@ -27,7 +28,7 @@ for (const width of [320, 375, 390, 768, 1024, 1440]) {
       ).toBeLessThanOrEqual(dimensions.viewportWidth)
       await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
         'content',
-        'noindex, nofollow',
+        expectedRobots(route),
       )
     }
   })

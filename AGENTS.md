@@ -22,8 +22,8 @@ These rules apply to ChatGPT, Codex, and other coding agents working on `zainsal
 
 ## Indexing and security
 
-- `publicationApproved` in `src/data/site.ts` is `false`. Do not change it without explicit owner approval.
-- Preserve independent safeguards: meta `noindex, nofollow`, `public/_headers` `X-Robots-Tag`, disallowing `robots.txt`, and empty `sitemap.xml`. Production deployment does not imply indexing approval.
+- The owner approved public search launch on 20 October 2026. `publicationApproved` is `true`; only explicit indexable routes in `src/data/seo.mjs` may be public in production. Further policy changes still require owner approval.
+- Preserve fail-closed previews: HTML/HTTP `noindex, nofollow`, disallowing robots and empty sitemap. Production requires an approved route, production build and canonical host. Never remove the Worker host guard or weaken its security headers. See `docs/SEO-LAUNCH.md`.
 - Preserve restrictive security headers, safe external links, and credential hygiene.
 
 ## Validation and release

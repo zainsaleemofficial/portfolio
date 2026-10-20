@@ -3,6 +3,12 @@
   "name": "zain-saleem-portfolio-preview",
   "compatibility_date": "2026-10-17",
   "workers_dev": true,
+  "main": "src/worker.ts",
   "preview_urls": true,
-  "assets": { "directory": "./dist", "not_found_handling": "404-page" },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page",
+  },
 }

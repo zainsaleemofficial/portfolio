@@ -54,6 +54,19 @@ jobs:
           worker_pid=$!
           trap 'kill "$worker_pid" 2>/dev/null || true' EXIT
           node scripts/verify-worker-headers.mjs
+      - name: Build and verify production indexing
+        run: npm run build:production
+      - name: Run full production Playwright suite
+        run: npm test
+        env:
+          TEST_DEPLOYMENT_ENV: production
+      - name: Verify production Worker and preview-host protection (local only)
+        shell: bash
+        run: |
+          ./node_modules/.bin/wrangler dev --local --ip 127.0.0.1 --port 8788 > /tmp/portfolio-production-wrangler.log 2>&1 &
+          worker_pid=$!
+          trap 'kill "$worker_pid" 2>/dev/null || true' EXIT
+          LOCAL_WORKER_URL=http://127.0.0.1:8788 node scripts/verify-worker-headers.mjs
       - name: Upload QA evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -63,5 +76,6 @@ jobs:
             artifacts/
             test-results/
             /tmp/portfolio-wrangler.log
+            /tmp/portfolio-production-wrangler.log
           if-no-files-found: ignore
           retention-days: 7

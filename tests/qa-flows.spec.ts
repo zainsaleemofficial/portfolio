@@ -1,3 +1,5 @@
+import { seoPages } from '../src/data/seo.mjs'
+import { expectedRobots } from './seo-helpers'
 import { expect, test } from '@playwright/test'
 import { services, site } from '../src/data/site'
 
@@ -93,7 +95,7 @@ test('every approved service has matching heading, description, canonical and co
     await expect(page.locator('main h1')).toContainText(service.title)
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       'content',
-      service.summary,
+      seoPages[path].description,
     )
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
@@ -101,7 +103,7 @@ test('every approved service has matching heading, description, canonical and co
     )
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
       'content',
-      'noindex, nofollow',
+      expectedRobots(path),
     )
     await expect(
       page.getByRole('heading', { name: 'What the work can include' }),

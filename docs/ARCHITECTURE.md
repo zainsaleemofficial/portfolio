@@ -31,13 +31,13 @@ Contact presents Calendly booking and direct email before the optional email bri
 
 ## Publication and response controls
 
-The indexing decision is gated by both `publicationApproved` and `PUBLIC_DEPLOYMENT_ENV === 'production'` in `Layout.astro` and generated crawl files. The current gate is false. Independent safeguards are `public/_headers` (`X-Robots-Tag`), disallowing `robots.txt`, and empty `sitemap.xml`. A deployment is not permission to index.
+The indexing decision is gated by both `publicationApproved` and `PUBLIC_DEPLOYMENT_ENV === 'production'` in `Layout.astro` and generated crawl files. The owner approved the public launch on 20 October 2026, so the publication gate is true. `src/data/seo.mjs` owns the metadata and explicit indexable route inventory. Default builds are previews; `scripts/build.mjs` selects production only for the existing Workers Builds main branch or an explicit production test. `PUBLIC_DEPLOYMENT_ENV` is set for Astro by that wrapper. The bundled `.astro/indexing-policy.json` mirrors the build decision and existing security headers. `src/worker.ts` enforces the canonical host, preserves security headers and keeps preview hosts noindex with blocked robots and an empty sitemap, even when serving a production artifact. No account-level or DNS configuration is needed. See `SEO-LAUNCH.md`.
 
 ## Build, CI, and hosting
 
-- `npm run build` invokes `astro build` followed by `scripts/verify-build.mjs`.
+- `npm run build` invokes the environment-aware build wrapper, Astro and `scripts/verify-build.mjs`. `npm run build:production` explicitly tests the public build. `npm run typecheck` generates ignored Worker policy/types before Astro diagnostics.
 - Playwright and axe tests live under `tests/`; `playwright.config.ts` uses local preview by default and browser-managed Chromium in CI.
-- `.github/workflows/portfolio-checks.yml` runs dependency installation, typecheck, ESLint, Prettier, build, Playwright, Worker-header verification, and evidence upload. Visual tests compare all eight scenarios against reviewed PNG references committed under `tests/visual.spec.ts-snapshots/`, with zero differing pixels allowed and snapshot updates disabled in normal runs. See `docs/VISUAL-BASELINES.md` for review provenance and future updates.
+- `.github/workflows/portfolio-checks.yml` runs dependency installation, typecheck, ESLint, Prettier, build, Playwright, Worker-header verification, and evidence upload in both preview and production modes. Visual tests compare all eight scenarios against reviewed PNG references committed under `tests/visual.spec.ts-snapshots/`, with zero differing pixels allowed and snapshot updates disabled in normal runs. See `docs/VISUAL-BASELINES.md` for review provenance and future updates.
 - GitHub `main` is linked to the production Cloudflare Worker `portfolio`. The checked-in `wrangler.jsonc` is configured for a distinct preview Worker named `zain-saleem-portfolio-preview`; do not conflate the two.
 - Production smoke verification and the exact deployed merge commit are recorded in `docs/PHASE3-RELEASE.md`.
 
