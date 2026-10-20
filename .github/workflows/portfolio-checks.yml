@@ -63,10 +63,14 @@ jobs:
       - name: Verify production Worker and preview-host protection (local only)
         shell: bash
         run: |
-          ./node_modules/.bin/wrangler dev --local --ip 127.0.0.1 --port 8788 > /tmp/portfolio-production-wrangler.log 2>&1 &
+          ./node_modules/.bin/wrangler deploy --dry-run --outdir /tmp/portfolio-worker
+          openssl req -x509 -newkey rsa:2048 -nodes -keyout /tmp/portfolio-local.key -out /tmp/portfolio-local.crt -days 1 -subj /CN=localhost -addext 'subjectAltName=IP:127.0.0.1,DNS:localhost' > /tmp/portfolio-local-cert.log 2>&1
+          ./node_modules/.bin/wrangler dev --local --ip 127.0.0.1 --port 8788 --persist-to /tmp/portfolio-tls-state --local-protocol https --https-key-path /tmp/portfolio-local.key --https-cert-path /tmp/portfolio-local.crt > /tmp/portfolio-production-wrangler.log 2>&1 &
           worker_pid=$!
-          trap 'kill "$worker_pid" 2>/dev/null || true' EXIT
-          LOCAL_WORKER_URL=http://127.0.0.1:8788 node scripts/verify-worker-headers.mjs
+          ./node_modules/.bin/wrangler dev --local --ip 127.0.0.1 --port 8789 --persist-to /tmp/portfolio-http-state --inspector-port 9231 > /tmp/portfolio-http-wrangler.log 2>&1 &
+          http_worker_pid=$!
+          trap 'kill "$worker_pid" "$http_worker_pid" 2>/dev/null || true' EXIT
+          LOCAL_WORKER_URL=https://127.0.0.1:8788 LOCAL_WORKER_CA=/tmp/portfolio-local.crt LOCAL_WORKER_HTTP_URL=http://127.0.0.1:8789 LOCAL_WORKER_BUNDLE=/tmp/portfolio-worker/worker.js node scripts/verify-worker-headers.mjs
       - name: Upload QA evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -77,5 +81,6 @@ jobs:
             test-results/
             /tmp/portfolio-wrangler.log
             /tmp/portfolio-production-wrangler.log
+            /tmp/portfolio-http-wrangler.log
           if-no-files-found: ignore
           retention-days: 7
