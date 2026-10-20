@@ -1,9 +1,10 @@
 import { brandIdentity, brandNumbers } from './brand'
+import { siteOrigin } from './seo.mjs'
 
 export const site = {
   name: 'Zain Saleem',
   title: `${brandIdentity.currentRole} at ${brandIdentity.currentCompany} | ${brandIdentity.primaryPositioning}`,
-  url: 'https://zainsaleem.co',
+  url: siteOrigin,
   email: 'me@zainsaleem.co',
   bookingUrl: 'https://calendly.com/zainsaleemofficial/30min',
   portrait: {
@@ -21,8 +22,8 @@ export const site = {
     },
   ],
 }
-// Keep indexing disabled until the owner approves all public content, regardless of deployment status.
-export const publicationApproved = false
+// Owner approved public search launch on 20 October 2026. Preview protection is independent.
+export const publicationApproved = true
 export const services = [
   {
     slug: 'saas-development',

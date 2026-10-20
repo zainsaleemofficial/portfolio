@@ -1,3 +1,5 @@
+import { expectedRobots, productionBuild } from './seo-helpers'
+import { crawlerPolicy, indexableRoutes, seoPages } from '../src/data/seo.mjs'
 import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import { publicationApproved, services, site } from '../src/data/site'
@@ -89,9 +91,7 @@ test('Services directory groups all six shared service summaries and links to th
   page,
 }) => {
   await page.goto('/services/')
-  await expect(page).toHaveTitle(
-    'Services — SaaS Development, AI Automation & SEO | Zain Saleem',
-  )
+  await expect(page).toHaveTitle(seoPages['/services/'].title)
   await expect(page.locator('main h1')).toHaveCount(1)
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
@@ -316,20 +316,21 @@ for (const theme of ['dual-contrast', 'ink-and-sage']) {
   })
 }
 
-test('new service route keeps independent crawl restrictions', async ({
+test('approved service route follows environment-specific crawl policy', async ({
   page,
   request,
 }) => {
-  expect(publicationApproved).toBe(false)
+  expect(publicationApproved).toBe(true)
   await page.goto('/services/')
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
-    'noindex, nofollow',
+    expectedRobots('/services/'),
   )
-  expect(await (await request.get('/robots.txt')).text()).toMatch(
-    /^User-agent: \*\s+Disallow: \/\s*$/,
+  expect(await (await request.get('/robots.txt')).text()).toBe(
+    crawlerPolicy(productionBuild),
   )
-  expect(await (await request.get('/sitemap.xml')).text()).not.toMatch(
-    /<url(?:\s|>)/,
+  const sitemap = await (await request.get('/sitemap.xml')).text()
+  expect([...sitemap.matchAll(/<loc>/g)]).toHaveLength(
+    productionBuild ? indexableRoutes.length : 0,
   )
 })

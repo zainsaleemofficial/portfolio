@@ -36,4 +36,4 @@ Keep longer About and My Story prose in their pages. Normalizing facts does not 
 
 Target WCAG 2.2 AA with semantic headings and landmarks, visible focus, labeled controls, sufficient contrast, at least 44px touch targets, keyboard and touch alternatives, no-JavaScript content, and reduced-motion behavior. Verify both themes and the required viewport widths with automated checks plus screenshot review.
 
-Keep `publicationApproved` false until the owner explicitly approves publication. The metadata gate, `robots.txt`, empty sitemap, and `public/_headers` are independent protections and must all remain restrictive for previews. Local builds, branches, screenshots, and preview servers do not authorize deployment, DNS changes, production traffic changes, or indexing.
+The owner approved public search launch on 20 October 2026. `publicationApproved` is true; production eligibility is explicitly listed in `src/data/seo.mjs`. The metadata gate, robots, sitemap and Worker host guard remain restrictive for all previews. Local builds, branches, screenshots, and preview servers do not authorize deployment, DNS changes, production traffic changes, or indexing.
