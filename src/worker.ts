@@ -12,11 +12,17 @@ import {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
-    const asset = await env.ASSETS.fetch(request)
     const production =
       publicationApproved &&
       url.hostname === new URL(siteOrigin).hostname &&
       policy.production
+    if (production && url.protocol === 'http:') {
+      url.protocol = 'https:'
+      const headers = new Headers(policy.securityHeaders)
+      headers.set('Location', url.href)
+      return new Response(null, { status: 301, headers })
+    }
+    const asset = await env.ASSETS.fetch(request)
     const headers = new Headers(asset.headers)
     for (const [name, value] of Object.entries(policy.securityHeaders))
       headers.set(name, value)

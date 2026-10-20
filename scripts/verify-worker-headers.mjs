@@ -2,6 +2,8 @@
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import http from 'node:http'
+import https from 'node:https'
+import { pathToFileURL } from 'node:url'
 import { indexableRoutes, crawlerPolicy, siteOrigin } from '../src/data/seo.mjs'
 const source = await readFile('public/_headers', 'utf8')
 const security = source
@@ -15,19 +17,29 @@ const production = (await readFile('dist/_headers', 'utf8')).includes(
   'X-Site-Environment: production',
 )
 const base = new URL(process.env.LOCAL_WORKER_URL || 'http://127.0.0.1:8787')
-assert.equal(base.protocol, 'http:')
+assert(['http:', 'https:'].includes(base.protocol))
 assert(
   ['127.0.0.1', 'localhost'].includes(base.hostname),
   'Refusing non-local target',
 )
-async function request(path, host) {
+const ca = process.env.LOCAL_WORKER_CA
+  ? await readFile(process.env.LOCAL_WORKER_CA)
+  : undefined
+async function request(path, host, target = base) {
   let lastError
   for (let i = 0; i < 40; i++) {
     try {
       const response = await new Promise((resolve, reject) => {
-        const req = http.get(
-          new URL(path, base),
-          { headers: { Host: host } },
+        assert(['127.0.0.1', 'localhost'].includes(target.hostname))
+        const client = target.protocol === 'https:' ? https : http
+        const req = client.get(
+          new URL(path, target),
+          {
+            headers: { Host: host },
+            ...(target.protocol === 'https:'
+              ? { ca, servername: 'localhost' }
+              : {}),
+          },
           (res) => {
             const chunks = []
             res.on('data', (chunk) => chunks.push(chunk))
@@ -53,6 +65,44 @@ async function request(path, host) {
     }
   }
   throw lastError
+}
+if (production) {
+  assert.equal(
+    base.protocol,
+    'https:',
+    'Production must also be tested over TLS',
+  )
+  const target = new URL(
+    process.env.LOCAL_WORKER_HTTP_URL || 'http://127.0.0.1:8789',
+  )
+  assert.equal(target.protocol, 'http:')
+  assert(process.env.LOCAL_WORKER_BUNDLE, 'A production bundle is required')
+  const { default: worker } = await import(
+    pathToFileURL(process.env.LOCAL_WORKER_BUNDLE).href
+  )
+  for (const path of ['/', '/services/technical-seo/?source=protocol-check']) {
+    // Wrangler's dev proxy rewrites same-host Location URLs to the listener's
+    // protocol (ProxyWorker.js/rewriteUrlRelatedHeaders). Verify the exact
+    // production response before that proxy, as well as the real HTTP listener.
+    const raw = await worker.fetch(new Request('http://zainsaleem.co' + path), {
+      ASSETS: {
+        fetch() {
+          throw new Error('HTTP must redirect before fetching assets')
+        },
+      },
+    })
+    assert.equal(raw.status, 301)
+    assert.equal(raw.headers.get('location'), siteOrigin + path)
+    const response = await request(path, 'zainsaleem.co', target)
+    assert.equal(
+      response.status,
+      301,
+      'HTTP must redirect permanently to HTTPS',
+    )
+    assert.equal(response.headers.location, 'http://zainsaleem.co' + path)
+    for (const [name, value] of security)
+      assert.equal(response.headers[name], value)
+  }
 }
 for (const host of ['zainsaleem.co', 'portfolio.example.workers.dev']) {
   const publicHost = production && host === 'zainsaleem.co'

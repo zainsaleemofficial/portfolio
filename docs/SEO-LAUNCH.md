@@ -30,6 +30,8 @@ Privacy remains `noindex, follow` as a utility page. Empty Insights remains `noi
 
 No lastmod, changefreq or priority values are fabricated. Add future content to the approved content data and metadata inventory only after content approval, then require sitemap/HTTP/schema tests. No analytics, cookies, submission backend or new third-party service was added.
 
+On the canonical production host, HTTP requests redirect permanently to HTTPS with the path and query preserved. This is enforced in the Worker without changing zone settings. Production Worker QA uses a temporary local certificate trusted explicitly by the test client, plus a second HTTP listener to verify the redirect. Certificate validation is not disabled.
+
 ## Entity and crawler policy
 
 The graph connects stable Person `/#person`, WebSite `/#website`, page `#webpage`, breadcrumbs and service entities. About is a ProfilePage whose main entity is the verified Person. Services lists six real offerings; each detail page uses Service with that Person as provider. Job title and LemStudio relationship come from verified visible content. No addresses, ratings, testimonials, awards or credentials were invented. Service schema does not imply eligibility for a Google rich result.
