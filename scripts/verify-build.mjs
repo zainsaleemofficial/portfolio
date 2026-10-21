@@ -88,6 +88,31 @@ for (const file of html) {
   descriptionsSeen.add(description)
 
   const links = [...head.matchAll(/<link\b[^>]*>/gi)].map((m) => m[0])
+  const icons = links.filter((tag) => attribute(tag, 'rel') === 'icon')
+  assert.equal(
+    icons.length,
+    2,
+    `${file}: exactly two complementary icon formats`,
+  )
+  assert.deepEqual(
+    icons.map((tag) => attribute(tag, 'href')),
+    ['/favicon.ico', '/favicon-96.png'],
+    `${file}: portrait favicon URLs`,
+  )
+  assert.equal(
+    attribute(icons[0], 'sizes'),
+    '16x16 32x32 48x48 96x96',
+    `${file}: ICO resolutions`,
+  )
+  assert.equal(
+    attribute(icons[1], 'sizes'),
+    '96x96',
+    `${file}: primary favicon dimensions`,
+  )
+  assert(
+    !head.includes('href="/favicon.svg"'),
+    `${file}: no legacy favicon declaration`,
+  )
   const canonicals = links.filter(
     (tag) => attribute(tag, 'rel')?.toLowerCase() === 'canonical',
   )
@@ -106,6 +131,7 @@ for (const file of html) {
   }
 
   for (const [name, expected] of [
+    ['og:site_name', 'Zain Saleem'],
     ['og:title', title],
     ['og:description', description],
     ['og:url', canonical],

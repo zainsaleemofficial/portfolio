@@ -149,18 +149,28 @@ for (const host of ['zainsaleem.co', 'portfolio.example.workers.dev']) {
     urls.sort(),
     publicHost ? indexableRoutes.map((p) => siteOrigin + p).sort() : [],
   )
-  for (const path of [
-    '/favicon.svg',
-    '/favicon.ico',
-    '/favicon-96.png',
-    '/apple-touch-icon.png',
-    '/social-preview.png',
+  for (const [path, type] of [
+    ['/favicon.svg', 'image/svg+xml'],
+    ['/favicon.ico', 'image/'],
+    ['/favicon-32.png', 'image/png'],
+    ['/favicon-48.png', 'image/png'],
+    ['/favicon-96.png', 'image/png'],
+    ['/apple-touch-icon.png', 'image/png'],
+    ['/social-preview.png', 'image/png'],
   ]) {
-    assert.equal(
-      (await request(path, host)).status,
-      200,
-      `${host}${path}: public asset`,
+    const asset = await request(path, host)
+    assert.equal(asset.status, 200, `${host}${path}: public asset`)
+    assert(
+      asset.headers['content-type'].includes(type),
+      `${host}${path}: asset MIME`,
     )
+    assert.equal(
+      asset.headers['x-robots-tag'],
+      publicHost ? 'index, follow' : 'noindex, nofollow',
+      `${host}${path}: asset indexing`,
+    )
+    for (const [name, value] of security)
+      assert.equal(asset.headers[name], value, `${host}${path}: ${name}`)
   }
 }
 console.log(
