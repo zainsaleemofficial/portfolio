@@ -68,6 +68,13 @@ test('linked JSON-LD describes the visible person, services and real hierarchy',
     expect(person).not.toHaveProperty('worksFor')
     expect(graph.some((node) => node['@type'] === 'Organization')).toBe(false)
     expect(person.sameAs).toEqual(site.socials.map((s) => s.url))
+    expect(person.image).toBe(siteOrigin + site.portrait.src)
+    expect(person.knowsAbout).toEqual(services.map((s) => s.title))
+    const website = graph.find((node) => node['@type'] === 'WebSite')!
+    expect(website['@id']).toBe(`${siteOrigin}/#website`)
+    expect(website.name).toBe('Zain Saleem')
+    expect(website.url).toBe(siteOrigin + '/')
+    expect(website.publisher).toEqual({ '@id': `${siteOrigin}/#person` })
     const webpage = graph.find((node) =>
       ['WebPage', 'ProfilePage'].includes(String(node['@type'])),
     )!
@@ -150,6 +157,8 @@ test('brand assets are reachable with correct formats and dimensions', async ({
   for (const [path, type] of [
     ['/favicon.svg', 'image/svg+xml'],
     ['/favicon.ico', 'image/'],
+    ['/favicon-32.png', 'image/png'],
+    ['/favicon-48.png', 'image/png'],
     ['/favicon-96.png', 'image/png'],
     ['/apple-touch-icon.png', 'image/png'],
     ['/social-preview.png', 'image/png'],

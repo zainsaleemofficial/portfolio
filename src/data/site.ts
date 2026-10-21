@@ -101,7 +101,7 @@ export const services = [
     intro:
       'Local search works best when your website and business information give people a consistent, useful picture of what you do and where you do it.',
     scope: [
-      'Review business information and local search presence.',
+      'Review Google Business Profile information and local search presence.',
       'Assess service and location pages for useful, accurate content.',
       'Identify inconsistencies in relevant business listings.',
       'Plan improvements around the actual services and areas you cover.',

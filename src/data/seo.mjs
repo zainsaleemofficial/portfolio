@@ -47,7 +47,7 @@ export const seoPages = {
   '/services/technical-seo/': {
     title: 'Technical SEO Services | Zain Saleem',
     description:
-      'Find and prioritize technical SEO issues with Zain Saleem: crawling, indexing, canonicals, internal links, structured data, performance and implementation checks.',
+      'Technical SEO audits and implementation with Zain Saleem. Review crawling, indexing, canonicals, internal links, structured data and website performance.',
     label: 'Technical SEO',
     intent: 'Technical SEO audit and implementation services',
     index: true,
@@ -55,7 +55,7 @@ export const seoPages = {
   '/services/local-seo/': {
     title: 'Local SEO Services | Zain Saleem',
     description:
-      'Improve your local search foundations with Zain Saleem. Review business information, service-area content and listings around your actual services and customers.',
+      'Local SEO services with Zain Saleem. Review business information, Google Business Profile, website content and listings around your real service areas.',
     label: 'Local SEO',
     intent: 'Local SEO services for real business service areas',
     index: true,
