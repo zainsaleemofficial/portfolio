@@ -45,6 +45,16 @@ The candidate run passed all 49 functional tests, including the added 320/375/39
 
 Local fallback Chromium was used for functional checks and visual investigation, but its system monospace fallback differs from CI even on unchanged production source. Its images were not accepted as references. The committed references come from the pinned CI browser only.
 
+## Reviewed personal-brand editorial refinement for PR #8
+
+Owner authorization: the personal-brand and professional-story request authorizes scoped editorial changes, screenshot review and release after green CI. No CSS, image assets, layout components, animations, contact behavior or indexing policy was changed.
+
+Source UI commit: `d9f9296d0612406318772ffd517eee9398cb4992`. Evidence: [Actions run 39604528947](https://github.com/zainsaleemofficial/portfolio/actions/runs/39604528947), artifact `portfolio-qa-evidence` (ID `12348171214`, ZIP SHA-256 `c932bf40bedad7f4151edcf4b3bfceb88c3430d4bafec9d4f0fac5b2a23dbc82`). Only the four native homepage actual PNGs were copied byte-for-byte after comparing approved/candidate/difference images in both themes at desktop and mobile sizes. No local fallback-browser images were accepted.
+
+Review covered the full default-theme page in consecutive crops and the alternate-theme hero, editorial sections, portrait scene, consultation and footer. Changes are the personal positioning line, descriptive organization wording, and the natural vertical reflow of that copy. The header's first 100 pixels remain pixel-identical in all four images. Portrait identity, split treatment, CTA clearance, heading alignment, services layout, consultation actions and footer remain intact. Mobile pages increase from 390 × 10795 to 390 × 10819; desktop pages increase from 1440 × 7810 to 1440 × 7842. No clipping, overlaps or unintended wrapping were found.
+
+The source run passed 62 scenarios and both the generated preview output checks and local preview Worker-header checks. Its only failures were the four intentionally changed homepage comparisons. The other four visual references remain unchanged. Additional About, Story, Experience and Work screenshots were inspected; responsive and axe checks cover both themes at 320, 390, 768 and 1440 pixels. Release requires a fresh green complete run after this acceptance. All eight visual scenarios, assertions, masks and zero-difference tolerances remain unchanged.
+
 ## Future changes
 
 1. Run `npm ci`, `npm run build` and `npm test` in the same Linux/browser environment as CI. Ordinary CI must stay in compare-only mode; never add an automatic update fallback.
@@ -55,10 +65,10 @@ Local fallback Chromium was used for functional checks and visual investigation,
 
 ## Reference SHA-256 hashes
 
-- `home-mobile-linux.png`: `58ed36927953f83f6ff01045d568b4f7665dfbe91e611de345164316b7c667e2`
-- `home-desktop-linux.png`: `b63b7f3c189f72669f45460f7982091ca0129a880fd05200093da52b0d4ccdaf`
-- `home-sage-mobile-linux.png`: `86cb6eca07c8ea13ffc57720c58fffd063d54e6576379219b1cbf14123cd7c2b`
-- `home-sage-desktop-linux.png`: `6064a898b913cd5624812f9a1a98ea8cbc07fb6f8a7647b5d31807b7bb8849f1`
+- `home-mobile-linux.png`: `dee0daf2cd8a90ebf181cbcb6b795e68238a1ddf2c5341aa8c7c0092f8b02578`
+- `home-desktop-linux.png`: `fc226b0b4380c1cdd7c9d2321daea78be1db3a2ecb1beaf611954c8ad82ee86e`
+- `home-sage-mobile-linux.png`: `c3739e1211c459885851bdd08ab785929e92356d44a6b9d3015707ec2818b601`
+- `home-sage-desktop-linux.png`: `e06491f84b4aa82be7b110b6fdd389df4b58652b259929c28d17b36a4b37019e`
 - `contact-mobile-linux.png`: `555035b543e3c2f32dca8814cafab96088d7c04f2b6b07e23aa4a2185c44c458`
 - `contact-desktop-linux.png`: `8b77f9eb38411e662a41700300fd03fd70214cf9744886491fa46fdd59d535b1`
 - `service-mobile-linux.png`: `d220e14cab12e9d5dffba3f01675d0983522e906ee1f3c54c1c484ebcf1119c2`
