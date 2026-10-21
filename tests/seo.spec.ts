@@ -65,6 +65,8 @@ test('linked JSON-LD describes the visible person, services and real hierarchy',
     expect(person['@id']).toBe(`${siteOrigin}/#person`)
     expect(person.name).toBe('Zain Saleem')
     expect(person.jobTitle).toBe('Head of SaaS')
+    expect(person).not.toHaveProperty('worksFor')
+    expect(graph.some((node) => node['@type'] === 'Organization')).toBe(false)
     expect(person.sameAs).toEqual(site.socials.map((s) => s.url))
     const webpage = graph.find((node) =>
       ['WebPage', 'ProfilePage'].includes(String(node['@type'])),

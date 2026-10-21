@@ -18,7 +18,7 @@ const title = pageSEO?.title ?? Astro.props.title ?? site.name
 const description =
   pageSEO?.description ??
   Astro.props.description ??
-  `Zain Saleem is ${brandIdentity.currentRole} at ${brandIdentity.currentCompany}, working across SaaS development, AI automation and SEO strategy.`
+  `Zain Saleem is ${brandIdentity.currentRole} at ${brandIdentity.currentOrganization}, working across SaaS development, AI automation and SEO strategy.`
 const canonical = new URL(Astro.url.pathname, site.url)
 const indexable =
   publicationApproved &&

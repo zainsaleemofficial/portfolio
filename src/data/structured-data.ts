@@ -19,7 +19,6 @@ export function structuredData(
       name: site.name,
       url: `${site.url}/`,
       jobTitle: brandIdentity.currentRole,
-      worksFor: { '@type': 'Organization', name: brandIdentity.currentCompany },
       image: new URL(site.portrait.src, site.url).href,
       sameAs: site.socials.map((entry) => entry.url),
       knowsAbout: services.map((entry) => entry.title),

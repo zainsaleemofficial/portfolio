@@ -2,7 +2,7 @@
 
 The user's two Personal Brand Master Document attachments have been reviewed. The Final Verified Update supersedes historical draft notes. Only edited, publication-safe copy belongs in this repository: **do not commit the private source documents**.
 
-- The professional story is now covered by the homepage, About, My Story and Experience pages. Reconfirm name styling of RedsGlow and Tracemark Impression if these should link to an official public profile.
+- The professional story is covered by the homepage, About, My Story and Experience pages. Employer names are intentionally omitted publicly; use the approved geography/type descriptions in `src/data/brand.ts`. The named source records below remain internal factual references, not public labels.
 - The role at Pearl Lemon is specifically **Head of Off-Page SEO for client-facing work**, not the overall company's Head of SEO.
 - The public numbers distinguish 50+ software projects (including experiments/prototypes), approximately 20+ launches, 25+ people trained and teams of more than ten. Avoid asserting 50+ commercially launched products.
 - LemStudio owns company products. Product names in prose are approved, but screenshots, source code, customer details, company internal diagrams and individual company-product case studies require separate permission.
