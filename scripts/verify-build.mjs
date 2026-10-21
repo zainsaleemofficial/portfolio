@@ -162,6 +162,27 @@ for (const file of html) {
     data['@graph'].some((node) => node['@type'] === 'Person'),
     `${file}: Person`,
   )
+  const person = data['@graph'].find((node) => node['@type'] === 'Person')
+  assert(
+    !Object.hasOwn(person, 'worksFor'),
+    `${file}: employer is not disclosed`,
+  )
+  const employerNames =
+    /reds[\s-]*glow|pearl[\s-]*lemon|trace[\s-]*mark(?:\s+impression)?|lem[\s-]*studio|lemon[\s-]*studio/i
+  const publicText = text
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+  assert.doesNotMatch(
+    publicText,
+    employerNames,
+    `${file}: public employer name`,
+  )
+  assert.doesNotMatch(
+    title + ' ' + description,
+    employerNames,
+    `${file}: employer metadata`,
+  )
   assert(
     data['@graph'].some((node) => node['@type'] === 'WebSite'),
     `${file}: WebSite`,
@@ -257,7 +278,7 @@ assert(
   'Homepage must label project count accurately',
 )
 assert(
-  home.includes('Head of SaaS at LemStudio'),
+  home.includes('Head of SaaS at a UK-based software product company'),
   'Homepage should reflect verified current role',
 )
 assert(

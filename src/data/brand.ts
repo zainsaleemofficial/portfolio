@@ -3,7 +3,8 @@
 // Approximate figures are labelled; no private company work or unapproved project visuals.
 export const brandIdentity = {
   currentRole: 'Head of SaaS',
-  currentCompany: 'LemStudio',
+  currentOrganization: 'a UK-based software product company',
+  currentOrganizationLabel: 'UK-Based Software Product Company',
   primaryPositioning: 'SaaS Development, AI Automation & SEO Strategy',
 } as const
 
@@ -25,7 +26,7 @@ export const brandHighlights = [
     figure: brandNumbers.launchedProducts,
     label: 'products launched',
     detail:
-      'An approximate count of products brought to launch across the LemStudio ecosystem.',
+      'An approximate count of company-owned software products brought to launch.',
   },
   {
     figure: brandNumbers.peopleTrained,
@@ -42,19 +43,19 @@ export const brandHighlights = [
 
 export const experience = [
   {
-    organization: 'RedsGlow',
+    organization: 'Pakistan-Based Technology Startup',
     label: 'The technical foundation',
     when: 'Started professionally at 15',
     role: 'Website operations, WordPress performance & troubleshooting',
     summary:
-      'My first professional role covered website maintenance, speed, hosting, plugins and security at a startup. When a WordPress site went down and the usual developer was unavailable, I volunteered to investigate and helped bring it back online.',
+      'My first professional role covered website maintenance, speed, hosting, plugins and security at a technology startup. When a WordPress site went down and the usual developer was unavailable, I volunteered to investigate and helped bring it back online.',
     details: [
       'Hands-on website performance and technical troubleshooting',
       'Small utilities and practical workflow improvements',
     ],
   },
   {
-    organization: 'Pearl Lemon',
+    organization: 'UK-Based Digital Marketing Agency',
     label: 'Learning to lead through SEO',
     when: 'Joined 29 April 2024',
     role: 'Off-Page SEO Intern → Head of Off-Page SEO (client-facing)',
@@ -66,7 +67,7 @@ export const experience = [
     ],
   },
   {
-    organization: 'Tracemark Impression',
+    organization: 'US-Based Digital Marketing Agency',
     label: 'US agency partnership',
     when: 'Separate US agency engagement',
     role: 'SEO partner / SEO delivery leadership',
@@ -78,12 +79,12 @@ export const experience = [
     ],
   },
   {
-    organization: brandIdentity.currentCompany,
+    organization: brandIdentity.currentOrganizationLabel,
     label: 'Building products that solve real problems',
     when: 'Current role',
-    role: brandIdentity.currentRole,
+    role: `${brandIdentity.currentRole} — Product Development & Operations`,
     summary:
-      'After a weekend software challenge at Pearl Lemon, I was invited to work directly with its CEO, Deepak Shukla. That transition became LemStudio, where I lead AI-assisted SaaS development, automation, product operations, launches and teams.',
+      'Leading AI-assisted SaaS product development, integrations, launches and operational workflows for a UK-based company that develops and sells its own software products internationally. A weekend software challenge at a digital marketing agency led to the transition into product work.',
     details: [
       `Hands-on AI-assisted building across ${brandNumbers.softwareProjects} projects`,
       `Approximately ${brandNumbers.launchedProducts} launches, integrations, support and go-to-market`,

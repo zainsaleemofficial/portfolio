@@ -34,7 +34,7 @@ On the canonical production host, HTTP requests redirect permanently to HTTPS wi
 
 ## Entity and crawler policy
 
-The graph connects stable Person `/#person`, WebSite `/#website`, page `#webpage`, breadcrumbs and service entities. About is a ProfilePage whose main entity is the verified Person. Services lists six real offerings; each detail page uses Service with that Person as provider. Job title and LemStudio relationship come from verified visible content. No addresses, ratings, testimonials, awards or credentials were invented. Service schema does not imply eligibility for a Google rich result.
+The graph connects stable Person `/#person`, WebSite `/#website`, page `#webpage`, breadcrumbs and service entities. About is a ProfilePage whose main entity is the verified Person. Services lists six real offerings; each detail page uses Service with that Person as provider. Job title comes from verified visible content. Following the owner's personal-brand refinement, the employer is described in public prose and Person `worksFor` is omitted; no anonymous Organization entity is substituted. No addresses, ratings, testimonials, awards or credentials were invented. Service schema does not imply eligibility for a Google rich result.
 
 Search discovery is allowed through the wildcard group, with an explicit OAI-SearchBot group. Training opt-outs cover GPTBot, Google-Extended, ClaudeBot, CCBot and Applebot-Extended. Googlebot access is separate from Google-Extended. ChatGPT-User is a user-triggered fetcher, not the automatic search-indexing control. robots is a cooperative policy, not authentication or a guarantee against scraping.
 

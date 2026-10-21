@@ -7,7 +7,7 @@ export const seoPages = {
   '/': {
     title: 'Zain Saleem | SaaS Development, AI Automation & SEO',
     description:
-      'Zain Saleem, Head of SaaS at LemStudio, builds AI-assisted SaaS products and business workflows, with expertise in technical SEO, local SEO and link building.',
+      'Zain Saleem works across SaaS product development, AI automation and SEO strategy, with experience in technical SEO, local SEO and link building.',
     label: 'Home',
     intent: 'Zain Saleem; personal brand and professional services',
     index: true,
@@ -69,9 +69,9 @@ export const seoPages = {
     index: true,
   },
   '/about/': {
-    title: 'About Zain Saleem | Head of SaaS at LemStudio',
+    title: 'About Zain Saleem | SaaS Builder & SEO Strategist',
     description:
-      'Meet Zain Saleem, Head of SaaS at LemStudio. Learn how technical curiosity, SEO leadership and AI-assisted product building shape his approach to business problems.',
+      'Meet Zain Saleem, an AI-assisted SaaS builder and SEO strategist. Discover the curiosity, product work and team leadership behind his practical approach.',
     label: 'About',
     intent: 'Who is Zain Saleem; professional profile',
     index: true,
@@ -79,7 +79,7 @@ export const seoPages = {
   '/experience/': {
     title: 'Experience & Leadership | Zain Saleem',
     description:
-      'Explore Zain Saleem’s roles at RedsGlow, Pearl Lemon, Tracemark Impression and LemStudio, spanning technical work, SEO delivery, SaaS products and team leadership.',
+      'Explore Zain Saleem’s progression from website operations and SEO delivery to Head of SaaS, spanning AI-assisted products, integrations and team leadership.',
     label: 'Experience',
     intent: 'Zain Saleem professional experience and leadership',
     index: true,
@@ -95,7 +95,7 @@ export const seoPages = {
   '/my-story/': {
     title: 'My Story | Zain Saleem',
     description:
-      'Zain Saleem’s story, from learning HTML and CSS at school to SEO leadership and Head of SaaS at LemStudio. Seven chapters about curiosity and responsibility.',
+      'Zain Saleem’s story, from learning HTML and CSS at school to SEO leadership and AI-assisted SaaS development. Seven chapters about curiosity and responsibility.',
     label: 'My Story',
     intent: 'Zain Saleem personal and career journey',
     index: true,

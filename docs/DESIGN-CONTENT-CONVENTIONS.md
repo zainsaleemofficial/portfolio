@@ -32,6 +32,8 @@ The primary positioning is SaaS Development, AI Automation, and SEO Strategy. Za
 
 Keep longer About and My Story prose in their pages. Normalizing facts does not authorize rewriting the professional story. Do not invent client results, company metrics, financial outcomes, testimonials, dates, or ownership. Add projects, case studies, and articles only with approval, evidence, and rights to publish.
 
+The owner approved personal-brand editorial refinement on 21 October 2026. Public employer references use Pakistan-based technology startup, UK-based digital marketing agency, US-based digital marketing agency and UK-based software product company. The current company develops, launches and sells its own software internationally; it is not a client-services software agency. Preserve the seven chapters, verified roles/figures, company product ownership and approved product examples. Omit Person `worksFor` while the employer is undisclosed; never create an anonymous Organization entity. Keep external destinations and internal factual source records intact.
+
 ## Accessibility and publication
 
 Target WCAG 2.2 AA with semantic headings and landmarks, visible focus, labeled controls, sufficient contrast, at least 44px touch targets, keyboard and touch alternatives, no-JavaScript content, and reduced-motion behavior. Verify both themes and the required viewport widths with automated checks plus screenshot review.

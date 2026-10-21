@@ -3,7 +3,7 @@ import { siteOrigin } from './seo.mjs'
 
 export const site = {
   name: 'Zain Saleem',
-  title: `${brandIdentity.currentRole} at ${brandIdentity.currentCompany} | ${brandIdentity.primaryPositioning}`,
+  title: `Zain Saleem | ${brandIdentity.primaryPositioning}`,
   url: siteOrigin,
   email: 'me@zainsaleem.co',
   bookingUrl: 'https://calendly.com/zainsaleemofficial/30min',

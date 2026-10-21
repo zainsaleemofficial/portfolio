@@ -315,11 +315,13 @@ test('verified personal brand pages tell the story without private project galle
     ).toBe(true)
   }
   await page.goto('/experience/')
-  await expect(page.getByText('Pearl Lemon', { exact: true })).toBeVisible()
-  await expect(
-    page.getByText('Tracemark Impression', { exact: true }),
-  ).toBeVisible()
-  await expect(page.getByText('LemStudio', { exact: true })).toBeVisible()
+  for (const name of [
+    'Pakistan-Based Technology Startup',
+    'UK-Based Digital Marketing Agency',
+    'US-Based Digital Marketing Agency',
+    'UK-Based Software Product Company',
+  ])
+    await expect(page.getByRole('heading', { name, exact: true })).toBeVisible()
   await page.goto('/')
   await expect(
     page.getByRole('link', { name: 'My full story' }),
