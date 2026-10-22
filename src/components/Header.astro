@@ -5,6 +5,7 @@ const links = [
   ['Work', '/work/'],
   ['Services', '/services/'],
   ['About', '/about/'],
+  ['My Story', '/my-story/'],
   ['Experience', '/experience/'],
   ['Contact', '/contact/'],
 ]
@@ -111,5 +112,5 @@ const current = (href: string) =>
     }
   })
   menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close))
-  matchMedia('(min-width: 768px)').addEventListener('change', close)
+  matchMedia('(min-width: 1024px)').addEventListener('change', close)
 </script>

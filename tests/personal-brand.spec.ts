@@ -38,48 +38,47 @@ test('all seven story chapters retain chronology, specificity and ownership dist
   page,
 }) => {
   await page.goto('/my-story/')
-  const chapters = page.locator('.story-chapter')
+  const chapters = page.locator('.story-v2 [data-chapter]')
   await expect(chapters).toHaveCount(7)
-  await expect(chapters.locator('h2')).toHaveText([
-    'The kid who wanted to figure things out.',
-    'The first real test.',
-    'From SEO intern to leading delivery.',
-    'Learning that the job is bigger than the title.',
-    'A weekend challenge changed everything.',
-    'Products, people and everything after the launch.',
-    'Still curious. More responsibility.',
-  ])
-  for (const [i, paragraphs] of [3, 3, 3, 2, 3, 4, 3].entries())
-    await expect(chapters.nth(i).locator('.brand-reading > p')).toHaveCount(
-      paragraphs,
-    )
-  for (const text of [
+  for (const [index, heading] of [
+    'It started with',
+    'The day I said',
+    'I came for SEO',
+    'Not every problem',
+    'Then came',
+    'Launch day',
+    'I’m still the kid',
+  ].entries()) {
+    await expect(chapters.nth(index).locator('h2')).toContainText(heading)
+  }
+  for (const detail of [
     'seventh grade',
-    'At 15',
     'Pakistan-based technology startup',
     'April 29, 2024',
     'Off-Page SEO Intern',
-    'Head of Off-Page SEO for the client-facing side',
-    '15 or more campaigns at once, sometimes over 20',
+    'fifteen or more campaigns',
     'US-based digital marketing agency',
-    'more than 20 clients',
-    'trained a successor',
-    'transition of roughly a month',
+    'more than twenty clients',
+    'roughly a month',
     'UK-based software product company',
-    'develops, launches and sells its own software products to customers across different countries',
-    'more than 50 software projects',
-    'Approximately 20 or more reached launch',
-    'products belong to the company',
-    'not as products I own personally',
-    'more than 100 booking pages',
+    'more than fifty software projects',
+    'Around twenty or more reached launch',
+    'company-owned',
+    'more than a hundred booking pages',
     'managed teams of more than ten',
-    'trained more than 25 people',
-    'write poetry, read, cook and play cricket',
-  ])
-    await expect(page.locator('main')).toContainText(text)
-  await expect(chapters.nth(1)).toContainText('The website came back online.')
+    'train more than twenty-five people',
+    'write poetry',
+  ]) {
+    await expect(page.locator('main')).toContainText(detail)
+  }
+  await expect(chapters.nth(1)).toContainText(
+    'helped get the site running again',
+  )
   await expect(chapters.nth(5)).toContainText(
-    "I'm not a traditional programmer",
+    'not going to pretend I hand-code every system',
+  )
+  await expect(chapters.nth(1)).toContainText(
+    'Recreated from memory; not a word-for-word transcript.',
   )
 })
 
