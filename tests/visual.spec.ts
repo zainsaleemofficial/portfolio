@@ -40,6 +40,18 @@ async function expectApprovedPage(
 }
 
 const views = [
+  {
+    label: 'story-mobile',
+    route: '/my-story/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'story-desktop',
+    route: '/my-story/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
   { label: 'home-mobile', route: '/', width: 390, theme: 'dual-contrast' },
   { label: 'home-desktop', route: '/', width: 1440, theme: 'dual-contrast' },
   { label: 'home-sage-mobile', route: '/', width: 390, theme: 'ink-and-sage' },
