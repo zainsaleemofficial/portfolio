@@ -416,6 +416,16 @@
 .ed-directory-intro h2 .serif {
   display: block;
 }
+.editorial .ed-directory-intro .ed-directory-subtitle {
+  font: italic clamp(2.6rem, 4.3vw, 4.25rem)/1.08 var(--font-editorial);
+  letter-spacing: -0.025em;
+  color: var(--ed-ink);
+  margin-top: 0;
+  max-width: 14ch;
+}
+.ed-work .ed-section .work-art .art-caption {
+  color: inherit;
+}
 .ed-directory-intro > p:last-child {
   margin-top: var(--space-6);
   max-width: 32ch;
