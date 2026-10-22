@@ -28,11 +28,20 @@ async function expectApprovedPage(
 ) {
   await loadPageImages(page)
   const target = options.locator ? page.locator(options.locator) : page
-  await expect(target).toHaveScreenshot(`${options.label}.png`, {
-    animations: 'disabled',
-    caret: 'hide',
+  const capture = {
+    animations: 'disabled' as const,
+    caret: 'hide' as const,
     ...(options.locator ? {} : { fullPage: true }),
     mask: options.locator ? [] : [page.locator('.footer-bottom p')],
+  }
+  // Preserve native review candidates even when a new reference is missing.
+  // This is evidence capture only; the compare-only assertion still fails.
+  await target.screenshot({
+    path: `artifacts/editorial/candidates/${options.label}.png`,
+    ...capture,
+  })
+  await expect(target).toHaveScreenshot(`${options.label}.png`, {
+    ...capture,
     // Preserve the previous CI's exact-pixel requirement; no tolerance increase.
     threshold: 0,
     maxDiffPixels: 0,
