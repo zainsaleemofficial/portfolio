@@ -3,28 +3,39 @@ import Layout from '../layouts/Layout.astro'
 import BriefForm from '../components/BriefForm'
 import Arrow from '../components/Arrow.astro'
 import { site } from '../data/site'
+import EditorialFrame from '../components/editorial/EditorialFrame.astro'
+import EditorialIntro from '../components/editorial/EditorialIntro.astro'
+import EditorialSection from '../components/editorial/EditorialSection.astro'
 ---
 
 <Layout>
-  <section class="section page-intro">
-    <div class="container">
-      <p class="eyebrow">A conversation before a commitment</p>
-      <h1>
+  <EditorialFrame class="ed-contact">
+    <EditorialIntro
+      eyebrow="Contact / A conversation before a commitment"
+      tone="mint"
+    >
+      <Fragment slot="heading">
         What are you
         <br />
         <span class="serif">working on?</span>
-      </h1>
-      <p class="large-copy">
+      </Fragment>
+      <p>
         Tell me about the problem, the people it affects, and what you’d like to
         change.
       </p>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container contact-grid">
-      <div class="contact-methods">
-        <div>
-          <h2>Book a Call</h2>
+      <p>
+        A call or a short email is a good start. If you'd rather organize your
+        thoughts first, there's an optional email brief below.
+      </p>
+    </EditorialIntro>
+    <EditorialSection labelledBy="contact-choices-title">
+      <h2 id="contact-choices-title" class="sr-only">
+        Choose how to get in touch
+      </h2>
+      <div class="contact-methods ed-contact-choices">
+        <section class="ed-contact-choice" aria-labelledby="call-title">
+          <p class="eyebrow">01 / Let's talk</p>
+          <h2 id="call-title">Book a Call</h2>
           <p>
             Schedule a conversation about your project. Calendly opens in a new
             tab so you can choose an available time and confirm your booking.
@@ -37,9 +48,10 @@ import { site } from '../data/site'
           >
             Book a Call <Arrow diagonal />
           </a>
-        </div>
-        <div>
-          <h2>Send an Email</h2>
+        </section>
+        <section class="ed-contact-choice" aria-labelledby="email-title">
+          <p class="eyebrow">02 / Put it in your own words</p>
+          <h2 id="email-title">Send an Email</h2>
           <p>
             Prefer to write? Open your email app and send a message directly to{' '}
             {site.email}.
@@ -51,24 +63,31 @@ import { site } from '../data/site'
             If an email app doesn’t open, copy {site.email} into your email
             service.
           </p>
+        </section>
+      </div>
+    </EditorialSection>
+    <EditorialSection id="email-brief" tone="mint" labelledBy="brief-title">
+      <div class="ed-split contact-brief">
+        <div class="ed-contact-brief-intro">
+          <p class="eyebrow">03 / Optional, at your own pace</p>
+          <h2 id="brief-title">Prepare an Email Brief</h2>
+          <p>
+            Optional: organize your project details into a draft, then review
+            and send it from your email app. Nothing is submitted through this
+            website.
+          </p>
+        </div>
+        <div>
+          <BriefForm email={site.email} client:visible />
+          <noscript>
+            <p>
+              JavaScript is needed to prepare a brief. Email{' '}
+              <a href={`mailto:${site.email}`}>{site.email}</a> directly or use
+              the booking link above.
+            </p>
+          </noscript>
         </div>
       </div>
-      <div id="email-brief" class="contact-brief">
-        <h2>Prepare an Email Brief</h2>
-        <p>
-          Optional: organize your project details into a draft, then review and
-          send it from your email app. Nothing is submitted through this
-          website.
-        </p>
-        <BriefForm email={site.email} client:visible />
-        <noscript>
-          <p>
-            JavaScript is needed to prepare a brief. Email{' '}
-            <a href={`mailto:${site.email}`}>{site.email}</a> directly or use
-            the booking link above.
-          </p>
-        </noscript>
-      </div>
-    </div>
-  </section>
+    </EditorialSection>
+  </EditorialFrame>
 </Layout>

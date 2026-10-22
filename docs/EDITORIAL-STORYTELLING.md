@@ -70,6 +70,8 @@ Reuse existing reveal/hover behavior and tokens. Content is visible before JS; n
 
 ## Review and release checklist
 
+The article shell in `src/pages/insights/[slug].astro` shows native section navigation for pieces with more than two sections. `ContentSections` gives each section a stable local anchor; an optional `quote` requires both source text and attribution. Use quotations only when verified and approved. The prose system includes reading measure, paragraph rhythm, section spacing and attributed pull quotes. Do not populate the article array merely to demonstrate the layout. Any future diagram needs a real explanatory purpose, a caption/alternative and its own responsive review.
+
 - State each page's purpose and verify its heading sequence, facts and next action.
 - Inspect before/after at desktop and mobile, both themes, small screens, tablet and landscape. Check full pages, wrapping, all interactive states and overflow.
 - Run install, typecheck, lint, formatting, both builds, generated metadata, complete Playwright/axe suites and actual local Worker checks. Run performance checks and distinguish lab results from field Core Web Vitals.

@@ -41,6 +41,24 @@ async function expectApprovedPage(
 
 const views = [
   {
+    label: 'insights-mobile',
+    route: '/insights/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'insights-desktop',
+    route: '/insights/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'privacy-mobile',
+    route: '/privacy/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
     label: 'technical-seo-mobile',
     route: '/services/technical-seo/',
     width: 390,
