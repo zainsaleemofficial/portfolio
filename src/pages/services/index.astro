@@ -46,14 +46,12 @@ const groups = ['Build', 'Grow'] as const
             <p class="eyebrow">
               {String(groupIndex + 1).padStart(2, '0')} / How I can help
             </p>
-            <h2 id={`services-${group.toLowerCase()}`}>
-              {group}
-              <span class="serif">
-                {group === 'Build'
-                  ? ' something useful.'
-                  : ' with a clear foundation.'}
-              </span>
-            </h2>
+            <h2 id={`services-${group.toLowerCase()}`}>{group}</h2>
+            <p class="ed-directory-subtitle">
+              {group === 'Build'
+                ? ' something useful.'
+                : ' with a clear foundation.'}
+            </p>
             <p>
               {group === 'Build'
                 ? 'Products, applications and workflows shaped around the way you work.'
