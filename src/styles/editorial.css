@@ -74,6 +74,9 @@
   border-top: 1px solid var(--ed-rule);
   padding-top: var(--space-5);
 }
+.ed-intro-before {
+  margin-bottom: var(--space-7);
+}
 .ed-section {
   padding-block: var(--section-spacing);
 }
@@ -395,5 +398,131 @@
     border-left: 0;
     border-top: 1px solid var(--color-border-subtle);
     padding-left: 0;
+  }
+}
+
+/* Commercial information remains visible; editorial rhythm makes it readable. */
+.ed-directory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(2rem, 8vw, 8rem);
+}
+.ed-directory-intro {
+  align-self: start;
+}
+.ed-directory-intro h2 {
+  max-width: 13ch;
+}
+.ed-directory-intro h2 .serif {
+  display: block;
+}
+.ed-directory-intro > p:last-child {
+  margin-top: var(--space-6);
+  max-width: 32ch;
+}
+.ed-services .service-directory-entry {
+  border-color: var(--ed-rule);
+  padding-block: var(--space-6) var(--space-7);
+}
+.ed-directory-index {
+  display: block;
+  font: var(--text-xs) var(--font-mono);
+  color: var(--ed-accent);
+  margin-bottom: var(--space-4);
+}
+.ed-services .service-directory-link {
+  font-size: clamp(1.5rem, 2.7vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  align-items: start;
+}
+.ed-services .service-directory-link svg {
+  margin-top: 0.25em;
+}
+.ed-services .service-directory-link:hover {
+  color: var(--ed-accent);
+}
+.ed-services .service-directory-entry p {
+  font-size: var(--text-sm);
+  max-width: 46ch;
+}
+.ed-service .ed-intro h1 {
+  font-size: clamp(3rem, 6vw, 6rem);
+  max-width: 17ch;
+}
+.ed-service-problem {
+  font-size: var(--text-lead) !important;
+  line-height: 1.5 !important;
+  color: var(--ed-ink) !important;
+}
+.ed-scope-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ed-scope-list li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: var(--space-5);
+  border-top: 1px solid var(--ed-rule);
+  padding-block: var(--space-5);
+}
+.ed-scope-list li:last-child {
+  border-bottom: 1px solid var(--ed-rule);
+}
+.ed-scope-list span {
+  font: var(--text-xs)/2.3 var(--font-mono);
+  color: var(--ed-accent);
+}
+.ed-work .work-grid {
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+.ed-work .work-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+.ed-work .work-art {
+  height: 380px;
+}
+.ed-work .work-card:nth-child(even) .work-art {
+  order: 2;
+}
+.ed-work .work-meta {
+  padding-top: 0;
+}
+.ed-work .work-meta h3 {
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+}
+.ed-work .work-meta > p:last-child {
+  font-size: var(--text-base);
+  margin-top: var(--space-5);
+}
+@media (max-width: 900px) {
+  .ed-directory-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+  .ed-directory-intro h2 {
+    max-width: 20ch;
+  }
+}
+@media (max-width: 767px) {
+  .ed-work .work-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+  .ed-work .work-card:nth-child(even) .work-art {
+    order: initial;
+  }
+  .ed-work .work-art {
+    height: 340px;
+  }
+  .ed-service .ed-intro h1 {
+    font-size: clamp(2.65rem, 11.5vw, 4.5rem);
   }
 }

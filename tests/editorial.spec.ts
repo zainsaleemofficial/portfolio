@@ -2,9 +2,27 @@ import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import { seoPages } from '../src/data/seo.mjs'
 import { expectedRobots } from './seo-helpers'
+import { services } from '../src/data/site'
 
 const routes = Object.keys(seoPages).filter((path) => path !== '/404/')
 const tags = ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']
+
+test('service explanations retain the accurate shared problem, scope, process and expectations', async ({
+  page,
+}) => {
+  for (const service of services) {
+    await page.goto(`/services/${service.slug}/`)
+    await expect(page.locator('.ed-service-problem')).toHaveText(
+      service.problem,
+    )
+    await expect(page.locator('#starting-point')).toContainText(service.intro)
+    await expect(page.locator('.ed-scope-list li p')).toHaveText([
+      ...service.scope,
+    ])
+    await expect(page.locator('#approach')).toContainText(service.process)
+    await expect(page.locator('#approach')).toContainText(service.note)
+  }
+})
 
 for (const theme of ['dual-contrast', 'ink-and-sage']) {
   test(`editorial inventory: every page fits, reads and remains accessible in ${theme}`, async ({

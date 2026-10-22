@@ -30,6 +30,8 @@ export const services = [
     title: 'SaaS Product Development',
     group: 'Build',
     summary: 'Turn a business problem into a product people can actually use.',
+    problem:
+      'An idea needs a clear first version before it needs more features. The useful question is what people need to do—and what would make that easier.',
     intro:
       'I work from the problem outward: understand the workflow, shape the experience, build with AI-assisted platforms and integrations, then test what happens when real people use it.',
     scope: [
@@ -47,6 +49,8 @@ export const services = [
     title: 'AI Automation & Workflows',
     group: 'Build',
     summary: 'Make repeatable processes easier for the people doing the work.',
+    problem:
+      'When the same tasks and handoffs keep taking time, another tool can add more work. Start by understanding the process, including the decisions a person still needs to make.',
     intro:
       'An automation is useful when it reduces friction without creating a new problem to maintain. I help identify the handoffs, data and repetitive decisions that can be handled more reliably with connected tools and AI-assisted workflows.',
     scope: [
@@ -64,6 +68,8 @@ export const services = [
     title: 'Custom Business Software',
     group: 'Build',
     summary: 'Applications and automations shaped around the way you work.',
+    problem:
+      'A process can become difficult when information is spread across disconnected tools. A useful internal application brings the right steps together without making the work harder to maintain.',
     intro:
       'Repeated manual tasks and disconnected tools can make a straightforward process difficult. Custom software can bring those steps together in one understandable workflow.',
     scope: [
@@ -81,6 +87,8 @@ export const services = [
     title: 'Technical SEO',
     group: 'Grow',
     summary: 'Help search engines discover and understand your website.',
+    problem:
+      'A useful page can be difficult to discover when technical foundations get in the way. Before adding more content, understand what search engines can crawl, index and interpret.',
     intro:
       'Search visibility depends partly on how a website is built. I review the technical foundations and turn findings into a clear, prioritized implementation plan.',
     scope: [
@@ -98,6 +106,8 @@ export const services = [
     title: 'Local SEO',
     group: 'Grow',
     summary: 'Make your business easier to find in the places you serve.',
+    problem:
+      'People searching nearby need an accurate picture of your business. Conflicting information or unclear service pages can make it harder to understand what you offer and where you work.',
     intro:
       'Local search works best when your website and business information give people a consistent, useful picture of what you do and where you do it.',
     scope: [
@@ -115,6 +125,8 @@ export const services = [
     title: 'Link Building & Off-Page SEO',
     group: 'Grow',
     summary: 'Relevant opportunities that support a credible search presence.',
+    problem:
+      'More links do not automatically mean a more credible presence. Off-page work needs a clear audience, relevant opportunities and a shared understanding of quality.',
     intro:
       'Off-page work starts with understanding your audience, subject matter, and existing visibility. Relevance and quality matter more than a large number of unrelated links.',
     scope: [
