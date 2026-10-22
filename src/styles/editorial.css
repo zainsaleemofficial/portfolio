@@ -1,0 +1,194 @@
+/* Opt-in editorial primitives. No global headings, chrome or Story v2 selectors. */
+.editorial {
+  --ed-bg: var(--color-bg-page);
+  --ed-ink: var(--color-text-primary);
+  --ed-muted: var(--color-text-muted);
+  --ed-accent: var(--color-brand-dark);
+  --ed-rule: var(--color-border-subtle);
+  color: var(--ed-ink);
+}
+.editorial .ed-tone-paper {
+  --ed-bg: var(--color-bg-page);
+  --ed-ink: var(--color-text-primary);
+  --ed-muted: var(--color-text-muted);
+  --ed-accent: var(--color-brand-dark);
+  --ed-rule: var(--color-border-subtle);
+}
+.editorial .ed-tone-surface {
+  --ed-bg: var(--color-bg-surface);
+}
+.editorial .ed-tone-mint {
+  --ed-bg: var(--color-bg-alternate);
+}
+.editorial .ed-tone-forest {
+  --ed-bg: var(--color-bg-hero);
+  --ed-ink: var(--color-text-inverse);
+  --ed-muted: var(--color-text-inverse-muted);
+  --ed-accent: var(--color-bg-mint);
+  --ed-rule: var(--color-border-inverse);
+  --color-focus-ring: var(--color-bg-mint);
+}
+.editorial :is(.ed-intro, .ed-section, .ed-note) {
+  background: var(--ed-bg);
+  color: var(--ed-ink);
+}
+.editorial :is(.ed-intro, .ed-section, .ed-note) p {
+  color: var(--ed-muted);
+}
+.editorial :is(.ed-intro, .ed-section, .ed-note) .eyebrow {
+  color: var(--ed-accent);
+}
+.editorial :is(.ed-tone-forest) .text-link:hover {
+  color: var(--ed-accent);
+}
+.ed-intro {
+  padding-block: var(--editorial-opening-space);
+}
+.ed-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: end;
+}
+.ed-intro h1 {
+  max-width: 17ch;
+  font-size: var(--editorial-display);
+  line-height: 1.02;
+  letter-spacing: -0.065em;
+}
+.ed-intro .serif {
+  color: var(--ed-accent);
+}
+.ed-intro-copy > p:first-child {
+  font-size: var(--text-lg);
+  line-height: 1.75;
+}
+.ed-intro-copy > p + p {
+  font-size: var(--text-sm);
+}
+.ed-intro-copy .text-link {
+  margin-top: var(--space-5);
+}
+.ed-intro-after {
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--ed-rule);
+  padding-top: var(--space-5);
+}
+.ed-section {
+  padding-block: var(--section-spacing);
+}
+.ed-section [id] {
+  scroll-margin-top: var(--space-6);
+}
+.ed-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: start;
+}
+.ed-stack {
+  display: grid;
+  gap: var(--space-6);
+}
+.ed-prose {
+  max-width: var(--editorial-measure);
+}
+.ed-prose p {
+  font-size: var(--text-base);
+  line-height: 1.9;
+  text-wrap: pretty;
+}
+.ed-prose :is(h2, h3) {
+  margin-block: var(--space-8) var(--space-5);
+}
+.ed-prose > :first-child {
+  margin-top: 0;
+}
+.ed-prose a:not(.button) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.ed-prose li {
+  color: var(--ed-muted);
+  margin-bottom: var(--space-4);
+}
+.ed-note {
+  padding: clamp(1.5rem, 3vw, 3rem);
+  min-width: 0;
+}
+.ed-note-content > :first-child {
+  margin-top: 0;
+}
+.ed-note .ed-note-content > p {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  line-height: 1.15;
+  color: var(--ed-ink);
+  letter-spacing: -0.025em;
+}
+.ed-note-caption {
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--ed-rule);
+  font-size: var(--text-sm);
+}
+.ed-reading-nav {
+  display: flex;
+  align-items: start;
+  gap: var(--space-7);
+}
+.ed-reading-nav > .eyebrow {
+  padding-block: 0.8rem;
+  margin: 0;
+  flex-shrink: 0;
+}
+.ed-reading-nav ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ed-reading-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  font-size: var(--text-sm);
+  border-bottom: 1px solid var(--ed-rule);
+}
+.ed-reading-nav a:hover {
+  color: var(--ed-accent);
+  border-color: currentColor;
+}
+.ed-reading-nav a > span {
+  font: var(--text-xs) var(--font-mono);
+  color: var(--ed-accent);
+}
+@media (max-width: 900px) {
+  .ed-intro-grid,
+  .ed-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+  .ed-intro-copy {
+    max-width: var(--editorial-measure);
+  }
+}
+@media (max-width: 600px) {
+  .ed-intro h1 {
+    font-size: clamp(2.8rem, 12vw, 4.8rem);
+  }
+  .ed-reading-nav {
+    display: block;
+  }
+  .ed-reading-nav > .eyebrow {
+    padding-top: 0;
+    margin-bottom: var(--space-3);
+  }
+  .ed-reading-nav ol {
+    gap: var(--space-2) var(--space-5);
+  }
+}

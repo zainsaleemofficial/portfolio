@@ -1,5 +1,30 @@
 # Dual Contrast — Zain Saleem
 
+## Soulful Editorial Design System
+
+The owner authorized the website-wide editorial direction on 23 October 2026. My Story V2 (PR #10) is the quality benchmark, not a page template. Preserve its approved implementation and the shared header/footer. New and revised pages must follow the rules and implementation examples in [Editorial storytelling](../docs/EDITORIAL-STORYTELLING.md); use the [route audit](../docs/EDITORIAL-AUDIT.md) to understand each page's purpose.
+
+Mandatory creative rules for every future page:
+
+1. Give the page a clear emotional or practical purpose.
+2. Make every major section contribute a distinct visual or narrative idea.
+3. Connect headings logically; avoid disconnected marketing slogans.
+4. Write naturally, as one intelligent person speaking to another.
+5. Use typography to tell the story: hierarchy first, serif emphasis where reflection earns it.
+6. Vary composition while retaining shared colors, type, spacing and interaction rules.
+7. Animate only to support feedback, orientation or understanding.
+8. Treat accessibility, contrast, responsive reading and performance as release requirements.
+9. Keep professional information and the next useful action clear.
+10. Meet My Story's standard of care without copying its chapters, artifacts or animation.
+
+Page roles: Home invites; About introduces; My Story tells the deeper journey; Experience demonstrates growth; Expertise connects disciplines; Services turns that understanding into a clear scope of work; Contact makes the first conversation effortless. Utility/legal pages stay quiet and precise.
+
+### Shared editorial implementation
+
+`src/components/editorial/` provides opt-in Astro primitives: `EditorialFrame`, `EditorialIntro`, `EditorialSection`, `NarrativePanel` and `ReadingNav`. Their styles live in `src/styles/editorial.css`, scoped by `.editorial` and named `ed-*`. They never target the global header/footer or `.story-v2`. The only new global tokens are an editorial display scale, reading measure and opening spacing; existing token values and meanings remain unchanged.
+
+Use an editorial frame only around page content, inside the existing Layout. Give every page its own composition. A narrative panel contains a supported observation or useful fact, not a fabricated quote. Reading navigation uses ordinary links and is reserved for content with enough sections to need it. Never add empty visual artifacts, unexplained numbers or fake product evidence to fill a layout.
+
 The approved direction is a charcoal-green / muted-forest cinematic introduction paired with a clean white navigation header followed by spacious, light editorial sections. SaaS development and AI-assisted building lead; SEO strategy is the complementary perspective. The visual signature is large, restrained typography, dark-to-light rhythm, and an interactive engineering/search split in the middle of the page.
 
 ## Tokens

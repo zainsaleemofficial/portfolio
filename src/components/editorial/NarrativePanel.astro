@@ -1,0 +1,20 @@
+---
+interface Props {
+  label: string
+  tone?: 'paper' | 'forest' | 'mint'
+  class?: string
+}
+const { label, tone = 'mint', class: className } = Astro.props
+---
+
+<aside class:list={['ed-note', `ed-tone-${tone}`, className]}>
+  <p class="eyebrow">{label}</p>
+  <div class="ed-note-content">
+    <slot />
+  </div>
+  {Astro.slots.has('caption') && (
+    <div class="ed-note-caption">
+      <slot name="caption" />
+    </div>
+  )}
+</aside>

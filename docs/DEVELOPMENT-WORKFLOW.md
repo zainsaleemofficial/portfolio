@@ -16,6 +16,8 @@ Use ChatGPT's connected GitHub integration for read-only inspection, drafting, b
 
 ## Quality and approval boundaries
 
+- The Soulful Editorial system is the permanent creative standard for new and revised pages. Read `design-system/MASTER.md`, `docs/EDITORIAL-STORYTELLING.md` and the applicable route purpose before visual implementation. The 23 October 2026 owner request authorizes four reviewable editorial phases; its explicit branch/write/release authorization takes precedence over routine approval prompts in this workflow. It does not authorize unrelated infrastructure, security changes, invented content or release with failing checks.
+
 - Public search launch was separately authorized on 20 October 2026. Preserve `publicationApproved = true` with the explicit route inventory and independent preview/host safeguards; adding indexable content requires approval. Run both build modes and Worker checks. See `SEO-LAUNCH.md`.
 - Preserve the approved Phase 2 design, verified professional facts, portrait identity, and honest contact-form behavior.
 - Do not weaken assertions, blindly update snapshots, force-push, or add unrelated refactors to clear CI.
