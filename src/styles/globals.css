@@ -2207,3 +2207,14 @@ ul {
     grid-template-columns: 1fr;
   }
 }
+
+/* Keep the six-link shared header usable on tablet without changing desktop/mobile baselines. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .desktop-nav, .header-cta { display: none; }
+  .menu-toggle { display: block; margin-left: auto; }
+  .no-js-nav { display: flex; padding: var(--space-5) var(--gutter); }
+}
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .header-inner { gap: var(--space-5); }
+  .desktop-nav { gap: var(--space-4); font-size: 0.78rem; }
+}
