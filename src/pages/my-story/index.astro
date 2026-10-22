@@ -31,7 +31,13 @@ import '../../styles/story-editorial.css'
       }
       const bounds = surface.getBoundingClientRect()
       const total = Math.max(1, bounds.height - window.innerHeight * 0.5)
-      const value = Math.max(0, Math.min(100, Math.round((-bounds.top + window.innerHeight * 0.4) / total * 100)))
+      const value = Math.max(
+        0,
+        Math.min(
+          100,
+          Math.round(((-bounds.top + window.innerHeight * 0.4) / total) * 100),
+        ),
+      )
       progress.style.width = `${value}%`
       percent.textContent = `${value}%`
     }
