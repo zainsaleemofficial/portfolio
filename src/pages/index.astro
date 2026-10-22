@@ -8,368 +8,373 @@ import PublishedContent from '../components/PublishedContent.astro'
 import { site, services, insightTopics } from '../data/site'
 import { projects, articles } from '../data/content'
 import { brandIdentity, brandNumbers } from '../data/brand'
+import EditorialFrame from '../components/editorial/EditorialFrame.astro'
 const softwareProjectsFigure = brandNumbers.softwareProjects.replace('+', '')
 ---
 
 <Layout>
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">
-            <span class="status-dot" aria-hidden="true"></span> Zain Saleem /
-            SaaS development / AI automation / SEO strategy
-          </p>
-          <h1>
-            Software with
-            <br />
-            <span class="serif">growth in mind.</span>
-          </h1>
-          <p class="hero-position">
-            SaaS Product Development <span>AI Automation & SEO Strategy</span>
-          </p>
-          <p class="hero-description">
-            I'm an AI-assisted product builder. I turn business problems into
-            useful SaaS products, smarter workflows and practical search
-            strategies.
-          </p>
-          <div class="hero-actions">
-            <a
-              class="button"
-              href={site.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Book a call <Arrow diagonal />
-            </a>
-            <a class="text-link" href="#work">
-              Explore my work <Arrow />
-            </a>
-          </div>
-        </div>
-        <div class="hero-portrait">
-          <div class="portrait-orbit" aria-hidden="true"></div>
-          {site.portrait ? (
-            <img
-              src={site.portrait.src}
-              width={site.portrait.width}
-              height={site.portrait.height}
-              alt={site.portrait.alt}
-              fetchpriority="high"
-            />
-          ) : (
-            <div class="portrait-placeholder">
-              <span class="portrait-monogram" aria-hidden="true">
-                zs<span>.</span>
-              </span>
-              <p>
-                Original portrait
-                <br />
-                <span>Coming into the picture.</span>
-              </p>
-            </div>
-          )}
-          <div class="portrait-caption">
-            <span>01 / The person behind the work</span>
-            <span>Zain Saleem</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-bottom">
-        <p>
-          <strong>{brandNumbers.softwareProjects} software projects</strong>
-          <span>from internal tools and prototypes to launched SaaS</span>
-        </p>
-        <a href="#work">
-          A closer look <Arrow direction="down" />
-        </a>
-        <p class="hero-note">
-          AI-assisted building.
-          <br />
-          Business problems first.
-        </p>
-      </div>
-    </div>
-  </section>
-  <section class="section" id="work">
-    <div class="container">
-      <div class="section-heading" data-reveal>
-        <div>
-          <p class="eyebrow">01 / Selected areas of work</p>
-          <h2>
-            Built for a reason.
-            <br />
-            <span class="serif">Made to be useful.</span>
-          </h2>
-        </div>
-        <div class="section-aside">
-          <p>
-            I'm {brandIdentity.currentRole} at{' '}
-            {brandIdentity.currentOrganization}, working across AI-assisted
-            products and automation with a background in SEO and operations.
-            These are the kinds of problems I help solve.
-          </p>
-          <a class="text-link" href="/work/">
-            Explore the work <Arrow diagonal />
-          </a>
-        </div>
-      </div>
-      <WorkGallery />
-      <p class="publication-note">
-        These illustrations describe my areas of work. They are not screenshots
-        of company-owned products or client projects.
-      </p>
-      <PublishedContent
-        items={projects}
-        base="/projects"
-        label="Published projects"
-      />
-    </div>
-  </section>
-  <section class="section about-section" id="about">
-    <div class="container about-grid" data-reveal>
-      <p class="eyebrow">02 / A little about me</p>
-      <div>
-        <h2>
-          I've always wanted to
-          <br />
-          <span class="serif">figure things out.</span>
-        </h2>
-        <p class="large-copy">
-          It started with HTML, CSS and little computer scripts in school.
-          Today, it's products, teams and business problems.
-        </p>
-        <div class="about-columns">
-          <p>
-            At 15, I worked on website performance and troubleshooting at a
-            Pakistan-based technology startup. SEO came next: I grew from an
-            off-page intern into leading client-facing delivery at a UK-based
-            digital marketing agency.
-          </p>
-          <p>
-            A weekend software challenge opened the door to product work. As
-            Head of SaaS, I now build with AI-assisted tools and work across
-            automation, products, launches and operations.
-          </p>
-        </div>
-        <div class="brand-inline-links">
-          <a class="text-link" href="/about/">
-            About me <Arrow diagonal />
-          </a>
-          <a class="text-link" href="/my-story/">
-            My full story <Arrow diagonal />
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section expertise-section" id="expertise">
-    <div class="container">
-      <div class="section-heading" data-reveal>
-        <div>
-          <p class="eyebrow">03 / The intersection</p>
-          <h2>
-            Products that work.
-            <br />
-            <span class="serif">Strategy that connects.</span>
-          </h2>
-        </div>
-        <p class="section-aside">
-          From AI-assisted SaaS development to SEO leadership, I connect how
-          something is built with how it works for a business.
-        </p>
-      </div>
-      <DualExpertise client:visible />
-    </div>
-  </section>
-  <section class="section" id="services">
-    <div class="container services-grid">
-      <div class="services-intro" data-reveal>
-        <p class="eyebrow">04 / How I can help</p>
-        <h2>
-          Clear problems.
-          <br />
-          <span class="serif">Useful solutions.</span>
-        </h2>
-        <p>
-          SaaS development, AI automation and SEO strategy—always starting with
-          the real problem and a clear scope.
-        </p>
-        <a class="text-link" href="/services/">
-          Explore all services <Arrow />
-        </a>
-      </div>
-      <div class="service-list">
-        {services.map((service, i) => (
-          <details class="service-item">
-            <summary>
-              <span class="service-number">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span>
-                <span class="eyebrow">{service.group}</span>
-                <span class="service-title">{service.title}</span>
-              </span>
-              <span class="service-plus" aria-hidden="true">
-                +
-              </span>
-            </summary>
-            <div class="service-body">
-              <p>{service.summary}</p>
-              <p>{service.intro}</p>
-              <a class="text-link" href={`/services/${service.slug}/`}>
-                Explore this service <Arrow diagonal />
+  <EditorialFrame class="ed-home">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span class="status-dot" aria-hidden="true"></span> Zain Saleem /
+              SaaS development / AI automation / SEO strategy
+            </p>
+            <h1>
+              Software with
+              <br />
+              <span class="serif">growth in mind.</span>
+            </h1>
+            <p class="hero-position">
+              SaaS Product Development <span>AI Automation & SEO Strategy</span>
+            </p>
+            <p class="hero-description">
+              I'm an AI-assisted product builder. I turn business problems into
+              useful SaaS products, smarter workflows and practical search
+              strategies.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="button"
+                href={site.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Book a call <Arrow diagonal />
+              </a>
+              <a class="text-link" href="#work">
+                Explore my work <Arrow />
               </a>
             </div>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
-  <section class="section experience-section" id="experience">
-    <div class="container experience-grid" data-reveal>
-      <div>
-        <p class="eyebrow">05 / Building and leading</p>
-        <div class="experience-number">
-          {softwareProjectsFigure}
-          <span>+</span>
+          </div>
+          <div class="hero-portrait">
+            <div class="portrait-orbit" aria-hidden="true"></div>
+            {site.portrait ? (
+              <img
+                src={site.portrait.src}
+                width={site.portrait.width}
+                height={site.portrait.height}
+                alt={site.portrait.alt}
+                fetchpriority="high"
+              />
+            ) : (
+              <div class="portrait-placeholder">
+                <span class="portrait-monogram" aria-hidden="true">
+                  zs<span>.</span>
+                </span>
+                <p>
+                  Original portrait
+                  <br />
+                  <span>Coming into the picture.</span>
+                </p>
+              </div>
+            )}
+            <div class="portrait-caption">
+              <span>01 / The person behind the work</span>
+              <span>Zain Saleem</span>
+            </div>
+          </div>
         </div>
-        <h2>
-          Software projects.
-          <br />
-          <span class="serif">Not just launches.</span>
-        </h2>
-        <p>
-          Hands-on AI-assisted building across SaaS products, internal tools,
-          prototypes and experiments. Approximately{' '}
-          {brandNumbers.launchedProducts} products reached launch.
-        </p>
-        <a class="text-link brand-inverse-link" href="/experience/">
-          My experience <Arrow diagonal />
-        </a>
-      </div>
-      <div class="experience-notes">
-        <article>
-          <p class="eyebrow">
-            {brandIdentity.currentRole} / Product development & operations
-          </p>
-          <h3>From first idea to real users.</h3>
+        <div class="hero-bottom">
           <p>
-            Products, workflow design, AI automation, launches and the ongoing
-            decisions that make software useful beyond its first version.
+            <strong>{brandNumbers.softwareProjects} software projects</strong>
+            <span>from internal tools and prototypes to launched SaaS</span>
           </p>
-        </article>
-        <article>
-          <p class="eyebrow">SEO leadership / UK & US agencies</p>
-          <h3>Learning to lead delivery.</h3>
-          <p>
-            Led client-side off-page SEO campaigns and coordinated local SEO
-            work across agencies. Experience spanning 15+ simultaneous campaigns
-            and 20+ local clients.
-          </p>
-        </article>
-        <article>
-          <p class="eyebrow">People and teams</p>
-          <h3>Helping others move forward.</h3>
-          <p>
-            Managed teams of more than ten people and trained more than 25
-            colleagues along the way.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-  <section class="section brand-home-story" id="journey">
-    <div class="container">
-      <div class="section-heading" data-reveal>
-        <div>
-          <p class="eyebrow">06 / How I got here</p>
-          <h2>
-            Not a straight line.
+          <a href="#work">
+            A closer look <Arrow direction="down" />
+          </a>
+          <p class="hero-note">
+            AI-assisted building.
             <br />
-            <span class="serif">A useful one.</span>
-          </h2>
-        </div>
-        <div class="section-aside">
-          <p>
-            From a curious kid experimenting with CMD to the responsibility of
-            leading SaaS work, every chapter taught me a different way to solve
-            problems.
+            Business problems first.
           </p>
-          <a class="text-link" href="/my-story/">
-            Read my story <Arrow diagonal />
+        </div>
+      </div>
+    </section>
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="eyebrow">01 / Selected areas of work</p>
+            <h2>
+              Built for a reason.
+              <br />
+              <span class="serif">Made to be useful.</span>
+            </h2>
+          </div>
+          <div class="section-aside">
+            <p>
+              I'm {brandIdentity.currentRole} at{' '}
+              {brandIdentity.currentOrganization}, working across AI-assisted
+              products and automation with a background in SEO and operations.
+              These are the kinds of problems I help solve.
+            </p>
+            <a class="text-link" href="/work/">
+              Explore the work <Arrow diagonal />
+            </a>
+          </div>
+        </div>
+        <WorkGallery />
+        <p class="publication-note">
+          These illustrations describe my areas of work. They are not
+          screenshots of company-owned products or client projects.
+        </p>
+        <PublishedContent
+          items={projects}
+          base="/projects"
+          label="Published projects"
+        />
+      </div>
+    </section>
+    <section class="section about-section ed-home-about" id="about">
+      <div class="container about-grid" data-reveal>
+        <p class="eyebrow">02 / A little about me</p>
+        <div>
+          <h2>
+            I've always wanted to
+            <br />
+            <span class="serif">figure things out.</span>
+          </h2>
+          <p class="large-copy ed-reflection">
+            The tools changed.
+            <br />
+            The question stayed:{' '}
+            <span class="serif">could this work better?</span>
+          </p>
+          <div class="about-columns">
+            <p>
+              At 15, I worked on website performance and troubleshooting at a
+              Pakistan-based technology startup. SEO came next: I grew from an
+              off-page intern into leading client-facing delivery at a UK-based
+              digital marketing agency.
+            </p>
+            <p>
+              A weekend software challenge opened the door to product work. As
+              Head of SaaS, I now build with AI-assisted tools and work across
+              automation, products, launches and operations.
+            </p>
+          </div>
+          <div class="brand-inline-links">
+            <a class="text-link" href="/about/">
+              About me <Arrow diagonal />
+            </a>
+            <a class="text-link" href="/my-story/">
+              My full story <Arrow diagonal />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section expertise-section" id="expertise">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="eyebrow">03 / The intersection</p>
+            <h2>
+              Products that work.
+              <br />
+              <span class="serif">Strategy that connects.</span>
+            </h2>
+          </div>
+          <p class="section-aside">
+            From AI-assisted SaaS development to SEO leadership, I connect how
+            something is built with how it works for a business.
+          </p>
+        </div>
+        <DualExpertise client:visible />
+      </div>
+    </section>
+    <section class="section" id="services">
+      <div class="container services-grid">
+        <div class="services-intro" data-reveal>
+          <p class="eyebrow">04 / How I can help</p>
+          <h2>
+            Clear problems.
+            <br />
+            <span class="serif">Useful solutions.</span>
+          </h2>
+          <p>
+            SaaS development, AI automation and SEO strategy—always starting
+            with the real problem and a clear scope.
+          </p>
+          <a class="text-link" href="/services/">
+            Explore all services <Arrow />
           </a>
         </div>
+        <div class="service-list">
+          {services.map((service, i) => (
+            <details class="service-item">
+              <summary>
+                <span class="service-number">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span>
+                  <span class="eyebrow">{service.group}</span>
+                  <span class="service-title">{service.title}</span>
+                </span>
+                <span class="service-plus" aria-hidden="true">
+                  +
+                </span>
+              </summary>
+              <div class="service-body">
+                <p>{service.summary}</p>
+                <p>{service.intro}</p>
+                <a class="text-link" href={`/services/${service.slug}/`}>
+                  Explore this service <Arrow diagonal />
+                </a>
+              </div>
+            </details>
+          ))}
+        </div>
       </div>
-      <div class="brand-home-chapters">
+    </section>
+    <section class="section experience-section" id="experience">
+      <div class="container experience-grid" data-reveal>
         <div>
-          <span>01 / Curiosity</span>
-          <strong>Learning HTML, CSS and scripting in school.</strong>
+          <p class="eyebrow">05 / Building and leading</p>
+          <div class="experience-number">
+            {softwareProjectsFigure}
+            <span>+</span>
+          </div>
+          <h2>
+            Software projects.
+            <br />
+            <span class="serif">Not just launches.</span>
+          </h2>
+          <p>
+            Hands-on AI-assisted building across SaaS products, internal tools,
+            prototypes and experiments. Approximately{' '}
+            {brandNumbers.launchedProducts} products reached launch.
+          </p>
+          <a class="text-link brand-inverse-link" href="/experience/">
+            My experience <Arrow diagonal />
+          </a>
         </div>
-        <div>
-          <span>02 / Ownership</span>
-          <strong>
-            A technology startup and the first real technical challenges.
-          </strong>
-        </div>
-        <div>
-          <span>03 / Leadership</span>
-          <strong>
-            Growing from an SEO intern at a UK agency to leading delivery.
-          </strong>
-        </div>
-        <div>
-          <span>04 / Building</span>
-          <strong>The weekend challenge that moved me into SaaS.</strong>
-        </div>
-      </div>
-      <p class="brand-note">
-        Detailed product case studies and company-owned assets will only be
-        shared with appropriate approval.
-      </p>
-    </div>
-  </section>
-  <section class="section insights-section" id="insights">
-    <div class="container insights-grid">
-      <div data-reveal>
-        <p class="eyebrow">07 / The writing desk</p>
-        <h2>
-          Notes from
-          <br />
-          <span class="serif">the intersection.</span>
-        </h2>
-        <p>
-          On building software, understanding search, and learning from the
-          work.
-        </p>
-        <a class="text-link" href="/insights/">
-          Visit the writing desk <Arrow diagonal />
-        </a>
-      </div>
-      <div>
-        {articles.some((x) => x.approved) ? (
-          <PublishedContent
-            items={articles}
-            base="/insights"
-            label="Latest articles"
-          />
-        ) : (
-          <>
+        <div class="experience-notes">
+          <article>
             <p class="eyebrow">
-              Topics on my mind / First articles forthcoming
+              {brandIdentity.currentRole} / Product development & operations
             </p>
-            <ul class="topic-list">
-              {insightTopics.map((topic) => (
-                <li>
-                  {topic}
-                  <Arrow diagonal />
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+            <h3>From first idea to real users.</h3>
+            <p>
+              Products, workflow design, AI automation, launches and the ongoing
+              decisions that make software useful beyond its first version.
+            </p>
+          </article>
+          <article>
+            <p class="eyebrow">SEO leadership / UK & US agencies</p>
+            <h3>Learning to lead delivery.</h3>
+            <p>
+              Led client-side off-page SEO campaigns and coordinated local SEO
+              work across agencies. Experience spanning 15+ simultaneous
+              campaigns and 20+ local clients.
+            </p>
+          </article>
+          <article>
+            <p class="eyebrow">People and teams</p>
+            <h3>Helping others move forward.</h3>
+            <p>
+              Managed teams of more than ten people and trained more than 25
+              colleagues along the way.
+            </p>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
-  <Consultation />
+    </section>
+    <section class="section brand-home-story" id="journey">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="eyebrow">06 / How I got here</p>
+            <h2>
+              Not a straight line.
+              <br />
+              <span class="serif">A useful one.</span>
+            </h2>
+          </div>
+          <div class="section-aside">
+            <p>
+              From a curious kid experimenting with CMD to the responsibility of
+              leading SaaS work, every chapter taught me a different way to
+              solve problems.
+            </p>
+            <a class="text-link" href="/my-story/">
+              Read my story <Arrow diagonal />
+            </a>
+          </div>
+        </div>
+        <div class="brand-home-chapters">
+          <div>
+            <span>01 / Curiosity</span>
+            <strong>Learning HTML, CSS and scripting in school.</strong>
+          </div>
+          <div>
+            <span>02 / Ownership</span>
+            <strong>
+              A technology startup and the first real technical challenges.
+            </strong>
+          </div>
+          <div>
+            <span>03 / Leadership</span>
+            <strong>
+              Growing from an SEO intern at a UK agency to leading delivery.
+            </strong>
+          </div>
+          <div>
+            <span>04 / Building</span>
+            <strong>The weekend challenge that moved me into SaaS.</strong>
+          </div>
+        </div>
+        <p class="brand-note">
+          Detailed product case studies and company-owned assets will only be
+          shared with appropriate approval.
+        </p>
+      </div>
+    </section>
+    <section class="section insights-section" id="insights">
+      <div class="container insights-grid">
+        <div data-reveal>
+          <p class="eyebrow">07 / The writing desk</p>
+          <h2>
+            Notes from
+            <br />
+            <span class="serif">the intersection.</span>
+          </h2>
+          <p>
+            On building software, understanding search, and learning from the
+            work.
+          </p>
+          <a class="text-link" href="/insights/">
+            Visit the writing desk <Arrow diagonal />
+          </a>
+        </div>
+        <div>
+          {articles.some((x) => x.approved) ? (
+            <PublishedContent
+              items={articles}
+              base="/insights"
+              label="Latest articles"
+            />
+          ) : (
+            <>
+              <p class="eyebrow">
+                Topics on my mind / First articles forthcoming
+              </p>
+              <ul class="topic-list">
+                {insightTopics.map((topic) => (
+                  <li>
+                    {topic}
+                    <Arrow diagonal />
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      </div>
+    </section>
+    <Consultation />
+  </EditorialFrame>
 </Layout>

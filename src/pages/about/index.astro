@@ -2,102 +2,106 @@
 import Layout from '../../layouts/Layout.astro'
 import Arrow from '../../components/Arrow.astro'
 import Consultation from '../../components/Consultation.astro'
+import EditorialFrame from '../../components/editorial/EditorialFrame.astro'
+import EditorialIntro from '../../components/editorial/EditorialIntro.astro'
+import EditorialSection from '../../components/editorial/EditorialSection.astro'
+import NarrativePanel from '../../components/editorial/NarrativePanel.astro'
 import { capabilities, interests } from '../../data/brand'
+import { site } from '../../data/site'
 ---
 
 <Layout>
-  <section class="section page-intro brand-intro">
-    <div class="container brand-lede">
-      <div>
-        <p class="eyebrow">About me / Zain Saleem</p>
-        <h1>
-          Curious first.
-          <br />
-          <span class="serif">Building ever since.</span>
-        </h1>
+  <EditorialFrame class="ed-about">
+    <EditorialIntro eyebrow="About me / Zain Saleem">
+      <Fragment slot="heading">
+        Curious first.
+        <br />
+        <span class="serif">Building ever since.</span>
+      </Fragment>
+      <p>
+        I'm Zain, an AI-assisted SaaS builder with a background in SEO. I like
+        understanding what gets in people's way—and helping make the work
+        easier.
+      </p>
+      <p>
+        Today, I'm Head of SaaS at a UK-based software product company. My work
+        brings together products, automation, search and the people who keep it
+        all moving.
+      </p>
+      <a class="text-link" href="/my-story/">
+        Read my full story <Arrow diagonal />
+      </a>
+    </EditorialIntro>
+    <EditorialSection
+      tone="mint"
+      id="the-person"
+      labelledBy="about-person-title"
+    >
+      <div class="ed-about-person">
+        <figure class="ed-portrait">
+          <img
+            src={site.portrait.src}
+            width={site.portrait.width}
+            height={site.portrait.height}
+            alt={site.portrait.alt}
+            loading="lazy"
+          />
+          <figcaption>Zain Saleem / The person behind the work</figcaption>
+        </figure>
+        <div class="ed-stack">
+          <div>
+            <p class="eyebrow">A habit that stayed with me</p>
+            <h2 id="about-person-title">
+              I want to know
+              <br />
+              <span class="serif">why it works.</span>
+            </h2>
+          </div>
+          <div class="ed-prose">
+            <p>
+              In school, that meant learning HTML and CSS, experimenting with
+              scripts, and breaking things until I understood them. At fifteen,
+              it meant volunteering to help when a website went down at work.
+            </p>
+            <p>
+              SEO taught me about delivery, trust and teams. A weekend software
+              challenge brought me into product work. The tools changed; the
+              habit of following a problem stayed.
+            </p>
+            <p>
+              I don't need a project to sound impressive. I want to understand
+              what someone needs, build what helps, and see whether it works for
+              them.
+            </p>
+          </div>
+          <a class="text-link" href="/experience/">
+            The experience behind that approach <Arrow diagonal />
+          </a>
+        </div>
       </div>
-      <div class="brand-intro-copy">
-        <p class="large-copy">
-          I'm Zain, a hands-on AI-assisted SaaS builder working across product
-          development, automation and SEO strategy. My background in search
-          still shapes how I solve business problems.
-        </p>
-        <p>
-          I've never been particularly interested in doing something just
-          because it sounds impressive. I want to understand the problem, build
-          what helps, and see it work for the people who actually use it.
-        </p>
-        <a class="text-link" href="/my-story/">
-          Read my full story <Arrow diagonal />
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container brand-prose-grid">
-      <div>
-        <p class="eyebrow">What shaped me</p>
-        <h2>
-          It started with
-          <br />
-          <span class="serif">curiosity.</span>
-        </h2>
-      </div>
-      <div class="brand-reading">
-        <p>
-          In seventh grade, I was learning HTML and CSS from YouTube and
-          experimenting with CMD, batch scripts and Windows customizations. I
-          wasn't building a career plan; I just liked finding out how things
-          worked.
-        </p>
-        <p>
-          At 15, I started working with a Pakistan-based technology startup on
-          WordPress sites, speed, hosting and technical troubleshooting. One
-          unexpected website outage taught me something I still believe: you
-          don't have to know the answer immediately to take responsibility for
-          finding it.
-        </p>
-        <p>
-          SEO became my next chapter. At a UK-based digital marketing agency I
-          grew from Off-Page SEO Intern to Head of Off-Page SEO for
-          client-facing work. Alongside work with a US-based digital marketing
-          agency, I learned to manage campaigns, support teams and understand
-          what growing businesses actually need.
-        </p>
-        <p>
-          A weekend software challenge changed the direction of my work. The
-          agency's CEO invited me to work directly with him, opening a new
-          chapter in software product development. Today, I'm Head of SaaS at a
-          UK-based company that develops, launches and sells its own software
-          products internationally. I lead its SaaS work: shaping solutions,
-          building with AI-assisted tools, testing, coordinating launches and
-          looking after what happens after a product ships.
-        </p>
-      </div>
-    </div>
-  </section>
-  <section class="section brand-soft-section">
-    <div class="container">
-      <div class="section-heading">
+    </EditorialSection>
+    <EditorialSection tone="forest" labelledBy="about-work-title">
+      <div class="ed-split">
         <div>
           <p class="eyebrow">The work today</p>
-          <h2>
-            Three areas.
+          <h2 id="about-work-title">
+            Different tools.
             <br />
-            <span class="serif">One practical approach.</span>
+            <span class="serif">The same care.</span>
           </h2>
         </div>
-        <p class="section-aside">
-          Software, automation and SEO make sense together when the starting
-          point is a real business need.
+        <p class="large-copy">
+          A product needs to work for its users. A workflow needs to hold up on
+          a busy day. A website needs to make sense to the people looking for
+          it.
         </p>
       </div>
-      <div class="brand-capabilities">
+      <div class="ed-capabilities">
         {capabilities.map((item, i) => (
-          <article class="brand-capability">
-            <span class="eyebrow">
+          <article>
+            <p class="eyebrow">
               {String(i + 1).padStart(2, '0')} / {item.label}
-            </span>
+            </p>
             <h3>{item.heading}</h3>
             <p>{item.description}</p>
             <a class="text-link" href={item.href}>
@@ -106,40 +110,41 @@ import { capabilities, interests } from '../../data/brand'
           </article>
         ))}
       </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container brand-prose-grid">
-      <div>
-        <p class="eyebrow">Beyond work</p>
-        <h2>
-          There's more
-          <br />
-          <span class="serif">to the story.</span>
-        </h2>
+    </EditorialSection>
+    <EditorialSection labelledBy="about-life-title">
+      <div class="ed-split">
+        <div>
+          <p class="eyebrow">Beyond work</p>
+          <h2 id="about-life-title">
+            Away from
+            <br />
+            <span class="serif">the screen.</span>
+          </h2>
+        </div>
+        <div class="ed-stack">
+          <div class="ed-prose">
+            <p>
+              I write poetry, read, cook and play cricket with friends. I like
+              having parts of my day that aren't about shipping features or
+              checking a campaign.
+            </p>
+            <p>
+              I'd like to build a business of my own around software and SEO one
+              day. For now, I care about doing the work in front of me well and
+              meeting people with thoughtful problems to solve.
+            </p>
+          </div>
+          <NarrativePanel label="In the quiet hours">
+            <p>Curiosity has a life outside work, too.</p>
+            <ul slot="caption" class="brand-interests">
+              {interests.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </NarrativePanel>
+        </div>
       </div>
-      <div class="brand-reading">
-        <p>
-          I write poetry, read books, enjoy cooking and play cricket with
-          friends. I like having interests that aren't about shipping features
-          or checking campaign performance.
-        </p>
-        <ul class="brand-interests">
-          {interests.map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-        <p>
-          I'm interested in meeting clients and partners who have meaningful
-          challenges to solve. Over time, I want to build something of my own at
-          the intersection of SEO and software—but I care more about doing the
-          current work well than making grand claims about the future.
-        </p>
-        <a class="text-link" href="/experience/">
-          Explore my experience <Arrow diagonal />
-        </a>
-      </div>
-    </div>
-  </section>
-  <Consultation />
+    </EditorialSection>
+    <Consultation />
+  </EditorialFrame>
 </Layout>

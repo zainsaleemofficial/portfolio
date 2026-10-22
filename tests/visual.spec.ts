@@ -41,6 +41,42 @@ async function expectApprovedPage(
 
 const views = [
   {
+    label: 'about-mobile',
+    route: '/about/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'about-desktop',
+    route: '/about/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'experience-mobile',
+    route: '/experience/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'experience-desktop',
+    route: '/experience/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'expertise-mobile',
+    route: '/expertise/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'expertise-desktop',
+    route: '/expertise/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
     label: 'story-mobile',
     route: '/my-story/',
     width: 390,
