@@ -52,6 +52,10 @@
   --measure: 64ch;
   --container-max: 1240px;
   --reading-max: 760px;
+  /* Editorial scale/measure; existing type and section tokens remain unchanged. */
+  --editorial-display: clamp(3.4rem, 6.6vw, 6.5rem);
+  --editorial-measure: 60ch;
+  --editorial-opening-space: clamp(4rem, 7vw, 7rem);
   --gutter: clamp(1.25rem, 5vw, 5rem);
   --section-spacing: clamp(4.5rem, 8vw, 8rem);
   --space-1: 0.25rem;

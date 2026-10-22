@@ -1,0 +1,19 @@
+---
+interface Props {
+  id?: string
+  labelledBy?: string
+  tone?: 'paper' | 'forest' | 'mint' | 'surface'
+  class?: string
+}
+const { id, labelledBy, tone = 'paper', class: className } = Astro.props
+---
+
+<section
+  id={id}
+  aria-labelledby={labelledBy}
+  class:list={['ed-section', `ed-tone-${tone}`, className]}
+>
+  <div class="container">
+    <slot />
+  </div>
+</section>
