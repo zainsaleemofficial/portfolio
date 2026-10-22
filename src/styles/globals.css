@@ -2210,13 +2210,16 @@ ul {
 
 /* Keep the six-link shared header usable on tablet without changing desktop/mobile baselines. */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .desktop-nav,
-  .header-cta {
+  .desktop-nav {
     display: none;
+  }
+  .header-cta {
+    display: inline-flex;
+    margin-left: auto;
   }
   .menu-toggle {
     display: block;
-    margin-left: auto;
+    margin-left: 0;
   }
   .no-js-nav {
     display: flex;

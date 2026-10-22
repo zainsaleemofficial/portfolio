@@ -8,6 +8,7 @@ const navigation = [
   ['Work', '/work/'],
   ['Services', '/services/'],
   ['About', '/about/'],
+  ['My Story', '/my-story/'],
   ['Experience', '/experience/'],
   ['Contact', '/contact/'],
 ] as const

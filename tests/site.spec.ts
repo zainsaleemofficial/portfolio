@@ -296,7 +296,7 @@ test('verified personal brand pages tell the story without private project galle
 }) => {
   const routes = [
     ['/about/', 'Curious first.'],
-    ['/my-story/', 'Nothing began'],
+    ['/my-story/', 'I never had a'],
     ['/experience/', 'Roles changed.'],
     ['/expertise/', 'Make the work'],
     ['/services/ai-automation/', 'AI Automation'],

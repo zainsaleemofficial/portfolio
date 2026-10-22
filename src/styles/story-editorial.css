@@ -2,7 +2,7 @@
 .story-v2 {
   --ink: var(--color-text-primary);
   --dark: var(--color-bg-hero);
-  --sage: var(--color-brand-primary);
+  --sage: var(--color-brand-dark);
   --mint: var(--color-bg-mint);
   --paper: var(--color-bg-page);
   --muted: var(--color-text-muted);
@@ -292,7 +292,7 @@
 .story-v2 .chapter-number b {
   font: 500 12px/1 var(--font);
   letter-spacing: 0.05em;
-  color: #82988a;
+  color: #4c665b;
 }
 .story-v2 .chapter-kicker {
   font-size: 10px;
@@ -371,7 +371,7 @@
 }
 .story-v2 .artifact-label {
   display: block;
-  color: #36775f;
+  color: #27634f;
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -385,7 +385,7 @@
 }
 .story-v2 .artifact small {
   font-size: 9px;
-  color: #5c7967;
+  color: #405e50;
   letter-spacing: 0.08em;
 }
 .story-v2 .terminal {
@@ -724,7 +724,7 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    background: var(--color-bg-page) ee;
+    background: color-mix(in srgb, var(--color-bg-page) 93%, transparent);
     backdrop-filter: blur(16px);
     padding: 10px 24px;
     border-bottom: 1px solid var(--rule);
