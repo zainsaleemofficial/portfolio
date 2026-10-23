@@ -83,6 +83,9 @@ jobs:
           http_worker_pid=$!
           trap 'kill "$worker_pid" "$http_worker_pid" 2>/dev/null || true' EXIT
           LOCAL_WORKER_URL=https://127.0.0.1:8788 LOCAL_WORKER_CA=/tmp/portfolio-local.crt LOCAL_WORKER_HTTP_URL=http://127.0.0.1:8789 LOCAL_WORKER_BUNDLE=/tmp/portfolio-worker/worker.js node scripts/verify-worker-headers.mjs
+      - name: Record mobile Lighthouse lab evidence
+        if: ${{ !cancelled() && steps.production_build.outcome == 'success' }}
+        run: node scripts/editorial-performance.mjs
       - name: Upload QA evidence
         if: always()
         uses: actions/upload-artifact@v4
