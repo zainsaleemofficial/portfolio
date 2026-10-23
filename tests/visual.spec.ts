@@ -28,11 +28,20 @@ async function expectApprovedPage(
 ) {
   await loadPageImages(page)
   const target = options.locator ? page.locator(options.locator) : page
-  await expect(target).toHaveScreenshot(`${options.label}.png`, {
-    animations: 'disabled',
-    caret: 'hide',
+  const capture = {
+    animations: 'disabled' as const,
+    caret: 'hide' as const,
     ...(options.locator ? {} : { fullPage: true }),
     mask: options.locator ? [] : [page.locator('.footer-bottom p')],
+  }
+  // Preserve native review candidates even when a new reference is missing.
+  // This is evidence capture only; the compare-only assertion still fails.
+  await target.screenshot({
+    path: `artifacts/editorial/candidates/${options.label}.png`,
+    ...capture,
+  })
+  await expect(target).toHaveScreenshot(`${options.label}.png`, {
+    ...capture,
     // Preserve the previous CI's exact-pixel requirement; no tolerance increase.
     threshold: 0,
     maxDiffPixels: 0,
@@ -40,6 +49,97 @@ async function expectApprovedPage(
 }
 
 const views = [
+  {
+    label: 'insights-mobile',
+    route: '/insights/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'insights-desktop',
+    route: '/insights/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'privacy-mobile',
+    route: '/privacy/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'technical-seo-mobile',
+    route: '/services/technical-seo/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'technical-seo-desktop',
+    route: '/services/technical-seo/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'services-mobile',
+    route: '/services/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'services-desktop',
+    route: '/services/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'service-desktop',
+    route: '/services/ai-automation/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  { label: 'work-mobile', route: '/work/', width: 390, theme: 'dual-contrast' },
+  {
+    label: 'work-desktop',
+    route: '/work/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'about-mobile',
+    route: '/about/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'about-desktop',
+    route: '/about/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'experience-mobile',
+    route: '/experience/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'experience-desktop',
+    route: '/experience/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'expertise-mobile',
+    route: '/expertise/',
+    width: 390,
+    theme: 'dual-contrast',
+  },
+  {
+    label: 'expertise-desktop',
+    route: '/expertise/',
+    width: 1440,
+    theme: 'dual-contrast',
+  },
   {
     label: 'story-mobile',
     route: '/my-story/',

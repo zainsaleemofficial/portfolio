@@ -45,7 +45,11 @@ jobs:
         id: build
         run: npm run build
       - name: Run complete Playwright suite against committed references
-        run: npm test
+        run: |
+          test_status=0
+          npm test || test_status=$?
+          cp artifacts/test-results.json artifacts/test-results-preview.json
+          exit "$test_status"
       - name: Verify Worker response headers (local only)
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         shell: bash
@@ -55,12 +59,20 @@ jobs:
           trap 'kill "$worker_pid" 2>/dev/null || true' EXIT
           node scripts/verify-worker-headers.mjs
       - name: Build and verify production indexing
+        id: production_build
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: npm run build:production
       - name: Run full production Playwright suite
-        run: npm test
+        if: ${{ !cancelled() && steps.production_build.outcome == 'success' }}
+        run: |
+          test_status=0
+          npm test || test_status=$?
+          cp artifacts/test-results.json artifacts/test-results-production.json
+          exit "$test_status"
         env:
           TEST_DEPLOYMENT_ENV: production
       - name: Verify production Worker and preview-host protection (local only)
+        if: ${{ !cancelled() && steps.production_build.outcome == 'success' }}
         shell: bash
         run: |
           ./node_modules/.bin/wrangler deploy --dry-run --outdir /tmp/portfolio-worker
@@ -71,6 +83,9 @@ jobs:
           http_worker_pid=$!
           trap 'kill "$worker_pid" "$http_worker_pid" 2>/dev/null || true' EXIT
           LOCAL_WORKER_URL=https://127.0.0.1:8788 LOCAL_WORKER_CA=/tmp/portfolio-local.crt LOCAL_WORKER_HTTP_URL=http://127.0.0.1:8789 LOCAL_WORKER_BUNDLE=/tmp/portfolio-worker/worker.js node scripts/verify-worker-headers.mjs
+      - name: Record mobile Lighthouse lab evidence
+        if: ${{ !cancelled() && steps.production_build.outcome == 'success' }}
+        run: node scripts/editorial-performance.mjs
       - name: Upload QA evidence
         if: always()
         uses: actions/upload-artifact@v4

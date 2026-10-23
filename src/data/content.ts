@@ -1,6 +1,7 @@
 export interface Section {
   heading: string
   paragraphs: string[]
+  quote?: { text: string; attribution: string }
 }
 interface Entry {
   slug: string

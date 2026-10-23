@@ -2,59 +2,86 @@
 import Layout from '../../layouts/Layout.astro'
 import Arrow from '../../components/Arrow.astro'
 import Consultation from '../../components/Consultation.astro'
+import EditorialFrame from '../../components/editorial/EditorialFrame.astro'
+import EditorialIntro from '../../components/editorial/EditorialIntro.astro'
+import EditorialSection from '../../components/editorial/EditorialSection.astro'
+import ReadingNav from '../../components/editorial/ReadingNav.astro'
 import { services } from '../../data/site'
 const groups = ['Build', 'Grow'] as const
 ---
 
 <Layout>
-  <section class="section page-intro">
-    <div class="container">
-      <p class="eyebrow">Services / How I can help</p>
-      <h1>
+  <EditorialFrame class="ed-services">
+    <EditorialIntro eyebrow="Services / How I can help">
+      <Fragment slot="heading">
         Clear problems.
         <br />
         <span class="serif">Useful solutions.</span>
-      </h1>
-      <p class="large-copy">
-        Find the right starting point for your product, workflow or search
-        presence. Explore a service, then book a call or email me about what you
-        need.
+      </Fragment>
+      <p>
+        You might have a product in mind, a workflow that takes too much time,
+        or a website that needs attention. We can start with the problem.
       </p>
-    </div>
-  </section>
-  {groups.map((group) => (
-    <section
-      class="section"
-      aria-labelledby={`services-${group.toLowerCase()}`}
-    >
-      <div class="container services-grid">
-        <div class="services-intro" data-reveal>
-          <h2 id={`services-${group.toLowerCase()}`}>{group}</h2>
-          <p>
-            {group === 'Build'
-              ? 'Products, applications and workflows shaped around the way you work.'
-              : 'Technical foundations, local visibility and a relevant search presence.'}
-          </p>
+      <p>
+        Explore the work below. Each service explains the approach and scope,
+        with a direct way to book a call or email me.
+      </p>
+      <ReadingNav
+        slot="after"
+        label="Find your starting point"
+        items={[
+          { id: 'build', label: 'Build a product or workflow' },
+          { id: 'grow', label: 'Improve search visibility' },
+        ]}
+      />
+    </EditorialIntro>
+    {groups.map((group, groupIndex) => (
+      <EditorialSection
+        id={group.toLowerCase()}
+        tone={group === 'Build' ? 'forest' : 'mint'}
+        labelledBy={`services-${group.toLowerCase()}`}
+      >
+        <div class="ed-directory-grid">
+          <div class="ed-directory-intro">
+            <p class="eyebrow">
+              {String(groupIndex + 1).padStart(2, '0')} / How I can help
+            </p>
+            <h2 id={`services-${group.toLowerCase()}`}>{group}</h2>
+            <p class="ed-directory-subtitle">
+              {group === 'Build'
+                ? ' something useful.'
+                : ' with a clear foundation.'}
+            </p>
+            <p>
+              {group === 'Build'
+                ? 'Products, applications and workflows shaped around the way you work.'
+                : 'Technical foundations, local visibility and a relevant search presence.'}
+            </p>
+          </div>
+          <div class="service-directory">
+            {services
+              .filter((service) => service.group === group)
+              .map((service, index) => (
+                <article class="service-directory-entry">
+                  <span class="ed-directory-index" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3>
+                    <a
+                      class="service-directory-link"
+                      href={`/services/${service.slug}/`}
+                    >
+                      {service.title}
+                      <Arrow diagonal />
+                    </a>
+                  </h3>
+                  <p>{service.summary}</p>
+                </article>
+              ))}
+          </div>
         </div>
-        <div class="service-directory">
-          {services
-            .filter((service) => service.group === group)
-            .map((service) => (
-              <article class="service-directory-entry">
-                <h3 class="service-title">
-                  <a
-                    class="service-directory-link"
-                    href={`/services/${service.slug}/`}
-                  >
-                    {service.title} <Arrow />
-                  </a>
-                </h3>
-                <p>{service.summary}</p>
-              </article>
-            ))}
-        </div>
-      </div>
-    </section>
-  ))}
-  <Consultation />
+      </EditorialSection>
+    ))}
+    <Consultation />
+  </EditorialFrame>
 </Layout>

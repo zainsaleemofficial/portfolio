@@ -9,6 +9,11 @@ const { eyebrow, tone = 'paper', class: className } = Astro.props
 
 <section class:list={['ed-intro', `ed-tone-${tone}`, className]}>
   <div class="container">
+    {Astro.slots.has('before') && (
+      <div class="ed-intro-before">
+        <slot name="before" />
+      </div>
+    )}
     <p class="eyebrow">{eyebrow}</p>
     <div class="ed-intro-grid">
       <h1>

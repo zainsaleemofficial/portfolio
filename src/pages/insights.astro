@@ -1,53 +1,63 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Arrow from '../components/Arrow.astro'
 import Consultation from '../components/Consultation.astro'
 import PublishedContent from '../components/PublishedContent.astro'
 import { articles } from '../data/content'
 import { insightTopics } from '../data/site'
+import EditorialFrame from '../components/editorial/EditorialFrame.astro'
+import EditorialIntro from '../components/editorial/EditorialIntro.astro'
+import EditorialSection from '../components/editorial/EditorialSection.astro'
 ---
 
 <Layout>
-  <section class="section page-intro">
-    <div class="container">
-      <p class="eyebrow">The writing desk</p>
-      <h1>
+  <EditorialFrame class="ed-insights">
+    <EditorialIntro eyebrow="Insights / The writing desk">
+      <Fragment slot="heading">
         Notes from
         <br />
         <span class="serif">the intersection.</span>
-      </h1>
-      <p class="large-copy">
+      </Fragment>
+      <p>
         On building software, understanding search, and learning from the work.
       </p>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container reading-width">
+      <p>
+        A place for the useful things I learn along the way. The first articles
+        are still to come.
+      </p>
+    </EditorialIntro>
+    <EditorialSection tone="mint">
       {articles.some((a) => a.approved) ? (
         <PublishedContent items={articles} base="/insights" label="Articles" />
       ) : (
-        <>
-          <p class="eyebrow">First articles forthcoming</p>
-          <h2>
-            Good writing
-            <br />
-            <span class="serif">starts with something to say.</span>
-          </h2>
-          <p>
-            This space is being prepared for practical articles and thoughtful
-            technical notes. No articles have been published yet.
-          </p>
-          <ul class="topic-list">
-            {insightTopics.map((topic) => (
-              <li>
-                {topic}
-                <Arrow diagonal />
-              </li>
-            ))}
-          </ul>
-        </>
+        <div class="ed-split">
+          <div>
+            <p class="eyebrow">First articles forthcoming</p>
+            <h2>
+              Good writing
+              <br />
+              <span class="serif">starts with something to say.</span>
+            </h2>
+            <p>
+              This space is being prepared for practical articles and thoughtful
+              technical notes. No articles have been published yet.
+            </p>
+          </div>
+          <div class="ed-writing-index">
+            <p class="eyebrow">Subjects on my mind</p>
+            <ol class="ed-topic-index">
+              {insightTopics.map((topic, index) => (
+                <li>
+                  <span aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  {topic}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
       )}
-    </div>
-  </section>
-  <Consultation />
+    </EditorialSection>
+    <Consultation />
+  </EditorialFrame>
 </Layout>

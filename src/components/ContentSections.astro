@@ -6,11 +6,17 @@ interface Props {
 const { sections } = Astro.props
 ---
 
-{sections.map((section) => (
-  <section>
+{sections.map((section, index) => (
+  <section id={`article-section-${index + 1}`}>
     <h2>{section.heading}</h2>
     {section.paragraphs.map((p) => (
       <p>{p}</p>
     ))}
+    {section.quote && (
+      <blockquote>
+        <p>{section.quote.text}</p>
+        <cite>{section.quote.attribution}</cite>
+      </blockquote>
+    )}
   </section>
 ))}
